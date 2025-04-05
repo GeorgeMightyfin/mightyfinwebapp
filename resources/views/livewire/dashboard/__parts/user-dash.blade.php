@@ -1,40 +1,54 @@
-<div class="col-12 col-xl-12">
+<div class="dashboard-wrapper">
     <!-- Header Section with Gradient Background -->
-    <div class="header-section" style="background-image: linear-gradient(135deg, #662d91, #912d73); color:#fff; border-radius: 0 0 1rem 1rem; padding: 1.25rem 0 1.5rem 0; box-shadow: 0 4px 12px rgba(102, 45, 145, 0.25);">
-        <div class="container flex px-4">
-            <!-- Top Navigation Bar -->
-            <div class="d-flex justify-content-end align-items-center mb-3">
-                <div class="header-right d-flex align-items-center gap-2">
-                    <div class="dark-light-toggle" onclick="themeToggle()">
-                        <span class="dark"><i class="bi bi-moon"></i></span>
-                        <span class="light"><i class="bi bi-brightness-high"></i></span>
+    <div class="header-section" style="background-image: linear-gradient(135deg, #662d91, #912d73); color:#fff; border-radius: 0 0 1.5rem 1.5rem; padding: 2rem 0 3rem 0; box-shadow: 0 4px 15px rgba(102, 45, 145, 0.2);">
+        <div class="container-fluid">
+            <!-- Preserved Header Content -->
+            <div class="header" style="background: transparent; position: absolute; top: 26px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xxl-12">
+                            <div class="header-content d-flex justify-content-between align-items-center">
+                                <div class="header-left">
+                                </div>
+                                <div class="header-right d-flex align-items-center">
+                                    <div class="dark-light-toggle me-3" onclick="themeToggle()">
+                                        <span class="dark"><i class="bi bi-moon"></i></span>
+                                        <span class="light"><i class="bi bi-brightness-high"></i></span>
+                                    </div>
+
+                                    @include('livewire.dashboard.__parts.notifcations_part')
+                                    @include('livewire.dashboard.__parts.profile_part')
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    @include('livewire.dashboard.__parts.notifcations_part')
-                    @include('livewire.dashboard.__parts.profile_part')
                 </div>
             </div>
 
-            <!-- Dashboard Content Row -->
-            <div class="align-items-center">
-                <!-- Dashboard Title -->
-                <div class="col-xl-3 col-lg-4">
-                    <h1 class="text-white fw-bold mb-0" style="font-size: 1.8rem;">My Dashboard</h1>
+            <!-- Dashboard Title Section -->
+            <div class="row">
+                <div class="col-xl-12" style="padding-top: 7svh">
+                    <div class="page-title-content">
+                        <h1 class="mb-4 text-white fw-bold" style="font-size: 2.5rem;">My Dashboard</h1>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Wallet Balance Card -->
-                <div class="col-xl-9 col-lg-8">
-                    <div class="wallet-balance-card py-2 px-3" style="background: rgba(255,255,255,0.1); border-radius: 0.75rem; backdrop-filter: blur(10px);">
-                        <div class="card-body px-2 py-1">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4 col-md-6">
-                                    <p class="mb-0" style="color: #fec00f; font-weight: 600; font-size: 0.9rem;">
-                                        Your Wallet Balance
-                                    </p>
-                                    <h2 class="text-white fw-bold mb-0" style="font-size: 1.75rem;">0.00 ZMW</h2>
+            <!-- Wallet Balance Card -->
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="p-3 wallet-balance-card">
+                        <div class="px-0 card-body">
+                            <p class="mb-1" style="color: #fec00f; font-weight: 600; font-size: 1rem;">
+                                Your Wallet Balance
+                            </p>
+                            <div class="wallet-amount">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6">
+                                        <h1 class="mb-3 text-white fw-bold" style="font-size: 2.5rem;">0.00 ZMW</h1>
+                                    </div>
                                 </div>
-                                <div class="col-lg-8 col-md-6">
-                                    <div id="chartx" style="height: 50px; margin-bottom: -10px;"></div>
-                                </div>
+                                <div id="chartx"></div>
                             </div>
                         </div>
                     </div>
@@ -44,9 +58,11 @@
     </div>
 
     <!-- Main Content Body -->
-    <div class="content-body col-xl-12 col-xxl-12" >
-            <div class="row px-2">
-                <div class="col-xl-8">
+    <div class="content-body mt-n5">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Column Content -->
+                <div class="col-xl-9">
                     <div class="row">
                         @include('livewire.dashboard.__parts.current-balance')
 
@@ -180,13 +196,12 @@
                                                                 <span class="badge bg-danger-subtle text-danger">{{ $loan->type }}</span>
                                                             </td>
                                                             <td class="fw-medium text-primary">
-                                                                K{{ number_format($loan->amount, 2, '.',',') }}</td>
+                                                                {{ $loan->amount }} ZMW</td>
                                                             <td class="text-danger">
-                                                                K{{ number_format(App\Models\Application::payback($loan), 2, '.',',') }}
-                                                            </td>
-                                                            <td><strong>K{{  number_format(App\Models\Application::open_balance($loan), 2, '.',',')  }}
-                                                                    </strong>
-                                                                </td>
+                                                                {{ App\Models\Application::payback($loan->amount, $loan->repayment_plan) }}
+                                                                ZMW</td>
+                                                            <td><strong>{{ App\Models\Loans::loan_balance($loan->id) }}
+                                                                    ZMW</strong></td>
                                                         </tr>
                                                     @empty
                                                         <tr>
@@ -203,8 +218,10 @@
                     </div>
                 </div>
 
+                <!-- Right Sidebar -->
                 <div class="col-xl-3">
                     <div class="row">
+                        <!-- KYC Verification Card -->
                         @if ($my_loan->complete == 0)
                             <div class="mb-4 col-12">
                                 <div class="text-white shadow card rounded-4"
@@ -233,6 +250,7 @@
                             </div>
                         @endif
 
+                        <!-- Action Buttons -->
                         <div class="mb-4 col-12">
                             <div class="gap-2 d-flex">
                                 <a href="{{ route('payment.gate', ['view' => 'deposit']) }}"
@@ -260,6 +278,7 @@
                             </div>
                         </div>
 
+                        <!-- Referral Card -->
                         <div class="col-12">
                             <div class="border-0 shadow-sm card rounded-4">
                                 <div class="p-4 card-body">
@@ -298,9 +317,11 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 
+<!-- Preserve Original JavaScript -->
 <script>
     $(document).ready(function() {
         const amountInput = document.getElementById('amountInput');

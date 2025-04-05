@@ -295,7 +295,7 @@
                                 </button>
                             </div>
                         </div>
-                        {{-- !mportant --}}
+
                         {{-- <div class="step" id="step3">
                             <h4>Guarantor's Information</h4>
 
@@ -627,10 +627,10 @@
                                     <input type="hidden" name="final" value="1">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <p>You will receive: <b>K {{ App\Models\Application::receiveAmount($activeLoan->amount, $activeLoan->repayment_plan)}}</b> </p>
-                                    <p>Payback Amount: <b>K {{ App\Models\Application::payback($activeLoan->amount, $activeLoan->repayment_plan, $activeLoan->loan_product_id)}}</b> </p>
-                                    <p>Next Payment Amount: <b>K {{ App\Models\Application::paybackInstallment($activeLoan->amount, $activeLoan->repayment_plan, $activeLoan->loan_product_id)}}</b> </p>
-                                    <p>Next Payment Date: <b> {{ App\Models\Application::paybackNextDate($activeLoan) }}</b> </p>
+                                    <p>You will receive: <b>K {{ App\Models\Application::receive_amount($activeLoan->amount, $activeLoan->repayment_plan)}}</b> </p>
+                                    <p>Payback Amount: <b>K {{ App\Models\Application::payback($activeLoan)}}</b> </p>
+                                    <p>Next Payment Amount: <b>K {{ App\Models\Application::payback_installment($activeLoan)}}</b> </p>
+                                    <p>Next Payment Date: <b> {{ App\Models\Application::payback_next_date($activeLoan) }}</b> </p>
                                     <p>Phone Number: <b>{{ auth()->user()->phone }}</b> </p>
                                     <p>Email: <b>{{ auth()->user()->email }}</b> </p>
                                 </div>

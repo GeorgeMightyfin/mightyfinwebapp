@@ -14,16 +14,19 @@
                                         $formattedRouteName = str_replace('-', ' ', $routeName);
                                         $capitalizedRouteName = ucwords($formattedRouteName);
                                     @endphp
-                            
+
                                     <p>
                                         @switch($capitalizedRouteName)
                                             @case('Profile.show')
                                                 My Profile
                                                 @break
+                                            @case('Transaction.item')
+                                                My Repayment Transactions
+                                                @break
                                             @default
                                             {{ $capitalizedRouteName }}
                                         @endswitch
-                                        
+
                                     </p>
                                 @endif</h1>
                             </div>
@@ -52,7 +55,7 @@
                                 <span class="dark"><i class="bi bi-moon"></i></span>
                                 <span class="light"><i class="bi bi-brightness-high"></i></span>
                             </div>
-                            
+
 
                             @include('livewire.dashboard.__parts.notifcations_part')
                             @include('livewire.dashboard.__parts.profile_part')

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Sign Up - Mighty Finance Solution</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/m.jpg') }}">
-    <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/images/m.jpg') }}">
+    <link href="{{ asset('public/theme/css/style.css') }}" rel="stylesheet">
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
     <style>
@@ -170,7 +170,7 @@
     <div id="background-container"></div>
     <div class="authincation h-100">
         <div class="container-fluid h-100 ">
-            <div class="row justify-content-center align-items-center p-4 h-70">
+            <div class="p-4 row justify-content-center align-items-center h-70">
                 <div class="col-md-5 col-sm-12" id="leftSide">
                     <div class="text-center">
                         <div class="logo">
@@ -181,49 +181,49 @@
                         </div>
                         <h4 class="text-white" style="margin-top:2rem" id="slogan-text">Financial Inclusion for All!
                         </h4>
-                        <p class="text-white mb-4" id="id-text">Welcome Back!</p>
+                        <p class="mb-4 text-white" id="id-text">Welcome Back!</p>
                     </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center py-5">
-                    <div class="container my-auto py-4 shadow-lg bg-white">
+                <div class="py-5 col-md-6 d-flex align-items-center">
+                    <div class="container py-4 my-auto bg-white shadow-lg">
                         <div class="row">
-                            <div class="col-11 col-lg-10 mx-auto">
-                                <h2 id="create-text" style="color: #792db8" class="text-center mb-4"> <b>Validate
+                            <div class="mx-auto col-11 col-lg-10">
+                                <h2 id="create-text" style="color: #792db8" class="mb-4 text-center"> <b>Validate
                                         OTP</b> </h2>
                                 <p class="text-center"><img class="img-fluid"
                                         src="{{ asset('/public/web/images/otp-icon.png') }}" alt="verification"></p>
-                                <p style="color:#792db8" class="text-muted text-center mb-4">Please enter the OTP (one
+                                <p style="color:#792db8" class="mb-4 text-center text-muted">Please enter the OTP (one
                                     time password) to verify your account. A code has been sent to <span
                                         class="text-dark text-4">{{ '+26 ' . auth()->user()->phone }}</span></p>
-                                <p class="text-dark text-center fw-600 mb-3">Enter 5 digit code</p>
+                                <p class="mb-3 text-center text-dark fw-600">Enter 5 digit code</p>
                                 <form id="otp-screen" method="POST" class="text-white" action="{{ route('otp') }}">
                                     @csrf
                                     <div class="row g-3">
                                         <div class="col">
-                                            <input type="text" class="form-control rounded-0 text-center text-6 py-2"
+                                            <input type="text" class="py-2 text-center form-control rounded-0 text-6"
                                                 maxlength="1" required="" autocomplete="off">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control rounded-0 text-center text-6 py-2"
+                                            <input type="text" class="py-2 text-center form-control rounded-0 text-6"
                                                 maxlength="1" required="" autocomplete="off">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control rounded-0 text-center text-6 py-2"
+                                            <input type="text" class="py-2 text-center form-control rounded-0 text-6"
                                                 maxlength="1" required="" autocomplete="off">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control rounded-0 text-center text-6 py-2"
+                                            <input type="text" class="py-2 text-center form-control rounded-0 text-6"
                                                 maxlength="1" required="" autocomplete="off">
                                         </div>
                                         <div class="col">
-                                            <input type="text" class="form-control rounded-0 text-center text-6 py-2"
+                                            <input type="text" class="py-2 text-center form-control rounded-0 text-6"
                                                 maxlength="1" required="" autocomplete="off">
                                         </div>
                                     </div>
-                                    <div class="d-grid my-4">
+                                    <div class="my-4 d-grid">
                                         {{-- <button
                                             style="background-color:#792db8; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;"
-                                            type="submit" class="btn btn-block text-white text-lg"
+                                            type="submit" class="text-lg text-white btn btn-block"
                                             type="submit">Verify</button> --}}
                                         {{-- <p class="form-check-label font-w400">{!! __(
                                             'By confirming your credential we are able to secure and confirm your account. Please check our Mightyfin :terms_of_service and :privacy_policy',
@@ -231,13 +231,13 @@
                                                 'terms_of_service' =>
                                                     '<a target="_blank" href="' .
                                                     route('terms') .
-                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900">' .
+                                                    '" class="text-sm text-gray-600 underline hover:text-gray-900">' .
                                                     __('Terms of Service') .
                                                     '</a>',
                                                 'privacy_policy' =>
                                                     '<a target="_blank" href="' .
                                                     route('pp') .
-                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900">' .
+                                                    '" class="text-sm text-gray-600 underline hover:text-gray-900">' .
                                                     __('Privacy Policy') .
                                                     '</a>',
                                             ],
@@ -261,10 +261,10 @@
     Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="{{ asset('theme/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('theme/js/custom.min.js') }}"></script>
-    <script src="{{ asset('theme/js/deznav-init.js') }}"></script>
+    <script src="{{ asset('public/theme/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('public/theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('public/theme/js/custom.min.js') }}"></script>
+    <script src="{{ asset('public/theme/js/deznav-init.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

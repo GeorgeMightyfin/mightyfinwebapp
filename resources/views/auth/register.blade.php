@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Sign Up - Mighty Finance Solution</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/m.jpg') }}">
-    <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'images/m.jpg' }}">
+    <link href="{{ 'public/theme/css/style.css' }}" rel="stylesheet">
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
     <style>
@@ -162,7 +162,7 @@
     <div id="background-container"></div>
     <div class="authincation h-100">
         <div class="container-fluid h-100 ">
-            <div class="row justify-content-center align-items-center p-4 h-70">
+            <div class="p-4 row justify-content-center align-items-center h-70">
                 <div class="col-md-5 col-sm-12" id="leftSide">
                     <div class="text-center">
                         <div class="logo">
@@ -173,16 +173,16 @@
                         </div>
                         <h4 class="text-white" style="margin-top:2rem" id="slogan-text">Financial Inclusion for All!
                         </h4>
-                        <p class="text-white mb-4" id="id-text">Welcome Back!</p>
+                        <p class="mb-4 text-white" id="id-text">Welcome Back!</p>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12 p-0 m-0">
+                <div class="p-0 m-0 col-md-6 col-sm-12">
                     <div class="authincation-content">
                         <div class="row no-gutters">
                             <div id="form-card">
                                 <div class="auth-form" style="border-radius:1.5rem">
                                     <div class="w-full">
-                                        <h2 id="create-text" style="color: #792db8" class="text-center mb-2"> <b>Create
+                                        <h2 id="create-text" style="color: #792db8" class="mb-2 text-center"> <b>Create
                                                 an Account</b> </h2>
                                         <p style="color: #792db8" class="text-center">Already have an account? <a
                                                 class="text-warning" href="{{ route('login') }}">Sign in</a></p>
@@ -192,37 +192,37 @@
                                         @csrf
                                         <div style="display: flex; gap: 0px; width: 100%">
                                             <div class="col-6">
-                                                <label class="text-dark mb-1"><strong>First Name</strong></label>
+                                                <label class="mb-1 text-dark"><strong>First Name</strong></label>
                                                 <input name="fname" required type="text" class="form-control"
                                                     placeholder="Your First Name" value="{{ old('fname') }}">
                                             </div>
                                             <div class="col-6">
-                                                <label class="text-dark mb-1"><strong>Last Name</strong></label>
+                                                <label class="mb-1 text-dark"><strong>Last Name</strong></label>
                                                 <input name="lname" required type="text" class="form-control"
                                                     placeholder="Your Last Name" value="{{ old('lname') }}">
                                             </div>
                                         </div>
                                         <div class="">
                                             <div class="col-12">
-                                                <label class="text-dark mb-1"><strong>Email</strong></label>
+                                                <label class="mb-1 text-dark"><strong>Email</strong></label>
                                                 <input name="email" required type="email" class="form-control"
                                                     placeholder="yourname@email.com" value="{{ old('email') }}">
                                             </div>
                                             <div class="col-12">
-                                                <label class="text-dark mb-1"><strong>Phone</strong></label>
+                                                <label class="mb-1 text-dark"><strong>Phone</strong></label>
                                                 <input name="phone" required type="phone" class="form-control"
                                                     minlength="10" maxlength="10" placeholder="097"
                                                     value="{{ old('phone') }}">
                                             </div>
                                             <div class="col-12">
-                                                <label class="text-dark mb-1"><strong>Password</strong></label>
+                                                <label class="mb-1 text-dark"><strong>Password</strong></label>
                                                 <input name="password" required autocomplete="new-password"
                                                     type="password" class="form-control">
                                             </div>
-                                            <div class="text-left px-3 mt-4">
+                                            <div class="px-3 mt-4 text-left">
                                                 <button
                                                     style="background-color:#792db8; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;"
-                                                    type="submit" class="btn btn-block text-white text-lg">Create
+                                                    type="submit" class="text-lg text-white btn btn-block">Create
                                                     Account</button>
                                                 @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                                                     <div id="policy" class="form-check text-dark">
@@ -232,11 +232,11 @@
                                                             for="termsCheckbox">By creating an account, you agree to
                                                             Mighty Finance Solution
                                                             <a target="_blank" href="{{ route('terms') }}"
-                                                                class="underline text-sm text-gray-600 hover:text-gray-900">Terms
+                                                                class="text-sm text-gray-600 underline hover:text-gray-900">Terms
                                                                 of Service</a>
                                                             and
                                                             <a target="_blank" href="{{ route('pp') }}"
-                                                                class="underline text-sm text-gray-600 hover:text-gray-900">Privacy
+                                                                class="text-sm text-gray-600 underline hover:text-gray-900">Privacy
                                                                 Policy</a>
                                                         </label>
                                                     </div>
@@ -283,10 +283,10 @@
     Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="{{ asset('theme/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('theme/js/custom.min.js') }}"></script>
-    <script src="{{ asset('theme/js/deznav-init.js') }}"></script>
+    <script src="{{ asset('public/theme/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('public/theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('public/theme/js/custom.min.js') }}"></script>
+    <script src="{{ asset('public/theme/js/deznav-init.js') }}"></script>
 
 </body>
 

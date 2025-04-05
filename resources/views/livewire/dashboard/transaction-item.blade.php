@@ -9,7 +9,7 @@
             $view = htmlspecialchars($param);
         }
         @endphp
-        <div class="content-body">
+        <div class="content-body mt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-12 col-xl-12">

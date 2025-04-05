@@ -1,51 +1,10 @@
 <div class="content-body">
-    <div class="container @role('user') @else mt-4 @endrole">
+    <div class="container mt-4">
         <div class="row ">
             <div class="col-xxl-12 col-xl-12 col-lg-12">
                 <div class="card home-chart fireworks">
                     <div class="card-header">
                         <h4 class="card-title text-primary home-chart">LOAN INFORMATION</h4>
-                        @role('user')@else
-                            @if ($this->my_review_status($loan->id) == 1)
-                                <span class="m-3 mt-7 alert alert-sm alert-primary text-center items-content-center d-flex gap-2">
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-                                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-                                        </svg>
-                                    </span>
-                                    @if ($loan->status == 0)
-                                        @if($loan->complete == 0)
-                                            <span class="text-warning fw-bold">
-                                                Incomplete KYC
-                                            </span>
-                                        @else
-                                            <span class="text-warning fw-bold">
-                                                Processing
-                                            </span>
-                                        @endif
-                                    @endif
-                                    @if ($loan->status == 1)
-                                        <span class="text-success fw-bold">
-                                            Accepted
-                                        </span>
-                                    @endif
-                                    @if ($loan->status == 2)
-                                        <span class="text-info fw-bold">
-                                            Processing
-                                        </span>
-                                    @endif  
-                                    @if ($loan->status == 3)
-                                        <span class="text-danger fw-bold">
-                                            Loan Request Rejected
-                                        </span>
-                                    @endif
-                                </span>
-                            @else
-                                <div class="mt-6">
-                                    <button wire:click="setLoanID({{ $loan->id }})" data-bs-toggle="modal" data-bs-target="#kt_modal_review_warning" class="btn btn-sm btn-success">Review</button>
-                                </div>
-                            @endif
-                        @endrole
                     </div>
                     <div class="card-body">
                         <div class="home-chart-height">
@@ -79,7 +38,9 @@
                             >
                             <div class="chart-price-value">
                                 <span>Paying Back</span>
-                                <h5>K {{ App\Models\Application::payback($loan->amount, $loan->repayment_plan, $loan->loan_product_id) }}</h5>
+                                <h5>K {{ number_format(App\Models\Application::payback($loan), 2, '.', ',') }}</h5>
+
+                                <small>{{ App\Models\Application::payback_installment($loan) }}</small>
                             </div>
                             </div>
                         </div>
@@ -88,36 +49,10 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xxl-4 col-xl-4 col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                    <h4 class="card-title">Download App</h4>
-                    </div>
-                    <div class="card-body">
-                    <div class="app-link">
-                        <h5>Get Verified On Our Mobile App</h5>
-                        <p>
-                        Get mobile app more secure, faster,
-                        and reliable.
-                        </p>
-                        <a href="#" class="btn btn-primary">
-                        <img src="images/android.svg" alt="" />
-                        </a>
-                        <br />
-                        <div class="mt-3"></div>
-                        <a href="#" class="btn btn-primary">
-                        <img src="images/apple.svg" alt="" />
-                        </a>
-                    </div>
-                    </div>
-                </div>
-            </div> --}}
-
             <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header">
                     <h4 class="card-title text-primary">USER INFORMATION</h4>
-                    {{-- <a href="settings-profile.html" class="btn btn-primary">Edit</a> --}}
                     </div>
                     <div class="card-body row">
                         <div class="col-xxl-4 col-xl-4 col-lg-4">
@@ -141,7 +76,6 @@
                                 <div class="user-info">
                                     <span>FULL NAMES</span>
                                     <h4>
-                                        {{-- {{ route('client-account', ['key'=>$user->id]) }} --}}
                                         <a target="_blank" href="{{ route('client-account', ['key'=>$loan->user->id]) }}">
                                             {{ $loan->user->fname.' '.$loan->user->lname }}
                                             <span>
@@ -196,8 +130,6 @@
                 </div>
             </div>
 
-
-            {{-- !important | Staff Use Only --}}
             @role('user')@else
             <div class="col-xxl-12 col-xl-12 col-lg-12 @role('user') @else mt-4 @endrole">
                 <div class="card">
@@ -268,7 +200,6 @@
                                     </div>
                                 @endif
                             </div>
-                            <!--end::Table-->
                         </div>
                     </div>
                 </div>
@@ -336,7 +267,6 @@
                             <p>
                                 Your loan request is currently under review. We appreciate your patience and will notify you via email of any updates.
                             </p>
-                            {{-- <a href="#" class="btn btn-primary"> Get Verified</a> --}}
                         @endif
                         @if ($loan->status == 3)
                             <p>

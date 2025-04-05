@@ -1,32 +1,36 @@
 @if ($my_loan !== null)
-    <h5><b style="color: rgb(90, 80, 99)">Current Loan</b></h5>
-    <h2 class="font-bold"><b>K{{ $my_loan->amount }}</b></h2>
-    <div class="col-xxl-4 col-xl-12 " style="color: rgb(150, 247, 65)">
-        <a title="View more details" href="{{ route('loan-details', $my_loan->id) }}">
-            <div class="card"
-                @switch($my_loan->status)
-                    @case(1)
-                        style="background-color: rgb(150, 247, 65)"
-                        @break
-                    @case(2)
-                        style="background-color: rgb(255, 208, 0)"
-                        @break
-                    @case(3)
-                        style="background-color: rgb(180, 28, 28)"
-                        @break
-                    @case(4)
-                        style="background-color: rgb(71, 67, 71)"
-                        @break
-                    @default
-                        style="background-color: rgb(255, 208, 0)"
-                @endswitch
-            >
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-8 col-lg-8">
-                            <p><b style="color: #792db8">{{ $my_loan->type }} Repayment</b></p>
-                            <h3> <strong><b>K{{ App\Models\Loans::loan_balance($my_loan->id) }}</b></strong> </h3>
-                            <small>
+    <div class="loan-dashboard-container">
+        <!-- Current Loan Status Card -->
+        <div class="loan-status-card">
+            <div class="loan-status-header">
+                <h2 class="subtitle">Current Loan</h2>
+                <h2 class="amount">K{{ number_format($my_loan->amount, 2, '.',',') }}</h2>
+            </div>
+
+            <a class="loan-details-link" href="#">
+                <div class="loan-card"
+                    @switch($my_loan->status)
+                        @case(1)
+                            data-status="active"
+                            @break
+                        @case(2)
+                            data-status="processing"
+                            @break
+                        @case(3)
+                            data-status="declined"
+                            @break
+                        @case(4)
+                            data-status="defaulted"
+                            @break
+                        @default
+                            data-status="processing"
+                    @endswitch
+                >
+                    <div class="loan-info">
+                        <div class="loan-details">
+                            <div class="loan-type">{{ $my_loan->type }} Repayment</div>
+                            <div class="balance">K{{ number_format(App\Models\Application::open_balance($my_loan), 2, '.',',') }}</div>
+                            <div class="due-date">
                                 @if ($my_loan->status == 1)
                                     @php
                                         if ($my_loan->loan->final_due_date !== null) {
@@ -40,202 +44,504 @@
                                 @else
                                     State: Processing
                                 @endif
-                                @php
-                                    // Convert the target date/time to a Unix timestamp
-                                    // $targetTimestamp = strtotime($date_str);
-
-                                    // // Calculate the difference between the target timestamp and the current timestamp
-                                    // $diff = $targetTimestamp - time();
-
-                                    // // Calculate the number of days remaining
-                                    // $daysRemaining = floor($diff / (60 * 60 * 24));
-
-                                    // // Calculate the number of hours remaining
-                                    // $hoursRemaining = floor(($diff % (60 * 60 * 24)) / (60 * 60));
-
-                                    // // Calculate the number of minutes remaining
-                                    // $minutesRemaining = floor(($diff % (60 * 60)) / 60);
-
-                                    // // Calculate the number of seconds remaining
-                                    // $secondsRemaining = $diff % 60;
-
-                                    // if ($daysRemaining < 0) {
-                                    //     echo "Payback payment is overdue";
-                                    // }else {
-                                    //     echo "{$daysRemaining} Days  {$hoursRemaining} Hours remaining";
-                                    // }
-                                    // Output the remaining time in a human-readable format
-                                    // echo "{$daysRemaining} Days  {$hoursRemaining} Hours {$minutesRemaining} Minutes {$secondsRemaining} Seconds remaining";
-                                @endphp
-                            </small>
-                        </div>
-                        <div class="col-xl-3 col-lg-3">
-                            <div class="card">
-                                <button class="btn btn-light text-primary p-4"
-                                    style="box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;">
-                                    @switch($my_loan->status)
-                                        @case(1)
-                                            <strong>Repay Now
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                                                </svg>
-                                            </strong>
-                                            @break
-                                        @case(2)
-                                            <strong>
-                                                Processing
-                                                @if($stage !== null)
-                                                    <div class="badge-sm badge-default">
-                                                        {{$stage}}
-                                                    </div>
-                                                @else
-                                                    <div class="badge-sm badge-default">
-                                                        Incomplete KYC
-                                                    </div>
-                                                @endif
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                                                </svg>
-                                            </strong>
-                                            @break
-                                        @case(3)
-                                            <strong>
-                                                Declined
-                                                @if($stage !== null)
-                                                    <div class="badge-sm badge-default">
-                                                        {{$stage}}
-                                                    </div>
-                                                @else
-                                                    <div class="badge-sm badge-default">
-                                                        Incomplete KYC
-                                                    </div>
-                                                @endif
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                                                </svg>
-                                            </strong>
-                                            @break
-                                        @case(4)
-                                            <strong>Defaulted
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                                                </svg>
-                                            </strong>
-                                            @break
-                                        @default
-                                            <strong>Processing
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                                    <path
-                                                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                                                </svg>
-                                            </strong>
-                                            @break
-                                    @endswitch
-                                </button>
                             </div>
+                        </div>
+
+                        <div class="action-button">
+                            @switch($my_loan->status)
+                                @case(1)
+                                    <button class="btn-action active">
+                                        <span class="btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        </span>
+                                        Repay Now
+                                    </button>
+                                    @break
+                                @case(2)
+                                    <button class="btn-action processing">
+                                        <span class="btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                                        </span>
+                                        Processing
+                                        @if($stage !== null)
+                                            <div class="status-badge">{{$stage}}</div>
+                                        @else
+                                            <div class="status-badge">KYC Pending</div>
+                                        @endif
+                                    </button>
+                                    @break
+                                @case(3)
+                                    <button class="btn-action declined">
+                                        <span class="btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-10v-2h10v2z"/></svg>
+                                        </span>
+                                        Declined
+                                        @if($stage !== null)
+                                            <div class="status-badge">{{$stage}}</div>
+                                        @else
+                                            <div class="status-badge">KYC Incomplete</div>
+                                        @endif
+                                    </button>
+                                    @break
+                                @case(4)
+                                    <button class="btn-action defaulted">
+                                        <span class="btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                                        </span>
+                                        Defaulted
+                                    </button>
+                                    @break
+                                @default
+                                    <button class="btn-action processing">
+                                        <span class="btn-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                                        </span>
+                                        Processing
+                                    </button>
+                                    @break
+                            @endswitch
                         </div>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 @else
-    <div class="col-xxl-4 col-xl-12">
-        <div class="row">
-            <div class="col-xxl-6 col-xl-6 col-lg-6">
-                <div class="card"
-                    style="border-radius:3rem; height:25vh; background-image:  linear-gradient(to right, #653092, #9E59F1); color:#fff">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-6 col-sm-6" style="padding-top: 4%;">
-                                <span class="pb-2"><strong style=" color: #ffc800">Apply for a Loan</strong></span>
-
-                                <div class="mt-2">
-                                    <a href="{{ route('new-loan') }}" style="border-radius:2rem; background-color:#ffc800;color: #ffffff" class="btn">
-                                        <strong>Get a Loan</strong> </a>
-                                </div>
-                            </div>
-                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="pt-6">
-                                    <img class="balance" src="{{ asset('images/mfs.png') }}" alt="">
-                                </div>
-                            </div>
-                            <style>
-                                @media (min-width: 577px) {
-                                    .balance {
-                                        width: 100px;
-                                        position: absolute;
-                                        top: 42px;
-                                    }
-                                }
-
-                                @media (max-width: 577px) {
-                                    .balance {
-                                        width: 120px;
-    position: absolute;
-    top: 13%;
-    left: 50%;
-                                    }
-                                }
-                            </style>
-                        </div>
+    <div class="no-loan-container">
+        <div class="action-cards">
+            <!-- Loan Application Card -->
+            <div class="apply-loan-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="tag">New Application</div>
+                        <h3 class="card-title">Need funds?</h3>
+                        <p class="card-description">Get quick access to cash with our easy application process</p>
+                        <a href="{{ route('new-loan') }}" class="apply-button">
+                            <span class="button-text">Apply Now</span>
+                            <span class="button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="card-illustration">
+                        <img src="{{ asset('public/images/mfs.png') }}" alt="Loan Application" class="illustration-image">
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6">
-                <div class="card"
-                    style="background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8UW4-kylyJg8bj33K3boAIvJ46HbT362BRwF06jStNxZLf2nkni-UDFofFkcvWrHhDqc&usqp=CAU');
-                background-position: center center;
-                background-size: cover;
-                height:25vh;
-                position: relative;
-                border-radius: 3rem;">
-                    <div
-                        style="border-radius: 3rem; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(102, 45, 145, 0.772);">
-                    </div>
-                    <div class="card-body">
-                        <div class="row" style="padding-top: 7%">
-                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <div class="mt-3">
-                                    <button style="background-color:#fff; color:black; z-index:1; position:absolute"
-                                        class="btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <div style="margin-top:14%;">
-                                    <strong class="text-white" style="z-index:1; position:absolute">Refer a
-                                        Friend</strong>
-                                </div>
-                            </div>
-                        </div>
+
+            <!-- Refer a Friend Card -->
+            <div class="refer-friend-card">
+                <div class="card-content">
+                    <div class="card-text">
+                        <div class="tag">Invitation</div>
+                        <h3 class="card-title">Refer & Earn</h3>
+                        <p class="card-description">Share with friends and you both get special benefits</p>
+                        <button class="refer-button">
+                            <span class="button-text">Share Now</span>
+                            <span class="button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endif
+
+<style>
+/* Global Styles */
+:root {
+    --primary-color: #6a3093;
+    --primary-gradient: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
+    --secondary-color: #ffc107;
+    --text-color: #333;
+    --text-light: #6c757d;
+    --white: #ffffff;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --dark: #333;
+    --light-bg: #f8f9fa;
+    --border-radius: 16px;
+    --shadow: 0 10px 30px rgba(106, 48, 147, 0.15);
+    --shadow-hover: 0 15px 35px rgba(106, 48, 147, 0.25);
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.loan-dashboard-container,
+.no-loan-container {
+    font-family: var(--font-primary);
+    max-width: 100%;
+    padding: 1.5rem;
+}
+
+/* Current Loan Card Styles */
+.loan-status-card {
+    margin-bottom: 2rem;
+}
+
+.loan-status-header {
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.5px;
+}
+
+.amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.loan-details-link {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.loan-details-link:hover {
+    transform: translateY(-5px);
+}
+
+.loan-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 2rem;
+}
+
+.loan-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.loan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: var(--primary-gradient);
+}
+
+.loan-card[data-status="active"]::before {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.loan-card[data-status="processing"]::before {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+.loan-card[data-status="declined"]::before {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.loan-card[data-status="defaulted"]::before {
+    background: linear-gradient(90deg, #333, #555);
+}
+
+.loan-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loan-details {
+    flex: 1;
+}
+
+.loan-type {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.balance {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.due-date {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.action-button {
+    margin-left: 1.5rem;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    min-width: 180px;
+}
+
+.btn-action.active {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+.btn-action.processing {
+    background-color: var(--warning);
+    color: var(--white);
+}
+
+.btn-action.declined {
+    background-color: var(--danger);
+    color: var(--white);
+}
+
+.btn-action.defaulted {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.btn-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-icon {
+    margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.status-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
+    border-radius: 12px;
+    padding: 0.25rem 0.75rem;
+    margin-left: 0.75rem;
+}
+
+/* No Loan Cards Styles */
+.action-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.apply-loan-card,
+.refer-friend-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    height: 300px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.apply-loan-card:hover,
+.refer-friend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.apply-loan-card {
+    background: var(--primary-gradient);
+    color: var(--white);
+}
+
+.refer-friend-card {
+    background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    position: relative;
+}
+
+.refer-friend-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(106, 48, 147, 0.85);
+}
+
+.card-content {
+    display: flex;
+    height: 100%;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tag {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.card-description {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    max-width: 80%;
+}
+
+.apply-button,
+.refer-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 0.875rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.apply-button:hover,
+.refer-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background-color: #ffca2c;
+}
+
+.button-text {
+    margin-right: 0.5rem;
+}
+
+.button-icon {
+    display: flex;
+    align-items: center;
+}
+
+.card-illustration {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+.illustration-image {
+    max-width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.apply-loan-card:hover .illustration-image {
+    transform: translateY(-10px);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .action-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-loan-card,
+    .refer-friend-card {
+        height: 200px;
+    }
+
+    .card-illustration {
+        width: 20%;
+    }
+
+    .illustration-image {
+        max-height: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .loan-info {
+        flex-direction: column;
+    }
+
+    .action-button {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .btn-action {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .status-badge {
+        margin-left: auto;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .card-description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .apply-loan-card,
+    .refer-friend-card {
+        height: auto;
+    }
+
+    .card-content {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    .card-illustration {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .illustration-image {
+        max-height: 80px;
+    }
+}
+</style>

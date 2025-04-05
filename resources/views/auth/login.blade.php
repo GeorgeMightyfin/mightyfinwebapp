@@ -10,9 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mighty Finance Solution | Sign In</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/m.jpg') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'public/images/m.jpg' }}" />
     <!-- Custom Stylesheet -->
-    <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet">
+    <link href="{{ 'public/theme/css/style.css' }}" rel="stylesheet">
     <style>
         a {
             color: rgb(255, 187, 0);
@@ -37,26 +37,26 @@
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-xl-5 col-md-6">
-                        <div class="mini-logo text-center my-4">
+                        <div class="my-4 text-center mini-logo">
                             <a href="{{ route('welcome') }}">
                                 <img width="170" src="{{ asset('/public/web/images/01-ft-logo.png') }}"
                                     alt="" />
                             </a>
                             <h4 class="text-white" style="margin-top:2rem" id="slogan-text">Financial Inclusion for All!
                             </h4>
-                            <p class="text-white mb-4" id="id-text">Welcome Back!</p>
+                            <p class="mb-4 text-white" id="id-text">Welcome Back!</p>
                         </div>
 
                         <div class="auth-form card"
                             style="box-shadow: rgba(255, 255, 255, 0.219) 0px 5px 15px 0px; border-radius:1.3rem">
                             <div class="w-full">
-                                <h2 id="create-text" style="color: #792db8" class="text-center mb-2"> <b>Sign In</b>
+                                <h2 id="create-text" style="color: #792db8" class="mb-2 text-center"> <b>Sign In</b>
                                 </h2>
                                 <p style="color: #792db8" class="text-center">Do not have an account? <a
                                         class="text-warning" href="{{ route('register') }}">Sign Up</a></p>
                             </div>
 
-                            <x-jet-validation-errors class="alert text-center alert-danger text-danger text-xs" />
+                            <x-jet-validation-errors class="text-xs text-center alert alert-danger text-danger" />
                             <div class="">
 
                                 <form name="myform" class=" row g-3" method="POST" action="{{ route('login') }}">
@@ -65,7 +65,7 @@
                                         <input type="email" name="email" :value="old('email')" class="form-control"
                                             placeholder="hello@example.com" name="email" />
                                     </div>
-                                    <div class="col-12 mt-2">
+                                    <div class="mt-2 col-12">
                                         <input type="password" name="password" required class="form-control"
                                             placeholder="Password" />
                                     </div>
@@ -77,13 +77,13 @@
                                                 me</label>
                                         </div>
                                     </div>
-                                    <div class="col-6 text-right">
+                                    <div class="text-right col-6">
                                         <a href="{{ route('password.request') }}">Forgot Password?</a>
                                     </div>
-                                    <div class="col-12 pt-3">
+                                    <div class="pt-3 col-12">
                                         <button
                                             style="background-color:#792db8; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;"
-                                            type="submit" class="btn col-12 text-white">Login</button>
+                                            type="submit" class="text-white btn col-12">Login</button>
                                     </div>
                                 </form>
                                 <p class="mt-3 mb-0">
@@ -112,9 +112,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('mfs/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('mfs/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('mfs/js/scripts.js') }}"></script>
+    <script src="{{ 'public/mfs/vendor/jquery/jquery.min.js' }}"></script>
+    <script src="{{ 'public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js' }}"></script>
+    <script src="{{ 'public/mfs/js/scripts.js' }}"></script>
 </body>
 <!-- Mirrored from tende.vercel.app/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:21:44 GMT -->
 

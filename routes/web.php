@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\OTPController;
 use App\Http\Controllers\LoanApplicationContBkUP;
+use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanProductController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TicketController;
@@ -137,9 +138,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('past-maturity-date', PastMaturityDateView::class)->name('past-maturity-date');
     Route::get('guarantors', GuarantorsView::class)->name('guarantors');
     Route::get('missed-repayments', MissedRepaymentsView::class)->name('missed-repayments');
-    Route::post('apply-for-loan', [LoanApplicationContBkUP::class, 'new_loan'])->name('apply-loan');
-    Route::post('apply-proxy-loan', [LoanApplicationContBkUP::class, 'new_proxy_loan'])->name('proxy-apply-loan');
-    Route::post('update-loan', [LoanApplicationContBkUP::class, 'updateLoanDetails'])->name('update-loan-details');
+    Route::post('apply-for-loan', [LoanApplicationController::class, 'new_loan'])->name('apply-loan');
+    Route::post('apply-proxy-loan', [LoanApplicationController::class, 'new_proxy_loan'])->name('proxy-apply-loan');
+    Route::post('update-loan', [LoanApplicationController::class, 'updateLoanDetails'])->name('update-loan-details');
     Route::post('update-loan-statuses', [LoanProductController::class, 'updateLoanStatus'])->name('update-loan-statuses');
 
     // ---- Payments
@@ -186,15 +187,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // ------ KYC Profile
     Route::get('kyc-profile', KYCView::class)->name('kyc');
-    Route::post('updating-file-uploads', [LoanApplicationContBkUP::class, 'updateFiles'])->name('update-file-uploads');
-    Route::post('updating-kyc-uploads', [LoanApplicationContBkUP::class, 'updateKYCFiles'])->name('update-kyc-uploads');
+    Route::post('updating-file-uploads', [LoanApplicationController::class, 'updateFiles'])->name('update-file-uploads');
+    Route::post('updating-kyc-uploads', [LoanApplicationController::class, 'updateKYCFiles'])->name('update-kyc-uploads');
     Route::post('update-prof-pic', [UserController::class, 'updatePic'])->name('update-prof-pic');
     Route::post('update-profile', [UserController::class, 'updateProfile'])->name('update-profile');
 
     Route::get('my-profile', MyProfile::class)->name('my-profile');
 
     // ------- Loan Continue Completion
-    Route::post('continue-loan', [LoanApplicationContBkUP::class, 'continue_loan'])->name('continue-loan');
+    Route::post('continue-loan', [LoanApplicationController::class, 'continue_loan'])->name('continue-loan');
 
     // -------Ticket
     Route::resource('tickets', TicketController::class);
@@ -213,11 +214,11 @@ Route::get('contact-us', ContactPage::class)->name('contact');
 Route::get('services', ServicePage::class)->name('services');
 
 
-Route::post('request-for-loan', [LoanApplicationContBkUP::class, 'store'])->name('loan-request');
-Route::post('assign-manual-approval', [LoanApplicationContBkUP::class, 'assign_manual'])->name('assign-manual-approval');
+Route::post('request-for-loan', [LoanApplicationController::class, 'store'])->name('loan-request');
+Route::post('assign-manual-approval', [LoanApplicationController::class, 'assign_manual'])->name('assign-manual-approval');
 
-Route::get('get-application', [LoanApplicationContBkUP::class, 'getLoan'])->name('get-application');
-Route::get('update-existing-application', [LoanApplicationContBkUP::class, 'updateExistingLoan'])->name('update-existing-application');
+Route::get('get-application', [LoanApplicationController::class, 'getLoan'])->name('get-application');
+Route::get('update-existing-application', [LoanApplicationController::class, 'updateExistingLoan'])->name('update-existing-application');
 
 // Our Team
 Route::get('vwanganji-bowa-ceo', PersonOne::class)->name('ceo');
@@ -252,4 +253,4 @@ Route::get('email-sent-successfully', SuccessEmailPage::class)->name('success-em
 
 // Errors
 Route::get('account-already-exists', AlreadyExistPage::class)->name('already-exists');
-Route::get('you-already-have-a-loan/{id}', [LoanApplicationContBkUP::class, 'alreadyLoaned'])->name('loan-exists');
+Route::get('you-already-have-a-loan/{id}', [LoanApplicationController::class, 'alreadyLoaned'])->name('loan-exists');

@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/m.jpg') }}" />
     <!-- Custom Stylesheet -->
 
-    <link rel="stylesheet" href="{{ asset('mfs/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/mfs/css/style.css') }}" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="https://unpkg.com/intro.js/introjs.css">
@@ -153,12 +153,10 @@
 
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@jsuites/cropper/cropper.min.js"></script> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@jsuites/cropper/cropper.min.css" type="text/css" /> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="dashboard">
-
     <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
 
@@ -202,13 +200,13 @@
                     <li>
                         <a href="{{ route('loan-wallet') }}" data-toggle="tooltip" data-placement="right"
                             title="My Wallet">
-                            <span><i class="bi bi-wallet2 text-white"></i></span>
+                            <span><i class="text-white bi bi-wallet2"></i></span>
                         </a>
                     </li>
                     <li>
                         <a class="setting_" href="{{ route('settings') }}" data-toggle="tooltip" data-placement="right"
                             title="Settings">
-                            <span><i class="bi bi-gear text-white"></i></span>
+                            <span><i class="text-white bi bi-gear"></i></span>
                         </a>
                     </li>
                     <li class="logout">
@@ -216,15 +214,13 @@
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
                                 <button type="submit" class="dropdown-item ai-icon">
-                                    <span><i class="bi bi-power text-white"></i></span>
+                                    <span><i class="text-white bi bi-power"></i></span>
                                 </button>
                             </form>
 
                         </a>
                     </li>
                 </ul>
-
-                {{-- <p class="copyright">&#169; <a href="#">greenwebbtech</a></p> --}}
             </div>
         </div>
 
@@ -238,29 +234,22 @@
     @stack('modals')
 
     @livewireScripts
-    <script src="{{ asset('mfs/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('mfs/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('mfs/vendor/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('mfs/js/plugins/apex-price.js') }}"></script>
+    <script src="{{ asset('public/mfs/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('public/mfs/js/plugins/apex-price.js') }}"></script>
 
-    <script src="{{ asset('mfs/vendor/basic-table/jquery.basictable.min.js') }}"></script>
-    <script src="{{ asset('mfs/js/plugins/basic-table-init.js') }}"></script>
+    <script src="{{ asset('public/mfs/vendor/basic-table/jquery.basictable.min.js') }}"></script>
+    <script src="{{ asset('public/mfs/js/plugins/basic-table-init.js') }}"></script>
 
-    <script src="{{ asset('mfs/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('mfs/js/plugins/perfect-scrollbar-init.js') }}"></script>
+    <script src="{{ asset('public/mfs/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('public/mfs/js/plugins/perfect-scrollbar-init.js') }}"></script>
 
-    <script src="{{ asset('mfs/js/dashboard.js') }}"></script>
-    <script src="{{ asset('mfs/js/scripts.js') }}"></script>
-
-    {{-- Third party --}}
+    <script src="{{ asset('public/mfs/js/dashboard.js') }}"></script>
+    <script src="{{ asset('public/mfs/js/scripts.js') }}"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-
     <script>
-        // AOS.init();
         let status = '{{ $status }}';
         let router = '{{ $route }}';
         let kyc = '{{ $kyc }}';
@@ -328,45 +317,17 @@
             });
         }
     </script>
-
-    {{-- Loan Completion Form was here --}}
-
     <script src="https://unpkg.com/intro.js/intro.js"></script>
     <script>
         // Get the current URL
         var currentUrl = window.location.href;
-
-        // Extract the route name from the URL
         var route = currentUrl.split('/').pop();
-
-        // Check if the route starts with "dashboard"
-        // if (route.startsWith('dashboard') && kyc === '0' ) {
-        //     // alert('Current route starts with "dashboard"');
-        //     introJs().setOptions({
-        //         steps: [{
-        //             element: document.querySelector('.tour-kyc-1'),
-        //             intro: "Click here to complete your KYC profile information!",
-        //             position: 'left'
-        //         }]
-        //     }).start();
-        //     introJs().addHints();
-        // } else {
-        //     // alert('Current route does not start with "dashboard"');
-        // }
     </script>
-
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
-        // let table = new DataTable('#default_loan_list', {
-        //     responsive: true
-        // });
         $(document).ready(function() {
             $('#default_loan_list').DataTable();
         });
     </script>
 </body>
-
-
-<!-- Mirrored from tende.vercel.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 17 Nov 2023 16:21:36 GMT -->
-
 </html>
