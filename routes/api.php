@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\UserAuthenticationController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\OTPController;
 use App\Http\Controllers\LoanApplicationContBkUP;
+use App\Http\Controllers\LoanApplicationController;
+use App\Http\Controllers\RepaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,8 +38,8 @@ Route::post('upload-files', [UserController::class, 'uploadFiles']);
 
 
 // Functions
-Route::post('request-for-loan', [LoanApplicationContBkUP::class, 'store']);
-Route::post('apply-for-loan', [LoanApplicationContBkUP::class, 'new_loan']);
+Route::post('request-for-loan', [LoanApplicationController::class, 'store']);
+Route::post('apply-for-loan', [LoanApplicationController::class, 'new_loan']);
 Route::get('get-my-loans/{id}', [LoanRequestController::class, 'getMyLoans']);
 
 Route::get('get-my-loan-balance/{loan_id}', [LoanRequestController::class, 'loanBalance']);
@@ -59,6 +61,9 @@ Route::get('/get-loan-denied-statuses', [SettingController::class, '__get_denied
 Route::get('/get-loan-not-taken-up-statuses', [SettingController::class, '__get_not_taken_status']);
 
 
+//Repayments
+Route::post('/pay/repayment', [RepaymentController::class, 'store']);
+
 // Deprected
 Route::get('get-my-wallet/{id}', [LoanRequestController::class, 'getWallets']);
 Route::get('get-my-withdrawal-requests/{id}', [LoanRequestController::class, 'getWithdrawalRequests']);
@@ -68,4 +73,3 @@ Route::post('make-withdrawal-request', [LoanRequestController::class, 'makeWithd
 // Admin Settings
 Route::get('/get-approvers-users', [SettingController::class, '__get_approvers']);
 Route::post('/set-auto-approvers', [SettingController::class, '__set_approvers']);
-

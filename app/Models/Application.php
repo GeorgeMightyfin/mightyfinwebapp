@@ -89,6 +89,7 @@ class Application extends Model
 
         static::addGlobalScope('withUser', function ($builder) {
             $builder->with('user');
+            $builder->with('loan_product');
         });
     }
 
@@ -178,10 +179,10 @@ class Application extends Model
 
     public static function payback($loan)
     {
-
         try {
 
             if ($loan->amount) {
+
                 // Change the URL or ensure proper DNS resolution
                 $apiUrl = 'http://localhost/mfs-admin/api/v2/payback';
                 // $apiUrl = 'https://admin.capexfinancialservices.org/api/payback';
@@ -208,7 +209,6 @@ class Application extends Model
 
                 // Execute request and get response
                 $response = curl_exec($ch);
-
                 // Better error logging
                 if (curl_errno($ch)) {
                     $error = 'cURL Error (' . curl_errno($ch) . '): ' . curl_error($ch);
@@ -218,7 +218,7 @@ class Application extends Model
                 }
 
                 // Log only in development or if debugging
-                Log::info('Payback API Response: ' . $response);
+                // Log::info('Payback API Response: ' . $response);
 
                 // Close cURL
                 curl_close($ch);
@@ -236,6 +236,7 @@ class Application extends Model
                 return $data['payback'] ?? 0;
             }
         } catch (\Throwable $th) {
+            dd($th);
             Log::error('Exception in payback function: ' . $th->getMessage());
             // Don't use dd() in production code as it stops execution
 

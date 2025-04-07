@@ -3,8 +3,9 @@
         <!-- Current Loan Status Card -->
         <div class="loan-status-card">
             <div class="loan-status-header">
-                <h2 class="subtitle">Current Loan</h2>
-                <h2 class="amount">K{{ number_format($my_loan->amount, 2, '.',',') }}</h2>
+                <h1 class="subtitle" style="color: #888577">Current Loan</h1>
+                <h2 class="amount" style="color: #3c3833">K{{ number_format($my_loan->amount, 2, '.',',') }}</h2>
+                <h4 class="amount" style="color: #dbcbb8">{{ $my_loan->loan_product->name }} </h4>
             </div>
 
             <a class="loan-details-link" href="#">
@@ -28,8 +29,8 @@
                 >
                     <div class="loan-info">
                         <div class="loan-details">
-                            <div class="loan-type">{{ $my_loan->type }} Repayment</div>
-                            <div class="balance">K{{ number_format(App\Models\Application::open_balance($my_loan), 2, '.',',') }}</div>
+                            <div class="loan-type">My Pending Repayment</div>
+                            <div class="balance" style="color:#f0ebf5">K{{ number_format(App\Models\Application::open_balance($my_loan), 2, '.',',') }}</div>
                             <div class="due-date">
                                 @if ($my_loan->status == 1)
                                     @php
@@ -50,12 +51,12 @@
                         <div class="action-button">
                             @switch($my_loan->status)
                                 @case(1)
-                                    <button class="btn-action active">
+                                    <a href="{{ route('transaction.item', ['view'=>'payments']) }}" class="btn-action active">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                                         </span>
                                         Repay Now
-                                    </button>
+                                    </a>
                                     @break
                                 @case(2)
                                     <button class="btn-action processing">
@@ -152,12 +153,12 @@
 <style>
 /* Global Styles */
 :root {
-    --primary-color: #6a3093;
+    --primary-color: #fff;
     --primary-gradient: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
     --secondary-color: #ffc107;
     --text-color: #333;
     --text-light: #6c757d;
-    --white: #ffffff;
+    --white: #a044ff;
     --success: #2ecc71;
     --warning: #f39c12;
     --danger: #e74c3c;
@@ -235,7 +236,7 @@
 }
 
 .loan-card[data-status="active"]::before {
-    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    background: linear-gradient(90deg, #802ecc, #38258c);
 }
 
 .loan-card[data-status="processing"]::before {
@@ -299,8 +300,8 @@
 }
 
 .btn-action.active {
-    background-color: var(--success);
-    color: var(--white);
+    background-color: var(--white);
+    color:white
 }
 
 .btn-action.processing {

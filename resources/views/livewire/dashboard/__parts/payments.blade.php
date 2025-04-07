@@ -279,7 +279,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <p style="font-size: 0.875rem; opacity: 0.8;">Total Outstanding Balance</p>
-                <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem; color:#fff">K{{ number_format(App\Models\Application::open_balance($open_loan),2,'.',',') }}</h2>
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 0.5rem; color:#fff">K{{ number_format(App\Models\Application::open_balance($current_loan),2,'.',',') }}</h2>
             </div>
             <div>
                 <p style="font-size: 0.875rem; opacity: 0.8;">Next Payment Due</p>
@@ -291,7 +291,7 @@
 
 
     <!-- Transaction List -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 p-2">
+    <div class="grid grid-cols-1 gap-4 p-2 mt-8 md:grid-cols-2 lg:grid-cols-3">
         @forelse($transactions as $data)
         <div class="animate-slide-fade transaction-card" style="animation-delay: {{ $loop->index * 150 }}ms;">
             <div class="row flex-column flex-md-row justify-content-even">
@@ -305,20 +305,24 @@
                     <div class="col-8">
                         <div style="display: flex; align-items: center;">
                             <span style="height: 8px; width: 8px; border-radius: 50%; background-color: var(--success); margin-right: 8px;"></span>
-                            <span style="font-weight: bold;"> <b>K{{ number_format($data->amount_settled, 2, '.', ',') }}</b> </span>
+                            <span style="font-weight: bold;"> <b>K{{ number_format($data?->amount_settled, 2, '.', ',') }}</b> </span>
                         </div>
-                        <p style="color: var(--gray); font-size: 0.875rem;">Repayment installment to {{ $data->application->loan_product->name }} Loan</p>
+                        <p style="color: var(--gray); font-size: 0.875rem;">Repayment installment to {{ $data?->application?->loan_product->name }} Loan</p>
                         <small style="color: var(--gray); font-size: 0.75rem;">Date: {{ $data->created_at->toFormattedDateString() }}</small>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-12">
-                    <small style="color: var(--gray); font-size: 0.75rem;">Process by: {{ $data->proccess_by ?? 'System' }}</small>
+                    <small style="color: var(--gray); font-size: 0.75rem;">Process by: {{ $data?->proccess_by ?? 'System' }}</small>
                 </div>
                 <div class="col-md-4 col-xs-3">
                     <div class="btn-group">
+                        @if ($data->application)
                         <a href="{{ route('loan-details',['id' => $data->application->id]) }}" class="btn btn-view sharp tp-btn">
                             <i style="color: white" class="fa fa-eye"></i>
                         </a>
+                        @else
+                        <p>This loan was removed or deleted</p>
+                        @endif
 
                     </div>
                 </div>
@@ -340,13 +344,11 @@
                 <form id="repaymentForm">
                     <div class="form-group">
                         <label for="loanSelect" style="display: block; margin-bottom: 0.5rem;">Select Loan</label>
-                        <select id="loanSelect" class="form-control">
-                            <option value="">Select a loan</option>
-                            <option value="1">Personal Loan (K35,245.00)</option>
-                            <option value="2">Business Loan (K15,750.00)</option>
-                            <option value="3">Auto Loan (K8,900.00)</option>
+                        <select id="loanSelect" value="{{ $current_loan->id }}" class="form-control">
+                            <option value="{{ $current_loan->id }}" selected>{{ $current_loan->loan_product->name }} K({{ number_format(App\Models\Application::payback($current_loan)) }})</option>
                         </select>
                     </div>
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                     <div class="form-group">
                         <label for="paymentAmount" style="display: block; margin-bottom: 0.5rem;">Payment Amount</label>
                         <input type="text" id="paymentAmount" class="form-control" placeholder="Enter amount (K)">
@@ -354,27 +356,33 @@
                     <div class="form-group">
                         <label style="display: block; margin-bottom: 0.75rem;">Payment Method</label>
                         <div class="payment-option">
-                            <input type="radio" id="method1" name="paymentMethod" value="bank_transfer">
-                            <label for="method1">Bank Transfer</label>
-                        </div>
-                        <div class="payment-option">
                             <input type="radio" id="method2" name="paymentMethod" value="mobile_money">
                             <label for="method2">Mobile Money</label>
                         </div>
                         <div class="payment-option">
-                            <input type="radio" id="method3" name="paymentMethod" value="card">
+                            <input disabled type="radio" id="method3" name="paymentMethod" value="card">
                             <label for="method3">Debit/Credit Card</label>
+                            &nbsp;&nbsp;
+                            <small class="rounded bg-primary badge">Coming Soon</small>
+                        </div>
+                        <div class="payment-option">
+                            <input disabled type="radio" id="method1" name="paymentMethod" value="bank_transfer">
+                            <label for="method1">Bank Transfer</label>
+                            &nbsp;&nbsp;
+                            <small class="rounded bg-primary badge">Coming Soon</small>
                         </div>
                     </div>
 
                     <!-- Mobile Network Selection (initially hidden) -->
                     <div id="networkSelection" class="form-group" style="display: none; margin-top: 1rem;">
                         <label for="networkSelect" style="display: block; margin-bottom: 0.5rem;">Select Network</label>
+                        <label for="networkSelect" style="display: block; margin-bottom: 0.1rem;">{{ auth()->user()->phone }}</label>
+
                         <select id="networkSelect" class="form-control">
                             <option value="">Select a network</option>
-                            <option value="mtn">MTN</option>
-                            <option value="airtel">Airtel</option>
-                            <option value="zamtel">Zamtel</option>
+                            <option value="MTN_MOMO_ZMB">MTN</option>
+                            <option value="AIRTEL_OAPI_ZMB">Airtel</option>
+                            <option value="ZAMTEL_ZMB">Zamtel</option>
                         </select>
                     </div>
                 </form>
@@ -388,137 +396,258 @@
             </div>
         </div>
     </div>
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Wait for the page to fully load
-        document.addEventListener("DOMContentLoaded", function () {
-            // Original script
-            const cards = document.querySelectorAll(".card");
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 300}ms`;
-            });
+        // Add the full-screen preloader CSS to the head
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+    .fullscreen-preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
 
-            // Modal functionality
-            const modal = document.getElementById("repaymentModal");
-            const repaymentBtn = document.getElementById("repaymentBtn");
-            const closeBtn = document.querySelector(".close");
-            const cancelBtn = document.getElementById("cancelBtn");
-            const payBtn = document.getElementById("payBtn");
-            const loader = document.getElementById("paymentLoader");
-            const networkSelection = document.getElementById("networkSelection");
+    .fullscreen-preloader.active {
+        opacity: 1;
+        visibility: visible;
+    }
 
-            // Payment options
-            const paymentOptions = document.querySelectorAll(".payment-option");
+    .fullscreen-preloader .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(155, 67, 238, 0.2);
+        border-radius: 50%;
+        border-top-color: var(--primary, #9b43ee);
+        animation: spinner 1s linear infinite;
+    }
 
-            // Open modal
-            repaymentBtn.addEventListener("click", function() {
-                modal.style.display = "flex";
-            });
+    .preloader-message {
+        position: absolute;
+        bottom: calc(50% - 50px);
+        font-weight: 600;
+        color: var(--primary, #9b43ee);
+    }
+</style>
+`);
 
-            // Close modal
-            closeBtn.addEventListener("click", closeModal);
-            cancelBtn.addEventListener("click", closeModal);
+// Create the preloader element
+const preloaderHTML = `
+<div id="fullscreenPreloader" class="fullscreen-preloader">
+    <div class="spinner"></div>
+    <div class="preloader-message">Processing your payment...</div>
+</div>
+`;
 
-            function closeModal() {
-                modal.style.display = "none";
-                // Reset the form when closing
-                document.getElementById("repaymentForm").reset();
+// Append preloader to body
+document.body.insertAdjacentHTML('beforeend', preloaderHTML);
+
+// Preloader utility functions
+const preloader = {
+    show: function(message = 'Processing your payment...') {
+        const preloader = document.getElementById('fullscreenPreloader');
+        const messageEl = preloader.querySelector('.preloader-message');
+        messageEl.textContent = message;
+        preloader.classList.add('active');
+    },
+    hide: function() {
+        const preloader = document.getElementById('fullscreenPreloader');
+        preloader.classList.remove('active');
+    }
+};
+
+// Wait for the page to fully load
+document.addEventListener("DOMContentLoaded", function () {
+    // Original script
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 300}ms`;
+    });
+
+    // Modal functionality
+    const modal = document.getElementById("repaymentModal");
+    const repaymentBtn = document.getElementById("repaymentBtn");
+    const closeBtn = document.querySelector(".close");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const payBtn = document.getElementById("payBtn");
+    const loader = document.getElementById("paymentLoader");
+    const networkSelection = document.getElementById("networkSelection");
+
+    // Payment options
+    const paymentOptions = document.querySelectorAll(".payment-option");
+
+    // Open modal
+    repaymentBtn.addEventListener("click", function() {
+        modal.style.display = "flex";
+    });
+
+    // Close modal
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+
+    function closeModal() {
+        modal.style.display = "none";
+        // Reset the form when closing
+        document.getElementById("repaymentForm").reset();
+        networkSelection.style.display = "none";
+    }
+
+    // Close if clicked outside
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Handle payment options selection
+    paymentOptions.forEach(option => {
+        option.addEventListener("click", function() {
+            // Remove selected class from all options
+            paymentOptions.forEach(opt => opt.classList.remove("selected"));
+
+            // Add selected class to clicked option
+            this.classList.add("selected");
+
+            // Check the radio button
+            const radio = this.querySelector("input[type='radio']");
+            radio.checked = true;
+
+            // Show network selection if Mobile Money is selected
+            if (radio.value === "mobile_money") {
+                networkSelection.style.display = "block";
+            } else {
                 networkSelection.style.display = "none";
             }
-
-            // Close if clicked outside
-            window.addEventListener("click", function(event) {
-                if (event.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Handle payment options selection
-            paymentOptions.forEach(option => {
-                option.addEventListener("click", function() {
-                    // Remove selected class from all options
-                    paymentOptions.forEach(opt => opt.classList.remove("selected"));
-
-                    // Add selected class to clicked option
-                    this.classList.add("selected");
-
-                    // Check the radio button
-                    const radio = this.querySelector("input[type='radio']");
-                    radio.checked = true;
-
-                    // Show network selection if Mobile Money is selected
-                    if (radio.value === "mobile_money") {
-                        networkSelection.style.display = "block";
-                    } else {
-                        networkSelection.style.display = "none";
-                    }
-                });
-            });
-
-            // Handle payment submission
-            payBtn.addEventListener("click", function(e) {
-                e.preventDefault();
-
-                // Form validation
-                const loanSelect = document.getElementById("loanSelect");
-                const paymentAmount = document.getElementById("paymentAmount");
-                const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-                const networkSelect = document.getElementById("networkSelect");
-
-                // Basic validation
-                if (!loanSelect.value) {
-                    alert("Please select a loan");
-                    return;
-                }
-
-                if (!paymentAmount.value || isNaN(parseFloat(paymentAmount.value))) {
-                    alert("Please enter a valid payment amount");
-                    return;
-                }
-
-                if (!selectedPaymentMethod) {
-                    alert("Please select a payment method");
-                    return;
-                }
-
-                // Network validation for Mobile Money
-                if (selectedPaymentMethod.value === "mobile_money" && !networkSelect.value) {
-                    alert("Please select a mobile network");
-                    return;
-                }
-
-                // Collect form data for submission to Laravel controller
-                const formData = {
-                    loan_id: loanSelect.value,
-                    amount: paymentAmount.value,
-                    payment_method: selectedPaymentMethod.value,
-                    network: selectedPaymentMethod.value === "mobile_money" ? networkSelect.value : null
-                };
-
-                // Show loader
-                loader.style.display = "block";
-
-                // Disable button
-                payBtn.disabled = true;
-
-                // In a real implementation, you would send the data to your Laravel controller
-                // using fetch or axios
-                console.log("Payment data to be sent to Laravel controller:", formData);
-
-                // Simulate API call to Laravel backend
-                setTimeout(function() {
-                    loader.style.display = "none";
-                    payBtn.disabled = false;
-
-                    // Close modal
-                    closeModal();
-
-                    // Show success message (this would be implemented properly in production)
-                    alert("Payment successful!");
-
-                    // In a real implementation, you would handle the response from the server
-                }, 2000);
-            });
         });
+    });
+
+    // Handle payment submission
+    payBtn.addEventListener("click", async function(e) {
+        e.preventDefault();
+
+        // Form validation
+        const loanSelect = document.getElementById("loanSelect");
+        const paymentAmount = document.getElementById("paymentAmount");
+        const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        const networkSelect = document.getElementById("networkSelect");
+
+        // Basic validation
+        if (!loanSelect.value) {
+            alert("Please select a loan");
+            return;
+        }
+
+        if (!paymentAmount.value || isNaN(parseFloat(paymentAmount.value))) {
+            alert("Please enter a valid payment amount");
+            return;
+        }
+
+        if (!selectedPaymentMethod) {
+            alert("Please select a payment method");
+            return;
+        }
+
+        // Network validation for Mobile Money
+        if (selectedPaymentMethod.value === "mobile_money" && !networkSelect.value) {
+            alert("Please select a mobile network");
+            return;
+        }
+
+        // Collect form data for submission to Laravel controller
+        const formData = {
+            loan_id: loanSelect.value,
+            amount: paymentAmount.value,
+            payment_method: selectedPaymentMethod.value,
+            network: selectedPaymentMethod.value === "mobile_money" ? networkSelect.value : null
+        };
+
+        // Show loader in button
+        loader.style.display = "block";
+
+        // Disable button
+        payBtn.disabled = true;
+
+        // Close modal
+        closeModal();
+
+        // Show full-screen preloader
+        preloader.show();
+
+        try {
+            // Send the data to Laravel backend using fetch API
+            // Get the CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            const response = await fetch('api/pay/repayment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Payment processing failed');
+            }
+
+            // On success
+            preloader.hide();
+
+            // Show success message with SweetAlert if available, otherwise use regular alert
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Your payment has been processed successfully. Please enter the MOMO Pin on your phone to complete.',
+                    icon: 'info',
+                    confirmButtonColor: 'var(--primary, #9b43ee)'
+                }).then(() => {
+                    // Reload the page to show updated data
+                    window.location.reload();
+                });
+            } else {
+                alert('Payment successful!');
+                window.location.reload();
+            }
+
+        } catch (error) {
+            console.error('Payment Error:', error);
+
+            preloader.hide();
+
+            // Show error message
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Payment Failed',
+                    text: error.message || 'There was an error processing your payment',
+                    icon: 'error',
+                    confirmButtonColor: 'var(--primary, #9b43ee)'
+                });
+            } else {
+                alert(`Payment failed: ${error.message || 'There was an error processing your payment'}`);
+            }
+        } finally {
+            // Reset button state
+            loader.style.display = "none";
+            payBtn.disabled = false;
+        }
+    });
+});
     </script>
 </div>

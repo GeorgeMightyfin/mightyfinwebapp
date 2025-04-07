@@ -9,7 +9,8 @@
             $view = htmlspecialchars($param);
         }
         @endphp
-        <div class="content-body mt-5">
+        <div class="mt-5 content-body">
+
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-12 col-xl-12">
@@ -46,7 +47,7 @@
 
 
                         <div class="col-xxl-12 col-xl-12">
-                            <div class="col-xxl-12 col-xl-12 col-lg-12 px-4">
+                            <div class="px-4 col-xxl-12 col-xl-12 col-lg-12">
                                 @if (session('success'))
                                     <div class="alert alert-success">
                                         {{ session('success') }}
@@ -62,17 +63,17 @@
                                 @include('livewire.dashboard.__parts.payments')
                             </div>
                             <div id="twoFactor" class="">
-                                @include('livewire.dashboard.__parts.deposits')
+                                {{-- @include('livewire.dashboard.__parts.deposits') --}}
                             </div>
                             <div id="browserSession" class="">
-                                @include('livewire.dashboard.__parts.withdrawals')
+                                {{-- @include('livewire.dashboard.__parts.withdrawals') --}}
                             </div>
 
                             <div id="docUploads" class="">
-                                @include('livewire.dashboard.__parts.investments')
+                                {{-- @include('livewire.dashboard.__parts.investments') --}}
                             </div>
                             <div id="payback" class="">
-                                @include('livewire.dashboard.__parts.repayments')
+                                {{-- @include('livewire.dashboard.__parts.repayments') --}}
                             </div>
                         </div>
                     </div>

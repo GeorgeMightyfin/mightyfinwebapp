@@ -1,15 +1,15 @@
-<div style="margin-top: -2svh;" class="profile_log dropdown">
+<div  class="profile_log dropdown">
     <div class="user" data-toggle="dropdown">
         <span style="">
             @if (auth()->user()->profile_photo_path)
                 @if ($route == 'profile.show' || $route == 'loan-details' || $route == 'loan-statement')
                     <img width="50" height="50" style="border-radius:50%;"
-                        src="{{ '../public/' . Storage::url(auth()->user()->profile_photo_path) }}"
-                        alt="">
+                    src="{{ '../public/' . Storage::url(auth()->user()->profile_photo_path) }}"
+                    alt="">
                 @else
                     <img width="50" height="50" style="border-radius:50%"
-                        src="{{ 'public/' . Storage::url(auth()->user()->profile_photo_path) }}"
-                        alt="">
+                    src="{{ 'public/' . Storage::url(auth()->user()->profile_photo_path) }}"
+                    alt="">
                 @endif
             @else
                 <img width="45" style="border-radius:50%"
@@ -19,6 +19,7 @@
         </span>
         <span class="arrow"><i class="icofont-angle-down"></i></span>
     </div>
+
     <div class="dropdown-menu dropdown-menu-right">
         <div class="user-email">
             <div class="user">
@@ -63,16 +64,16 @@
             class="dropdown-item">
             <i class="bi bi-person"></i>Profile
         </a>
-        <a href="{{ route('payments') }}" class="dropdown-item">
+        {{-- <a href="{{ route('payments') }}" class="dropdown-item">
             <i class="bi bi-wallet"></i>Payments
-        </a>
+        </a> --}}
         <a href="{{ route('transactions') }}" class="dropdown-item">
-            <i class="bi bi-wallet"></i>Transactions
+            <i class="bi bi-wallet"></i>My Repayments
         </a>
         <a href="{{ route('settings') }}" class="dropdown-item">
             <i class="bi bi-gear"></i> Settings
         </a>
-        
+
 
         <a>
             <form method="POST" action="{{ route('logout') }}">
