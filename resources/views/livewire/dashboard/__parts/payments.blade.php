@@ -277,6 +277,7 @@
     @endif
 
     <!-- Balance Card -->
+    @if ($current_loan)
     <div class="balance-card">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
@@ -290,6 +291,7 @@
             </div>
         </div>
     </div>
+    @endif
 
 
     <!-- Transaction List -->
