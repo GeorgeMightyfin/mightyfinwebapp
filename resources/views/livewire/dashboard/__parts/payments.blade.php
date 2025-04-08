@@ -264,6 +264,7 @@
 
 <div wire:ignore class="col-xl-12 col-md-12 col-sm-12">
     <!-- Header with repayment button -->
+    @if ($current_loan)
     <div class="dashboard-header">
         <h1 class="text-2xl font-bold"></h1>
         <button id="repaymentBtn" class="btn-repay">
@@ -273,6 +274,7 @@
             Make a Repayment
         </button>
     </div>
+    @endif
 
     <!-- Balance Card -->
     <div class="balance-card">

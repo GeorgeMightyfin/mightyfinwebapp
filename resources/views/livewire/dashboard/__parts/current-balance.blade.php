@@ -158,7 +158,7 @@
     --secondary-color: #ffc107;
     --text-color: #333;
     --text-light: #6c757d;
-    --white: #a044ff;
+    --white: #ffffff;
     --success: #2ecc71;
     --warning: #f39c12;
     --danger: #e74c3c;
@@ -414,6 +414,7 @@
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
+    color:#fff;
 }
 
 .card-description {
