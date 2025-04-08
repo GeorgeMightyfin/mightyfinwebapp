@@ -119,9 +119,12 @@
                         <p class="card-description">Get quick access to cash with our easy application process</p>
                         <a href="{{ route('new-loan') }}" class="apply-button">
                             <span class="button-text">Apply Now</span>
-                            <span class="button-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/></svg>
-                            </span>
+                            <span class="button-icon" >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z"/>
+                                    <path fill="white" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/>
+                                  </svg>
+                                                              </span>
                         </a>
                     </div>
                     <div class="card-illustration">
@@ -140,8 +143,11 @@
                         <button class="refer-button">
                             <span class="button-text">Share Now</span>
                             <span class="button-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-                            </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z"/>
+                                    <path fill="white" d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                  </svg>
+                                                              </span>
                         </button>
                     </div>
                 </div>
@@ -318,11 +324,12 @@
     background-color: var(--dark);
     color: var(--white);
 }
-
+/*
 .btn-action:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
+    color:white !important;
+} */
 
 .btn-icon {
     margin-right: 0.75rem;
@@ -362,8 +369,21 @@
 }
 
 .apply-loan-card {
-    background: var(--primary-gradient);
+     background: rgba(106, 48, 147, 0.85);
+    background-size: cover;
+    background-position: center;
     color: var(--white);
+}
+
+
+.apply-loan-card::before{
+     background: rgba(106, 48, 147, 0.85);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .refer-friend-card {
@@ -451,11 +471,13 @@
 
 .button-text {
     margin-right: 0.5rem;
+    color:#fff
 }
 
 .button-icon {
     display: flex;
     align-items: center;
+    color:#fff;
 }
 
 .card-illustration {
@@ -466,12 +488,23 @@
 }
 
 .illustration-image {
+    margin-bottom:-32px;
     max-width: 100%;
     max-height: 140px;
     object-fit: contain;
     transition: transform 0.5s ease;
 }
-
+@media screen and (max-width: 768px) {
+  .illustration-image {
+    padding-left: 52%;
+    margin-bottom: 0;
+    max-width: 102%;
+    max-height: 123px !important;
+    object-fit: contain;
+    position: absolute;
+    bottom: -20px
+  }
+}
 .apply-loan-card:hover .illustration-image {
     transform: translateY(-10px);
 }
@@ -484,7 +517,7 @@
 
     .apply-loan-card,
     .refer-friend-card {
-        height: 200px;
+        padding: 0.5rem;
     }
 
     .card-illustration {

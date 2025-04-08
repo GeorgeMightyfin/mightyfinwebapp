@@ -22,65 +22,10 @@
                             @include('livewire.dashboard.__parts.current-balance')
 
                             <!-- Quick Actions Section -->
-                            <div class="mb-5 col-12">
-                                <div class="mb-4 d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 fw-bold text-primary">
-                                        <i class="bi bi-lightning-fill me-2"></i>Quick Actions
-                                    </h4>
-                                    <span class="px-3 py-2 badge bg-primary-subtle text-primary rounded-pill">Essentials</span>
-                                </div>
-                                <div class="flex-wrap gap-4 quick-actions d-flex">
-                                    <a class="text-center action-item position-relative" href="{{ route('profile.show', ['view' => 'kyc']) }}">
-                                        <div class="p-3 mb-3 shadow-sm btn btn-light rounded-circle action-icon-wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" class="bi bi-lightning-charge-fill text-primary" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
-                                            </svg>
-                                            <div class="ripple-effect"></div>
-                                        </div>
-                                        <span class="fw-medium">Complete KYC</span>
-                                        <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                            !
-                                        </span>
-                                    </a>
-                                    <a class="text-center action-item" href="#">
-                                        <div class="p-3 mb-3 shadow-sm btn btn-light rounded-circle action-icon-wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" class="bi bi-bank text-primary" viewBox="0 0 16 16">
-                                                <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.5.5 0 0 1-.485.62H.5a.5.5 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
-                                            </svg>
-                                            <div class="ripple-effect"></div>
-                                        </div>
-                                        <span class="fw-medium">Apply for Loan</span>
-                                    </a>
-                                    <a class="text-center action-item" href="#">
-                                        <div class="p-3 mb-3 shadow-sm btn btn-light rounded-circle action-icon-wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" class="bi bi-credit-card text-primary" viewBox="0 0 16 16">
-                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-                                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z"/>
-                                            </svg>
-                                            <div class="ripple-effect"></div>
-                                        </div>
-                                        <span class="fw-medium">Payment Methods</span>
-                                    </a>
-                                    <a class="text-center action-item" href="#">
-                                        <div class="p-3 mb-3 shadow-sm btn btn-light rounded-circle action-icon-wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="currentColor" class="bi bi-credit-card text-primary" viewBox="0 0 16 16">
-                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-                                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z"/>
-                                            </svg>
-                                            <div class="ripple-effect"></div>
-                                        </div>
-                                        <span class="fw-medium">Payment Methods</span>
-                                    </a>
-                                </div>
-                            </div>
+                            @include('livewire.dashboard.__parts.quick-actions')
 
                             <!-- Wallet Information Section -->
-                            {{-- <div class="mb-5 col-12">
+                            <div class="mb-5 col-12">
                                 <div class="mb-4 d-flex align-items-center justify-content-between">
                                     <h4 class="mb-0 fw-bold text-primary">
                                         <i class="bi bi-wallet2 me-2"></i>Wallet Information
@@ -156,7 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <!-- Loan History Section -->
                             <div class="mb-5 col-12">
@@ -243,8 +188,8 @@
                                     <div class="text-white border-0 shadow-lg card rounded-4 verification-card"
                                         style="background-image: linear-gradient(135deg, #662d91, #913d93);">
                                         <div class="p-4 card-body">
-                                            <div class="mb-2 d-flex justify-content-between">
-                                                <h4 class="mb-0">Hey, {{ auth()->user()->fname }}! 👋</h4>
+                                            <div class="mb-2 text-white d-flex justify-content-between">
+                                                <h4 style="color: #ffff !important;" class="mb-0">Hey, {{ auth()->user()->fname }}! 👋</h4>
                                                 <div class="profile-avatar">
                                                     <div class="avatar-placeholder">{{ substr(auth()->user()->fname, 0, 1) }}</div>
                                                 </div>
@@ -262,9 +207,9 @@
                                                 <li class="mb-3">
                                                     <a class="p-3 bg-white rounded-4 d-flex align-items-center justify-content-between bg-opacity-10 tour-kyc-1 verification-link"
                                                         href="{{ route('profile.show', ['view' => 'kyc']) }}">
-                                                        <div class="d-flex align-items-center">
+                                                        <div class="d-flex align-items-center text-muted">
                                                             <span class="not-verified me-3"><i class="icofont-close-line"></i></span>
-                                                            <span class="fw-medium">Complete KYC Verification</span>
+                                                            <span class="fw-medium ">Complete KYC Verification</span>
                                                         </div>
                                                         <i class="text-white bi bi-chevron-right"></i>
                                                     </a>
@@ -272,7 +217,7 @@
                                                 <li class="mb-3">
                                                     <a class="p-3 bg-white rounded-4 d-flex align-items-center justify-content-between bg-opacity-10 verification-link"
                                                         href="#">
-                                                        <div class="d-flex align-items-center">
+                                                        <div class="d-flex align-items-center text-muted">
                                                             <span class="not-verified me-3"><i class="icofont-close-line"></i></span>
                                                             <span class="fw-medium">Verify Mobile Number</span>
                                                         </div>
