@@ -1,7 +1,7 @@
 <div class="notification dropdown">
     <div class="notify-bell" data-toggle="dropdown">
         <span><i style="font-size:1.8rem;"
-                class=" text-white bi bi-bell"></i></span>
+                class="text-muted bi bi-bell"></i></span>
     </div>
     <div class="dropdown-menu dropdown-menu-right notification-list">
         <h4>Announcements</h4>

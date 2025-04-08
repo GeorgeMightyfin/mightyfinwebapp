@@ -12,9 +12,8 @@
                     alt="">
                 @endif
             @else
-                <img width="45" style="border-radius:50%"
-                    src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
-                    alt="" />
+            <span><i style="font-size:1.8rem;"
+                class="text-muted bi bi-person"></i></span>
             @endif
         </span>
         <span class="arrow"><i class="icofont-angle-down"></i></span>
