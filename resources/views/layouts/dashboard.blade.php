@@ -159,11 +159,8 @@
 <body class="dashboard">
     <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
-
     <div @if (request()->routeIs('dashboard')) style="margin-top:0px" @endif id="main-wrapper">
-
-
-       @include('livewire.dashboard.__parts.header_content')
+        @include('livewire.dashboard.__parts.header_content')
         <div class="sidebar" style="background-image: linear-gradient(to right, #792db8, #792db8); color:#fff;">
             <div class="brand-logo">
                 <a href="{{ route('dashboard') }}" style="margin:4%;">
@@ -232,7 +229,6 @@
         @endif
     </div>
     @stack('modals')
-
     @livewireScripts
     <script src="{{ asset('public/mfs/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('public/mfs/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

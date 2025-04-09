@@ -218,10 +218,19 @@ trait LoanTrait{
     }
 
     public function apply_loan($data){
+        $app = Application::create($data);
+        // Initialize a stage for the wizard during processing
+        DB::table('application_stages')->insert([
+            'application_id' => $app->id,
+            'loan_status_id' => 1,
+            'state' => 'current',
+            'status' => 'verification',
+            'stage' => 'processing',
+            'prev_status' => 'current',
+            'curr_status' => '',
+            'position' => 1
+        ]);
         try {
-            // that is not approved yet and not complete
-            $check = Application::where('closed', 0)->where('user_id', $data['user_id'])->orderBy('created_at', 'desc')->get();
-            // dd(empty($check->toArray()));
             if($data['email'] != ''){
                 $mail = [
                     'name' => $data['fname'].' '.$data['lname'],
@@ -233,45 +242,15 @@ trait LoanTrait{
                     'message' => 'Thank you for choosing us. Your loan request is submitted. Sign in with username '.$data['email'].' and password is "mighty4you" to check the status. We value your trust and are committed to your satisfaction.',
                     'message2'=>'Before proceeding, please fill out the attached Pre-approval form and submit it for the final processing of your '.$data['type'].' loan application.'
                 ];
+                $loan_data = new LoanApplication($mail);
+                Mail::to($data['email'])->send($loan_data);
             }
-
-            if(empty($check->toArray())){
-                $item = Application::create($data);
-                if($data['email'] != ''){
-                    $loan_data = new LoanApplication($mail);
-                    Mail::to($data['email'])->send($loan_data);
-                }
-
-                // Fetch the loan status with relationships
-                $status = DB::table('loan_statuses')
-                    ->join('statuses', 'loan_statuses.status_id', '=', 'statuses.id')
-                    ->select('loan_statuses.*', 'statuses.*')
-                    ->where('loan_statuses.loan_product_id', 1)
-                    ->orderBy('loan_statuses.id', 'asc')
-                    ->first();
-
-                // Create a new application stage
-                DB::table('application_stages')->insert([
-                    'application_id' => $item->id,
-                    'loan_status_id' => 1,
-                    'state' => 'current',
-                    'status' => $status->name, // Using the status retrieved from the query
-                    'stage' => $status->stage,
-                    'prev_status' => 'current',
-                    'curr_status' => '',
-                    'position' => 1
-                ]);
-
-                return $item->id;
-            }else{
-                // redirect to you already have loan request
-                return 'exists';
-            }
-
         } catch (\Throwable $th) {
-            dd($th);
-            // return false;
+
         }
+
+        return $app->id;
+
     }
 
     public function apply_update_loan($data, $loan_id){

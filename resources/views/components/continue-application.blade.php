@@ -4,7 +4,7 @@
 
         <div class="p-6 modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center ">
+                <h4 class="text-center modal-title ">
                     <b>Loan Completion Form</b>
                 </h4>
             </div>
@@ -21,11 +21,11 @@
                         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                         <!-- Personal Info -->
                         <div class="step col-xxl-12" id="step1">
-                            <div style="width: 90%" class="d-flex justify-content-between mb-2">
+                            <div style="width: 90%" class="mb-2 d-flex justify-content-between">
                                 <h5>Profile Details</h5>
                             </div>
                             <br>
-                            <div class="row mb-4"><div class="col-md-6">
+                            <div class="mb-4 row"><div class="col-md-6">
                                 <label for="dob">D.O.B</label>
                                 <input type="date" class="form-control" id="dob" name="dob">
                                 <small id="jobDOBError" class="text-danger"></small>
@@ -55,7 +55,7 @@
                                     <small id="jobTitleError" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="phone">PHONE NUMBER
                                         <small class="text-success">(eg. starting with: 0975, 00772, 965)</small></label>
@@ -83,7 +83,7 @@
                                     <small id="employeeNoError" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="col-md-6">
                                     <label for="nrc">IDENTIFICATION TYPE</label>
                                     <div class="input-group">
@@ -109,7 +109,7 @@
                                     <input value="{{ auth()->user()->ministry }}" placeholder="eg. Ministry of Health" type="text" class="form-control" id="ministry" name="ministry">
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="department">GENDER</label>
                                     <select
@@ -128,7 +128,7 @@
                                     <input value="{{ auth()->user()->department }}" type="text" placeholder="" class="form-control" id="department" name="department">
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="address">PHYSICAL ADDRESS</label>
                                     <div class="input-group">
@@ -161,17 +161,17 @@
 
                         {{-- KYC --}}
                         <div class="step" id="step2">
-                            <div style="width: 90%" class="d-flex justify-content-between mb-2">
+                            <div style="width: 90%" class="mb-2 d-flex justify-content-between">
                                 <h5>KYC Documents</h5>
                             </div>
                             <br>
                             <div class="row col-md-12 col-lg-12" style="">
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
 
                                     <input type="file" value="{{ $meta->uploads->where('name', 'nrc_file')->first()->path }}" class="file-input visually-hidden" id="fileInput" accept=".pdf, .doc, .docx" name="nrc_file">
 
-                                    <label for="fileInput" class="bg-primary p-2 text-white rounded file-input-label">
+                                    <label for="fileInput" class="p-2 text-white rounded bg-primary file-input-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -193,10 +193,10 @@
                                     </div>
                                     <small id="nrcFileError" class="text-danger"></small>
                                 </div>
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
                                     <input type="file" class="file-input visually-hidden"  value="{{ $meta->uploads->where('name', 'tpin_file')->first()->path }}" id="fileInput2" accept=".pdf, .doc, .docx" name="tpin_file">
-                                    <label for="fileInput2" class="bg-primary p-2 text-white rounded file-input-label">
+                                    <label for="fileInput2" class="p-2 text-white rounded bg-primary file-input-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -239,7 +239,7 @@
                         <div class="step" id="step3">
                             <h5>Next of Kin Details</h5>
                             <br>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="nextOfKinFirstName">FIRST NAME (Next of Kin)</label>
                                     <input type="text" value="{{ $meta->next_of_king->first()->fname }}" class="form-control" id="nextOfKinFirstName" name="nextOfKinFirstName">
@@ -251,7 +251,7 @@
                                     <small id="nokLNError" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="nextOfKinPhone">PHONE NUMBER (Next of Kin)</label>
                                     <div class="input-group">
@@ -275,7 +275,7 @@
                                     <input type="text" value="{{ $meta->next_of_king->first()->address }}"  class="form-control" id="physicalAddress" name="physicalAddress">
                                 </div>
                             </div>
-                            <div class="form-group mb-4">
+                            <div class="mb-4 form-group">
                                 <label for="relationship">RELATIONSHIP WITH APPLICANT</label>
                                 <input type="text" value="{{ $meta->next_of_king->first()->relation }}"  class="form-control" id="relationship" name="relationship">
                                 <small id="relationError" class="text-danger"></small>
@@ -299,7 +299,7 @@
                         {{-- <div class="step" id="step3">
                             <h4>Guarantor's Information</h4>
 
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="guarantorName">Guarantor’s Name</label>
                                     <input type="text" class="form-control" id="guarantorName" name="guarantorName">
@@ -309,7 +309,7 @@
                                     <input type="text" class="form-control" id="guarantorAddress" name="guarantorAddress">
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="guarantorNRC">NRC Number</label>
                                     <input type="text" class="form-control" id="guarantorNRC" name="guarantorNRC">
@@ -319,7 +319,7 @@
                                     <input type="date" class="form-control" id="guarantorDOB" name="guarantorDOB">
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="relationshipToBorrower">Relationship to the Borrower</label>
                                     <input type="text" class="form-control" id="relationshipToBorrower" name="relationshipToBorrower">
@@ -329,7 +329,7 @@
                                     <input type="text" class="form-control" id="guarantorContactNumber" name="guarantorContactNumber">
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="alternativeNumber">Alternative Number</label>
                                     <input type="text" class="form-control" id="alternativeNumber" name="alternativeNumber">
@@ -360,7 +360,7 @@
                             <h5>References</h5>
                             <p>Human Resource Details:</p>
                             <br>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-4">
                                     <label for="hrFirstName">FIRST NAME (HR)</label>
                                     <input type="text" value="{{ $meta->refs->first()->hrFname }}" class="form-control" id="hrFirstName" name="hrFirstName">
@@ -379,7 +379,7 @@
                             </div>
 
                             <p>Supervisor Details:</p>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-4">
                                     <label for="supervisorFirstName">FIRST NAME (Supervisor)</label>
                                     <input type="text" value="{{ $meta->refs->first()->supervisorFirstName }}" class="form-control" id="supervisorFirstName" name="supervisorFirstName">
@@ -416,7 +416,7 @@
                         <div class="step" id="step5">
                             <h5>Bank Details</h5>
                             <br>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="bankName">BANK NAME</label>
                                     <input type="text" value="{{ $meta->bank->first()->bankName }}" class="form-control" id="bankName" name="bankName">
@@ -424,11 +424,44 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="branchName">BRANCH NAME</label>
-                                    <input type="text" value="{{ $meta->bank->first()->branchName }}" class="form-control" id="branchName" name="branchName">
+                                    <select
+                                        id="bankName"
+                                        name="bankName"
+                                        class="block w-full mt-1 border-2 rounded-md shadow-sm form-select border-sky-300 focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        >
+                                        @if ($meta && $meta->bank && $meta->bank->first())
+                                        <option selected value="{{ $meta->bank->first()->bankName }}">{{ $meta && $meta->bank && $meta->bank->first() ? $meta->bank->first()->bankName : '' }}</option>
+                                        @endif
+                                        <option value="">Select a Bank</option>
+                                        <option value="Zambia National Commercial Bank">Zambia National Commercial Bank (Zananco)</option>
+                                        <option value="Zambia National Building Society">Zambia National Building Society (ZNBS)</option>
+                                        <option value="Standard Chartered Bank Zambia">Standard Chartered Bank Zambia</option>
+                                        <option value="Stanbic Bank Zambia">Stanbic Bank Zambia</option>
+                                        <option value="Barclays Bank Zambia">Barclays Bank Zambia</option>
+                                        <option value="First National Bank Zambia">First National Bank Zambia</option>
+                                        <option value="Cavmont Bank">Cavmont Bank</option>
+                                        <option value="Atlas Mara Bank Zambia">Atlas Mara Bank Zambia</option>
+                                        <option value="Indo Zambia Bank">Indo Zambia Bank</option>
+                                        <option value="Access Bank Zambia">Access Bank Zambia</option>
+                                        <option value="United Bank for Africa Zambia">United Bank for Africa Zambia</option>
+                                        <option value="Citibank Zambia">Citibank Zambia</option>
+                                        <option value="Ecobank Zambia">Ecobank Zambia</option>
+                                        <option value="Bank of China Zambia">Bank of China Zambia</option>
+                                        <option value="Development Bank of Zambia">Development Bank of Zambia</option>
+                                        <option value="Zambia Industrial Commercial Bank">Zambia Industrial Commercial Bank</option>
+                                        <option value="BancABC Zambia">BancABC Zambia</option>
+                                        <option value="Investrust Bank Zambia">Investrust Bank Zambia</option>
+                                        <option value="Natsave Zambia">Natsave Zambia</option>
+                                        <option value="AB Bank Zambia">AB Bank Zambia</option>
+                                        <option value="TBA Bank Zambia">TBA Bank Zambia</option>
+                                        <option value="FNB Zambia">FNB Zambia</option>
+                                        <option value="Nedbank Zambia">Nedbank Zambia</option>
+                                        <option value="AB Bank Zambia">AB Bank Zambia</option>
+                                    </select>
                                     <small id="bankBranchError" class="text-danger"></small>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="mb-4 row">
                                 <div class="form-group col-md-6">
                                     <label for="accountNumber">ACCOUNT NUMBER</label>
                                     <input type="text" value="{{ $meta->bank->first()->accountNumber }}" class="form-control" id="accountNumber" name="accountNumber" placeholder="XXXX XXXX XXXX XXXX">
@@ -458,9 +491,9 @@
 
                         <!-- Bank Details -->
                         <div class="step" id="step6">
-                            <div style="width: 90%" class="d-block justify-content-start mb-2">
+                            <div style="width: 90%" class="mb-2 d-block justify-content-start">
                                 <h5>Requirements</h5>
-                                <span class="justify-content-end items-right float-right text-left">
+                                <span class="float-right text-left justify-content-end items-right">
                                     <p>Click the button below to share preapproval form, if missing</p>
                                     <button title="Send the preapproval form to employer, manager, or supervisor" type="button" class="btn btn-sm" style="background-color: rgb(54, 15, 94)" onclick="openSendDocModal()">Send Preapproval</button>
                                 </span>
@@ -472,7 +505,7 @@
                             </div>
 
                             <div class="row col-md-12 col-lg-12" style="">
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <input type="file" value="{{ $meta->uploads->where('name', 'payslip_file')->first()->path }}" class="file-input visually-hidden" id="fileInput3" accept=".pdf, .doc, .docx" name="payslip_file">
                                     <label for="fileInput3" class="file-input-label">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
@@ -494,7 +527,7 @@
                                     </div>
                                     <small id="payslipError" class="text-danger"></small>
                                 </div>
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
                                     <input type="file" value="{{ $meta->uploads->where('name', 'bankstatement')->first()->path }}" class="file-input visually-hidden" id="fileInput4" accept=".pdf, .doc, .docx" name="bankstatement">
                                     <label for="fileInput4" class="file-input-label">
@@ -519,7 +552,7 @@
                                     </div>
                                     <small id="bankstatementError" class="text-danger"></small>
                                 </div>
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
                                     <input type="file" value="{{ $meta->uploads->where('name', 'passport')->first()->path }}" class="file-input visually-hidden" id="fileInput5" accept=".pdf, .doc, .docx" name="passport">
                                     <label for="fileInput5" class="file-input-label">
@@ -544,7 +577,7 @@
                                     </div>
                                     <small id="passportError" class="text-danger"></small>
                                 </div>
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
                                     <input type="file" value="{{$meta->uploads->where('name', 'preapproval')->first()->path}}" class="file-input visually-hidden" id="fileInput6" accept=".pdf, .doc, .docx" name="preapproval">
                                     <label for="fileInput6" class="file-input-label">
@@ -569,7 +602,7 @@
                                     </div>
                                     <small id="preapprovalError" class="text-danger"></small>
                                 </div>
-                                <div class="file-uploader col-xxl-6 col-xl-6 col-lg-6 border" style="border: 1px #d3d1d1; padding:2%;">
+                                <div class="border file-uploader col-xxl-6 col-xl-6 col-lg-6" style="border: 1px #d3d1d1; padding:2%;">
                                     <!-- Use a label for file input and add a Font Awesome icon -->
                                     <input type="file" value="{{ $meta->uploads->where('name', 'letterofintro')->first()->path }}" class="file-input visually-hidden" id="fileInput7" accept=".pdf, .doc, .docx" name="letterofintro">
                                     <label for="fileInput7" class="file-input-label">

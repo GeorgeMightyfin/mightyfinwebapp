@@ -24,13 +24,13 @@
                             data-status="defaulted"
                             @break
                         @default
-                            data-status="processing"
+                            data-status="pending approval"
                     @endswitch
                 >
                     <div class="loan-info">
                         <div class="loan-details">
-                            <div class="loan-type">My Pending Repayment</div>
-                            <div class="balance" style="color:#f0ebf5">K{{ number_format(App\Models\Application::open_balance($my_loan), 2, '.',',') }}</div>
+                            <div class="loan-type" style="color:#98929e">My Pending Repayment</div>
+                            <div class="balance" style="color:#120a1a">K{{ number_format(App\Models\Application::open_balance($my_loan), 2, '.',',') }}</div>
                             <div class="due-date">
                                 @if ($my_loan->status == 1)
                                     @php
@@ -93,12 +93,12 @@
                                     </button>
                                     @break
                                 @default
-                                    <button class="btn-action processing">
+                                    <div class="btn-action pending">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
                                         </span>
-                                        Processing
-                                    </button>
+                                        Pending Approval
+                                    </div>
                                     @break
                             @endswitch
                         </div>
@@ -124,7 +124,7 @@
                                     <path fill="none" d="M0 0h24v24H0z"/>
                                     <path fill="white" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"/>
                                   </svg>
-                                                              </span>
+                            </span>
                         </a>
                     </div>
                     <div class="card-illustration">
@@ -147,7 +147,7 @@
                                     <path fill="none" d="M0 0h24v24H0z"/>
                                     <path fill="white" d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                                   </svg>
-                                                              </span>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
     --white: #ffffff;
     --success: #2ecc71;
     --warning: #f39c12;
-    --danger: #e74c3c;
+    --danger: #f02d17;
     --dark: #333;
     --light-bg: #f8f9fa;
     --border-radius: 16px;
@@ -306,8 +306,8 @@
 }
 
 .btn-action.active {
-    background-color: var(--white);
-    color:white
+    background-color: rgb(66, 33, 126);
+    color:rgb(255, 255, 255)
 }
 
 .btn-action.processing {
@@ -322,6 +322,10 @@
 
 .btn-action.defaulted {
     background-color: var(--dark);
+    color: var(--white);
+}
+.btn-action.pending {
+    background-color: #08ac6dda;
     color: var(--white);
 }
 /*
@@ -369,7 +373,7 @@
 }
 
 .apply-loan-card {
-     background: rgba(106, 48, 147, 0.85);
+    background: rgba(106, 48, 147, 0.85);
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -377,7 +381,7 @@
 
 
 .apply-loan-card::before{
-     background: rgba(106, 48, 147, 0.85);
+    background: rgba(106, 48, 147, 0.85);
     content: '';
     position: absolute;
     top: 0;
@@ -488,8 +492,9 @@
 }
 
 .illustration-image {
-    margin-bottom:-32px;
-    max-width: 100%;
+    padding-left: 50%;
+    margin-bottom:-40px;
+    max-width: 160%;
     max-height: 140px;
     object-fit: contain;
     transition: transform 0.5s ease;

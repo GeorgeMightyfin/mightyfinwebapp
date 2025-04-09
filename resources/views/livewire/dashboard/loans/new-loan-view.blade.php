@@ -731,9 +731,9 @@
                                         d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                 </symbol>
                             </svg>
-                            <div class="alert alert-danger d-flex align-items-center mt-3 d-none mb-0" id="alertBox"
+                            <div class="mt-3 mb-0 alert alert-danger d-flex align-items-center d-none" id="alertBox"
                                 role="alert">
-                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                <svg class="flex-shrink-0 bi me-2" width="24" height="24" role="img"
                                     aria-label="Danger:">
                                     <use xlink:href="#exclamation-triangle-fill" />
                                 </svg>
@@ -748,20 +748,20 @@
 
                     <div class="row justify-content-center" id="cardSection">
                         <div class="col-lg-9 col-md-9" id="stepOneMedia">
-                            <h3 class="fw-bold pt-2">Ready, get set, <strong class="text-primary">go!</strong> </h3>
+                            <h3 class="pt-2 fw-bold">Ready, get set, <strong class="text-primary">go!</strong> </h3>
                             <div>
                                 {{-- Duration --}}
-                                <p class="small pb-0">Before we start, there are a few things you have to know!
+                                <p class="pb-0 small">Before we start, there are a few things you have to know!
                                     Make sure you have the following made available.</p>
                                 <small class="text-danger" id="loanProdValidText"></small>
                                 <div style="border-radius:1rem; padding: 1rem; margin-top: 2rem;"
-                                    class="bg-secondary m-20 col-12">
+                                    class="m-20 bg-secondary col-12">
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <div class="col-md-12">
                                                 <div class="loan-container">
                                                     <div class="title-icon-container">
-                                                        <img src="{{ asset('mfs/images/svg/4.svg') }}"
+                                                        <img src="{{ asset('public/mfs/images/svg/4.svg') }}"
                                                             alt="">
                                                     </div>
 
@@ -792,16 +792,16 @@
 
 
                             </div>
-                            <button type="button" class="btn btn-primary float-end next mt-4">Continue</button>
+                            <button type="button" class="mt-4 btn btn-primary float-end next">Continue</button>
                         </div>
                     </div>
 
                     <div class="row justify-content-center form-business">
                         <div class="col-lg-9 col-md-9" id="stepThreeMedia">
-                            <h3 class="fw-bold pt-2">Lets get <strong class="text-primary">Started!</strong> </h3>
+                            <h3 class="pt-2 fw-bold">Lets get <strong class="text-primary">Started!</strong> </h3>
                             <div>
                                 {{-- Duration --}}
-                                <p class="small pb-0">Fill in the form to get instant access.</p>
+                                <p class="pb-0 small">Fill in the form to get instant access.</p>
                                 <small class="text-danger" id="loanProdValidText"></small>
 
                                 <div id="loan_products" class="row row-cols-2 row-cols-lg-2 g-4">
@@ -829,7 +829,7 @@
                                     @endforelse
 
                                     {{-- <div class="col">
-                                        <label class="card h-70 py-2 custom-radio disabled-card">
+                                        <label class="py-2 card h-70 custom-radio disabled-card">
                                             <input type="radio" name="loan_type" value="1" class="d-none"
                                                 checker() />
                                             <div class="radio-btn">
@@ -893,7 +893,7 @@
                                             <div class="card-body">
                                                 <div class="row justify-content-center">
                                                     <div class="col-12">
-                                                        <h4 class="text-center text-secondary mt-2 mb-1"
+                                                        <h4 class="mt-2 mb-1 text-center text-secondary"
                                                             style="position: relative;">Duration
                                                             {{-- <button
                                                                 class="lazy-felix lazy-felix-download-btn"
@@ -929,14 +929,14 @@
                                                             <span class="btn btn-secondary"
                                                                 onclick="decreaseDuration()">-</span>
                                                             <input type="number" name="duration" id="durationInput"
-                                                                class="form-control text-center bg-purple"
+                                                                class="text-center form-control bg-purple"
                                                                 value="1" min="1" max="60">
                                                             <span class=" btn btn-secondary"
                                                                 onclick="increaseDuration()">+</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 mt-3">
-                                                        <p id="durationAlert" class="text-danger text-center"></p>
+                                                    <div class="mt-3 col-12">
+                                                        <p id="durationAlert" class="text-center text-danger"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -953,18 +953,18 @@
                                         <div class="border-dotted-yellow">
                                             <div class="row">
                                                 <div class="col">
-                                                    <p class="text-center  text-secondary font-weight-bold">
+                                                    <p class="text-center text-secondary font-weight-bold">
                                                         Total Repayment
                                                     </p>
                                                     <p id="payback_value" class="text-center text-secondary">K51000.00</p>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="text-center  text-secondary font-weight-bold">Monthly
+                                                    <p class="text-center text-secondary font-weight-bold">Monthly
                                                         Repayment</p>
                                                     <p id="monthly_repay" class="text-center text-secondary">K51000.00</p>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="text-center  text-secondary font-weight-bold">Next
+                                                    <p class="text-center text-secondary font-weight-bold">Next
                                                         Repayment Date</p>
                                                     <p id="nxt_repay_date" class="text-center text-secondary">02/05/2024</p>
                                                 </div>
@@ -978,10 +978,10 @@
                             <!-- /cards -->
                             <!-- NEXT BUTTON-->
                             <button type="button"
-                                class="btn btn-dark mt-4 text-white float-start back mt-0 rounded-3">Go
+                                class="mt-0 mt-4 text-white btn btn-dark float-start back rounded-3">Go
                                 Back</button>
                             <button onclick="showLoader()" type="submit"
-                                class="finalcontinue btn btn-primary float-end next mt-4 confirm">Continue</button>
+                                class="mt-4 finalcontinue btn btn-primary float-end next confirm">Continue</button>
 
                             <!-- /NEXT BUTTON-->
                         </div>

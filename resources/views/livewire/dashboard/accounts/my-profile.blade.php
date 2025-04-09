@@ -1,6 +1,6 @@
-<div>
-    <div class="content-body">
-        <div class="container">
+
+    <div style="padding:50%" class="container content-body">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
               <div class="card welcome-profile">
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                       <div class="user-info">
-                        <span>RESIDENCIAL ADDRESS</span>
+                        <span>RESIDENTIAL ADDRESS</span>
                         <h4>{{ $data->address ?? 'No Address' }}</h4>
                       </div>
                     </div>
@@ -115,39 +115,6 @@
                 </div>
               </div>
             </div>
-
-            {{-- <div class="col-xxl-8 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">VERIFY & UPGRADE</h4>
-                </div>
-                <div class="card-body">
-                  <h5>
-                    Account Status :
-                    <span class="text-warning"
-                      >Pending <i class="icofont-warning"></i
-                    ></span>
-                  </h5>
-                  <p>
-                    Your account is unverified. Get verified to enable funding,
-                    trading, and withdrawal.
-                  </p>
-                  <a href="#" class="btn btn-primary"> Get Verified</a>
-                </div>
-              </div>
-            </div> --}}
-            {{-- <div class="col-xxl-4 col-xl-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Earn 30% Commission</h4>
-                </div>
-                <div class="card-body">
-                  <p>Refer your friends and earn 30% of their trading fees.</p>
-                  <a href="#" class="btn btn-primary"> Referral Program</a>
-                </div>
-              </div>
-            </div> --}}
           </div>
         </div>
-      </div>
-</div>
+    </div>
