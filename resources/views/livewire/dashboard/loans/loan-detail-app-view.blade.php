@@ -15,6 +15,7 @@
                             <div class="chart-price-value">
                                 <span>Loan</span>
                                 <h5>{{ $loan_product->name }} Loan</h5>
+                                {{-- <h5>{{ $loan->loan_number }}</h5> --}}
                             </div>
                             </div>
                             <div
@@ -22,7 +23,7 @@
                             >
                             <div class="chart-price-value">
                                 <span>Borrowed</span>
-                                <h5>{{ $loan->amount ?? 0 }} ZMW</h5>
+                                <h5>K{{ number_format($loan->amount, 2, '.',',') ?? 0 }} </h5>
                             </div>
                             </div>
                             <div
@@ -31,6 +32,7 @@
                             <div class="chart-price-value">
                                 <span>Duration</span>
                                 <h5>{{ $loan->repayment_plan }} Month(s)</h5>
+                                <small>K{{ number_format(App\Models\Application::payback_installment($loan), 2, '.',',') }} Per Month(Installment)</small>
                             </div>
                             </div>
                             <div
@@ -38,9 +40,8 @@
                             >
                             <div class="chart-price-value">
                                 <span>Paying Back</span>
-                                <h5>K {{ number_format(App\Models\Application::payback($loan), 2, '.', ',') }}</h5>
+                                <h5>K{{ number_format(App\Models\Application::payback($loan), 2, '.', ',') }}</h5>
 
-                                <small>{{ App\Models\Application::payback_installment($loan) }}</small>
                             </div>
                             </div>
                         </div>
@@ -76,16 +77,9 @@
                                 <div class="user-info">
                                     <span>FULL NAMES</span>
                                     <h4>
-                                        <a target="_blank" href="{{ route('client-account', ['key'=>$loan->user->id]) }}">
+                                        <a target="_blank">
                                             {{ $loan->user->fname.' '.$loan->user->lname }}
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-                                                </svg>
-                                            </span>
                                         </a>
-
                                     </h4>
                                 </div>
                             </div>
@@ -97,19 +91,19 @@
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                                 <div class="user-info">
-                                    <span>RESIDENCIAL ADDRESS</span>
+                                    <span>RESIDENTIAL ADDRESS</span>
                                     <h4>{{ $loan->user->address ?? 'Not set'}}</h4>
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                                 <div class="user-info">
                                     <span>PHONE NUMBER</span>
-                                    <h4> <a href="tel:{{ $loan->user->phone }}" style="color: rgb(55, 44, 58)">+260 {{ $loan->user->phone ?? 'Not set'}}</a> </h4>
+                                    <h4> <a href="tel:{{ $loan->user->phone }}" style="color: rgb(55, 44, 58)">+26{{ $loan->user->phone ?? 'Not set'}}</a> </h4>
                                 </div>
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                                 <div class="user-info">
-                                    <span>RESIDENCIAL ADDRESS</span>
+                                    <span>RESIDENTIAL ADDRESS</span>
                                     <h4>{{ $loan->user->address ?? 'Not set'}}</h4>
                                 </div>
                             </div>
@@ -121,7 +115,7 @@
                             </div>
                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                             <div class="user-info">
-                                <span>TYPE</span>
+                                <span>PRODUCT</span>
                                 <h4>{{ $loan_product->name }} Loan</h4>
                             </div>
                             </div>
@@ -296,8 +290,8 @@
 
         @role('user') @else
             @if ($this->my_review_status($loan->id) == 1)
-                <div class="col-xl-12 col-xxl-12 col-md-12 mt-4 mb-4">
-                    <div class="d-flex justify-content-between align-items-center gap-4 text-center items-center">
+                <div class="mt-4 mb-4 col-xl-12 col-xxl-12 col-md-12">
+                    <div class="items-center gap-4 text-center d-flex justify-content-between align-items-center">
                         <span>
                             <button class="btn btn-light">Cancel Review</button>
                             <button wire:click="setLoanID({{$loan->id}})" data-bs-target="#kt_modal_decline_warning" data-bs-toggle="modal" class="btn btn-danger" data >Decline</button>

@@ -185,7 +185,7 @@ class Application extends Model
 
                 // Change the URL or ensure proper DNS resolution
                 $apiUrl = 'http://localhost/mfs-admin/api/v2/payback';
-                // $apiUrl = 'https://admin.capexfinancialservices.org/api/payback';
+                // $apiUrl = 'https://admin.mightyfinance.co.zm/api/payback';
 
                 // dd($apiUrl);
                 // Initialize cURL
@@ -255,7 +255,7 @@ class Application extends Model
             }
 
             $apiUrl = config('app.env') === 'production'
-                ? 'https://admin.capexfinancialservices.org/api/get-my-loan-balance/' . $loan->id
+                ? 'https://admin.mightyfinance.co.zm/api/get-my-loan-balance/' . $loan->id
                 : 'http://localhost/mfs-admin/api/get-my-loan-balance/' . $loan->id;
 
             $ch = curl_init($apiUrl);
@@ -305,20 +305,19 @@ class Application extends Model
     public static function payback_installment($loan)
     {
         try {
-
             if ($loan->amount) {
                 // Change the URL or ensure proper DNS resolution
-                $apiUrl = 'http://localhost/mfs-admin/api/v2/payback';
-                // $apiUrl = 'https://admin.capexfinancialservices.org/api/payback';
+                $apiUrl = 'http://localhost/mfs-admin/api/v2/monthly';
+                // $apiUrl = 'https://admin.mightyfinance.co.zm/api/_monthly-installment';
 
-                // dd($apiUrl);
                 // Initialize cURL
                 $ch = curl_init();
 
                 // Set cURL options
                 curl_setopt($ch, CURLOPT_URL, $apiUrl . '?' . http_build_query([
-                    'loan_id' => $loan->id,
+                    'loan' => $loan->id,
                 ]));
+                // dd($loan->id);
 
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -357,13 +356,11 @@ class Application extends Model
                     return 0;
                 }
 
-                // dd($data['payback']);
-                return $data['installment'] ?? 0;
+                return $data['month'] ?? 0;
             }
         } catch (\Throwable $th) {
+            // dd($th);
             Log::error('Exception in payback function: ' . $th->getMessage());
-            // Don't use dd() in production code as it stops execution
-
             return 0;
         }
     }

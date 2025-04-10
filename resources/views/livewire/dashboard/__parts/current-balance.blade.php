@@ -43,7 +43,7 @@
                                         }
                                     @endphp
                                 @else
-                                    State: Processing
+                                    In review
                                 @endif
                             </div>
                         </div>

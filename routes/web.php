@@ -107,7 +107,6 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::post('/share-docs', [UserController::class, 'share_doc'])->name('share.docs');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-
     Route::get('otp-verification', [OTPController::class, 'index'])->name('otp');
     Route::get('/dashboard', DashboardView::class)->name('dashboard');
     Route::get('/search', SearchEngineView::class)->name('search');
@@ -125,7 +124,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('loan-rates', LoanRatesView::class)->name('view-loan-rates');
     Route::get('repayment-calculator', LoanRepaymentCalculatorView::class)->name('view-repayment-calculator');
     Route::get('edit-user/{id}', UserUpdateView::class)->name('edit-user');
-
 
     // ---- Borrowers
     Route::get('borrowers', BorrowerView::class)->name('borrowers');

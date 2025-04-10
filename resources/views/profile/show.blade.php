@@ -31,11 +31,13 @@
         return redirect()->route('otp');
     }
   @endphp
-    <div class="content-body">
+  <br>
+  <br>
+    <div class="mt-4 content-body">
         <div class="container">
           <div class="row">
             <div class="col-xxl-12 col-xl-12">
-              <div class="page-title" style="display: flex; gap:3%">
+              <div class="mt-8 page-title" style="display: flex; gap:3%">
                 <span>
                   <a href="{{ route('settings') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -64,7 +66,7 @@
               </div>
               <div class="">
 
-                <div class="col-xxl-12 col-xl-12 col-lg-12 px-4">
+                <div class="px-4 col-xxl-12 col-xl-12 col-lg-12">
                   @if (session('success'))
                       <div class="alert alert-success">
                           {{ session('success') }}
