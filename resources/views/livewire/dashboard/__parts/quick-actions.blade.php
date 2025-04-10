@@ -18,8 +18,8 @@
             <span class="fw-medium">Complete KYC</span>
             <span class="top-0 position-absolute start-100 translate-middle badge rounded-pill bg-danger">!</span>
         </a>
-
-        @if ($my_loan->status = null)
+        
+        @if ($my_loan == null)
         <a href="{{ route('new-loan') }}" style="background-color: rgba(106, 48, 147, 0.85); border-radius:1rem" class="p-3 text-center text-white action-item d-flex flex-column align-items-center flex-fill text-decoration-none">
             <div class="mb-2 d-flex align-items-center justify-content-center" style="width:60px; height:60px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">

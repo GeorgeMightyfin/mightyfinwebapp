@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mighty Finance Solution | Sign In</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'public/images/m.jpg' }}" />
     <!-- Custom Stylesheet -->
     <link href="{{ 'public/theme/css/style.css' }}" rel="stylesheet">
     <style>
