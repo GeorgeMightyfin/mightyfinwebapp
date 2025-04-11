@@ -32,6 +32,10 @@
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
     @livewireStyles
     <style>
+        body{
+            background-color: #fff !important;
+            background: #fff !important;
+        }
         .p-6 {
             padding: 3%;
         }
