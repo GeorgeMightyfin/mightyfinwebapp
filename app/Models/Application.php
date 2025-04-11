@@ -299,7 +299,7 @@ class Application extends Model
     {
         $discount = $principal * 0.1;
         $finalPayback = $principal - $discount;
-        return number_format($finalPayback, 2, '.', '');
+        return number_format($finalPayback, 2, '.', ',');
     }
 
     public static function payback_installment($loan)
@@ -308,7 +308,7 @@ class Application extends Model
             if ($loan->amount) {
                 // Change the URL or ensure proper DNS resolution
                 $apiUrl = 'http://localhost/mfs-admin/api/v2/monthly';
-                // $apiUrl = 'https://admin.mightyfinance.co.zm/api/_monthly-installment';
+                // $apiUrl = 'https://admin.mightyfinance.co.zm/api/v2/monthly';
 
                 // Initialize cURL
                 $ch = curl_init();

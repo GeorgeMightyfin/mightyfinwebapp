@@ -1,13 +1,13 @@
 <div id="overlay" class="loan-modal-overlay"></div>
-<div class="loan-modal" style="z-index: 99999; background:#e5f5f0;" id="continue-loan-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="p-6 loan-modal-content">
+<div class="loan-modal" style="z-index: 99999; background:#faf9fa;" id="continue-loan-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="p-0 loan-modal-content">
         {{-- <div class="loan-modal-header">
             <h4 class="loan-modal-title">
                 <span class="loan-icon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
                 <b>Loan Completion Form</b>
             </h4>
         </div> --}}
-        <div class="loan-modal-body row" style="overflow-y: auto; overflow-x: hidden; height: 70vh">
+        <div class="loan-modal-body row" style="overflow-y: auto; overflow-x: hidden; height: 80vh">
             <div class="loan-sidebar col-xxl-3 col-xl-3 col-lg-3">
                 <div class="loan-progress-container">
                     <div class="loan-progress-bar"></div>
@@ -82,9 +82,9 @@
 <style>
     /* Modern Loan Form Styling */
     :root {
-        --loan-primary: #3b82f6;
-        --loan-primary-dark: #2563eb;
-        --loan-success: #10b981;
+        --loan-primary: #ffe602;
+        --loan-primary-dark: #ffe602;
+        --loan-success: #6a3093;
         --loan-text: #334155;
         --loan-bg: #ffffff;
         --loan-border: #e2e8f0;
@@ -157,12 +157,12 @@
     .loan-sidebar {
         padding: 1.5rem;
         border-right: 1px solid var(--loan-border);
-        background-color: #f8fafc;
+        background-color: #ffffff;
     }
 
     .loan-progress-container {
         margin-bottom: 1.5rem;
-        background-color: #e2e8f0;
+        background-color: #ffffff;
         height: 6px;
         border-radius: 3px;
         overflow: hidden;
@@ -217,8 +217,9 @@
     }
 
     .loan-step.active {
-        background-color: rgba(59, 130, 246, 0.1);
+        background-color: #6a3093;
         border-left: 3px solid var(--loan-primary);
+        color: #ffff;
     }
 
     .loan-step-icon {
@@ -405,13 +406,6 @@
 
         // You can add additional logic here, such as form submission or other actions.
 
-        // For demonstration purposes, let's simulate a delay (e.g., 3 seconds) before resetting the button state.
-        setTimeout(function() {
-            // Hide loading animation and show finish icon
-            document.getElementById('ploading').style.display = 'none';
-            document.getElementById('finishicon').style.display = 'inline-block';
-            document.getElementById('backicon').style.display = 'inline-block';
-        }, 10000);
     });
 
     function _validate_step1(){

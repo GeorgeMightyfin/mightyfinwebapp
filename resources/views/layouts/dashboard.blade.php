@@ -157,18 +157,16 @@
 </head>
 
 <body class="dashboard">
-
-
     <div @if (request()->routeIs('dashboard')) style="margin-top:0px" @endif id="main-wrapper">
         @include('livewire.dashboard.__parts.header_content')
-        <div style="z-index: 0" class="sidebar" style="background-image: linear-gradient(to right, #792db8, #792db8); color:#fff;">
+        <div class="sidebar" style="background-image: linear-gradient(to right, #792db8, #792db8); color:#fff;">
             <div class="brand-logo">
                 <a href="{{ route('dashboard') }}" style="margin:4%;">
                     <img src="{{ asset('web/images/01-ft-logo.png') }}" alt="" width="80" />
                 </a>
             </div>
-            <div class="menu" style="z-index: 0">
-                <ul style="z-index: 0">
+            <div class="menu">
+                <ul>
                     <li>
                         <a href="{{ route('dashboard') }}" data-toggle="tooltip" data-placement="right"
                             title="Dashboard">

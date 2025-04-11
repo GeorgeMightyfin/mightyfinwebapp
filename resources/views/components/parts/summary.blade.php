@@ -3,13 +3,13 @@
         <h5 class="step-title">Loan Summary Details</h5>
         <span class="step-indicator">Step 3/4</span>
     </div>
-    
+
     <div class="summary-grid">
         <!-- Left Column -->
         <div class="summary-column">
             <div class="summary-item">
                 <span class="summary-label">Loan Amount:</span>
-                <span class="summary-value">K{{ $activeLoan->amount }}</span>
+                <span class="summary-value">K{{ number_format($activeLoan->amount, 2, '.', ',') }}</span>
             </div>
             <div class="summary-item">
                 <span class="summary-label">Loan Type:</span>
@@ -29,7 +29,7 @@
             </div>
             <input type="hidden" name="final" value="1">
         </div>
-        
+
         <!-- Right Column -->
         <div class="summary-column">
             <div class="summary-item">
@@ -38,19 +38,15 @@
             </div>
             <div class="summary-item">
                 <span class="summary-label">Payback Amount:</span>
-                <span class="summary-value">K{{ App\Models\Application::payback($activeLoan) }}</span>
+                <span class="summary-value">K{{ number_format(App\Models\Application::payback($activeLoan), 2,'.',',') }}</span>
             </div>
             <div class="summary-item">
                 <span class="summary-label">Next Payment Amount:</span>
-                <span class="summary-value">K{{ App\Models\Application::payback_installment($activeLoan) }}</span>
-            </div>
-            <div class="summary-item">
-                <span class="summary-label">Next Payment Date:</span>
-                <span class="summary-value">{{ App\Models\Application::payback_next_date($activeLoan) }}</span>
+                <span class="summary-value">K{{ number_format(App\Models\Application::payback_installment($activeLoan), 2, '.',',') }}</span>
             </div>
             <div class="summary-item">
                 <span class="summary-label">Phone Number:</span>
-                <span class="summary-value">{{ auth()->user()->phone }}</span>
+                <span class="summary-value">+26 {{ auth()->user()->phone }}</span>
             </div>
             <div class="summary-item">
                 <span class="summary-label">Email:</span>
@@ -66,7 +62,7 @@
             </svg>
             Back to Previous Step
         </button>
-        <button type="submit" id="submit_click" class="btn btn-primary">
+        <button  style="background: linear-gradient(135deg, #6a3093, #873093)" type="submit" id="submit_click" class="btn btn-primary">
             <div id="ploading" style="display:none;">
                 <div class="spinner">
                     <div class="bounce1"></div>
@@ -249,9 +245,9 @@
 }
 
 @keyframes bounce {
-    0%, 80%, 100% { 
+    0%, 80%, 100% {
         transform: scale(0);
-    } 40% { 
+    } 40% {
         transform: scale(1.0);
     }
 }
@@ -262,16 +258,16 @@
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .step-panel {
         padding: 1.25rem;
     }
-    
+
     .form-actions {
         flex-direction: column-reverse;
         gap: 0.75rem;
     }
-    
+
     .form-actions button {
         width: 100%;
     }

@@ -3,14 +3,14 @@
         <h5 class="step-title">KYC Documents</h5>
         <span class="step-indicator">Step 2/4</span>
     </div>
-    
+
     <div class="document-upload-grid">
         <!-- NRC Document Upload -->
         <div class="upload-cell">
             <label class="form-label">National ID Copy</label>
             <div class="upload-container">
                 <input type="file" value="{{ $meta->uploads->where('name', 'nrc_file')->first()->path }}" class="file-input visually-hidden" id="fileInput" accept=".pdf, .doc, .docx" name="nrc_file">
-                
+
                 <label for="fileInput" class="upload-button">
                     <span class="upload-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" viewBox="0 0 16 16">
@@ -18,9 +18,10 @@
                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
                         </svg>
                     </span>
-                    <span class="upload-text">Upload Copy of NRC</span>
+                    <span class="upload-text">Upload Copy of NRC </span>
+                    <small class="p">Upload Copy of One World or PDF Document (Having Front & Back Sides)</small>
                 </label>
-                
+
                 <div class="upload-status">
                     <ul class="file-list" id="fileList"></ul>
                     @if ($meta->uploads->where('name', 'nrc_file')->isNotEmpty())
@@ -46,7 +47,7 @@
             <label class="form-label">Tax ID Copy</label>
             <div class="upload-container">
                 <input type="file" class="file-input visually-hidden" value="{{ $meta->uploads->where('name', 'tpin_file')->first()->path }}" id="fileInput2" accept=".pdf, .doc, .docx" name="tpin_file">
-                
+
                 <label for="fileInput2" class="upload-button">
                     <span class="upload-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" viewBox="0 0 16 16">
@@ -55,8 +56,10 @@
                         </svg>
                     </span>
                     <span class="upload-text">Upload Copy of Tpin <span class="optional-badge">Optional</span></span>
+                    <small class="p">Upload Copy of your TPIN in PDF or Word document</small>
+
                 </label>
-                
+
                 <div class="upload-status">
                     <ul class="file-list-2" id="fileList-2"></ul>
                     @if ($meta->uploads->where('name', 'tpin_file')->isNotEmpty())
@@ -85,7 +88,7 @@
             </svg>
             Back
         </button>
-        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+        <button type="button" class="btn btn-primary" style="background: linear-gradient(135deg, #6a3093, #873093)" onclick="nextStep(2)">
             Continue to Next Step
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -130,7 +133,7 @@
     top: 0;
     height: 100%;
     width: 4px;
-    background: linear-gradient(180deg, #3b82f6, #1e40af);
+    background: linear-gradient(180deg, #6a3093, #7f3093);
     border-radius: 2px;
 }
 
@@ -172,7 +175,7 @@
 }
 
 .upload-container:hover {
-    border-color: #3b82f6;
+    border-color: #6a3093;
     background-color: rgba(59, 130, 246, 0.05);
 }
 
@@ -181,7 +184,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    background: linear-gradient(135deg, #6a3093, #823093);
     color: white;
     border-radius: 8px;
     padding: 1rem;
@@ -193,7 +196,7 @@
 }
 
 .upload-button:hover {
-    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    background: linear-gradient(135deg, #6a3093, #823093);
     transform: translateY(-1px);
     box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
 }
@@ -269,13 +272,13 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    background: linear-gradient(135deg, #6a3093, #823093);
     color: white;
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    background: linear-gradient(135deg, #6a3093, #823093);
     box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
     transform: translateY(-1px);
 }
@@ -308,7 +311,7 @@
     .document-upload-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .step-panel {
         padding: 1.25rem;
     }

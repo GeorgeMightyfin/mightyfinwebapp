@@ -3,7 +3,7 @@
         <h5 class="step-title">Bank Details</h5>
         <span class="step-indicator">Step 2/4</span>
     </div>
-    
+
     <div class="form-grid">
         <!-- Row 1 -->
         <div class="form-cell">
@@ -83,7 +83,7 @@
             </svg>
             Back to Previous Step
         </button>
-        <button type="button" class="btn btn-primary" onclick="nextStep(5)">
+        <button type="button"style="background: linear-gradient(135deg, #6a3093, #873093)" class="btn btn-primary" onclick="nextStep(5)">
             Continue to Next Step
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -128,7 +128,7 @@
     top: 0;
     height: 100%;
     width: 4px;
-    background: linear-gradient(180deg, #3b82f6, #1e40af);
+    background: linear-gradient(180deg, #6a3093, #873093);
     border-radius: 2px;
 }
 
@@ -194,7 +194,7 @@
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #3b82f6;
+    border-color: #6a3093;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     outline: none;
 }
@@ -230,13 +230,13 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    background: linear-gradient(135deg, #6a3093, #873093);
     color: white;
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    background: linear-gradient(135deg, #6a3093, #873093);
     box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
     transform: translateY(-1px);
 }
@@ -260,16 +260,16 @@
     .form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .step-panel {
         padding: 1.25rem;
     }
-    
+
     .form-actions {
         flex-direction: column-reverse;
         gap: 0.75rem;
     }
-    
+
     .form-actions button {
         width: 100%;
     }

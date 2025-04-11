@@ -3,9 +3,9 @@
         <h5 class="step-title">References</h5>
         <span class="step-indicator">Step 4/4</span>
     </div>
-    
+
     <div class="section-title">Human Resource Details</div>
-    
+
     <div class="form-grid">
         <!-- HR First Name -->
         <div class="form-cell">
@@ -45,7 +45,7 @@
     </div>
 
     <div class="section-title">Supervisor Details</div>
-    
+
     <div class="form-grid">
         <!-- Supervisor First Name -->
         <div class="form-cell">
@@ -91,7 +91,7 @@
             </svg>
             Back
         </button>
-        <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+        <button style="background: linear-gradient(135deg, #6a3093, #873093)" type="button" class="btn btn-primary" onclick="nextStep(4)">
             Complete Registration
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -136,7 +136,7 @@
     top: 0;
     height: 100%;
     width: 4px;
-    background: linear-gradient(180deg, #3b82f6, #1e40af);
+    background: linear-gradient(180deg, #6a3093, #6a3093);
     border-radius: 2px;
 }
 
@@ -166,7 +166,7 @@
     bottom: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, #3b82f6, rgba(59, 130, 246, 0.2));
+    background: linear-gradient(90deg, #6a3093, rgba(59, 130, 246, 0.2));
 }
 
 .form-grid {
@@ -223,7 +223,7 @@
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #3b82f6;
+    border-color: #6a3093;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     outline: none;
 }
@@ -260,13 +260,13 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    background: linear-gradient(135deg, #6a3093, #873093);
     color: white;
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    background: linear-gradient(135deg, #6a3093, #873093);
     box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4);
     transform: translateY(-1px);
 }
@@ -287,7 +287,7 @@
     .form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .step-panel {
         padding: 1.25rem;
     }
