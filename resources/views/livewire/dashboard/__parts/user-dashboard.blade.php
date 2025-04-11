@@ -198,8 +198,8 @@
                                                 Complete your verification to unlock all features and maximize your MFS experience!
                                             </p>
 
-                                            <div class="mb-3 progress" style="height: 10px;">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="mb-3 progress" style="height: 10px; color:#fff">
+                                                <div class="progress-bar bg-warning text-white" role="progressbar" style="width: 25%; color:#fff" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <p class="mb-4 small">Profile completion: <strong>25%</strong></p>
 
@@ -214,7 +214,7 @@
                                                         <i class="text-white bi bi-chevron-right"></i>
                                                     </a>
                                                 </li>
-                                                <li class="mb-3">
+                                                {{-- <li class="mb-3">
                                                     <a class="p-3 bg-white rounded-4 d-flex align-items-center justify-content-between bg-opacity-10 verification-link"
                                                         href="#">
                                                         <div class="d-flex align-items-center text-muted">
@@ -223,7 +223,7 @@
                                                         </div>
                                                         <i class="text-white bi bi-chevron-right"></i>
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                     </div>

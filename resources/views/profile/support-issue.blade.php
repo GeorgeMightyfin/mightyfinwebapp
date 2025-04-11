@@ -8,7 +8,7 @@
 <div class="col-xxl-6 col-xl-6 col-lg-6">
     <div class="card welcome-profile">
     <div class="card-body">
-        
+
         <h4>Submit your issue</h4>
         <p>
             We're here to assist you! If you're encountering any challenges or have questions, please use the form below to submit your issue. Our dedicated support team will promptly address your concerns and provide the necessary assistance to ensure a smooth resolution.
@@ -80,7 +80,7 @@
         <form method="POST" action="{{ route('tickets.store') }}" class="app-link">
             @csrf
             <p>
-                Hi {{ auth()->user()->fname.' '.auth()->user()->lname }}, How may we assit you today, please sumbit your complaint or issue here, by creating a ticket 
+                Hi {{ auth()->user()->fname.' '.auth()->user()->lname }}, How may we assit you today, please sumbit your complaint or issue here, by creating a ticket
                 and we will email you {{ auth()->user()->email }} once the issue has been resolved
             </p>
             <div class="col-xxl-12 col-xl-12 col-lg-12">
@@ -99,38 +99,4 @@
     </div>
     </div>
 </div>
-
-
-
-{{-- <div class="col-xxl-8 col-xl-6">
-    <div class="card">
-    <div class="card-header">
-        <h4 class="card-title">VERIFY & UPGRADE</h4>
-    </div>
-    <div class="card-body">
-        <h5>
-        Account Status :
-        <span class="text-warning"
-            >Pending <i class="icofont-warning"></i
-        ></span>
-        </h5>
-        <p>
-        Your account is unverified. Get verified to enable funding,
-        trading, and withdrawal.
-        </p>
-        <a href="#" class="btn btn-primary"> Get Verified</a>
-    </div>
-    </div>
-</div> --}}
-{{-- <div class="col-xxl-4 col-xl-6">
-    <div class="card">
-    <div class="card-header">
-        <h4 class="card-title">Earn 30% Commission</h4>
-    </div>
-    <div class="card-body">
-        <p>Refer your friends and earn 30% of their trading fees.</p>
-        <a href="#" class="btn btn-primary"> Referral Program</a>
-    </div>
-    </div>
-</div> --}}
 </div>

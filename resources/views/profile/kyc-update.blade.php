@@ -1,265 +1,420 @@
 
-<style>
-    .wizard-container {
-      margin: auto;
-    }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a3de8;
+            --primary-dark: #5429d0;
+            --secondary: #ffd500;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #fff;
+            --success: #38b653;
+            --error: #e74c3c;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-    .step {
-      display: none;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .step.active {
-      display: block;
-    }
+        body {
+            background-color: #f5f7ff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-    button {
-      margin-top: 10px;
-    }
+        .wizard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
 
-/* card */
-.card img{
-    width: 40px;
-}
-.card{
-    border: 3px solid #fbf6f6;
-    cursor: pointer;
-}
-.active-card{
-    color:#792db8;
-    font-weight: bold;
-    border: 3px solid #792db8;
-}
-.form-check-input:focus {
-    box-shadow: none;
-}
-.bg-color-info{
-    background-color:#792db8 !important;
-}
-.border-color{
-    border-color: #792db8;
-}
-.btn{
-    padding:16px 30px;
-}
-.back-to-wizard{
-    transform: translate(-50%, -139%) !important;
-}
-.bg-success-color{
-    background-color:#87D185;
-}
-.bg-success-color:focus{
-    box-shadow: 0 0 0 0.25rem rgb(55 197 20 / 25%);
-}
+        .profile-card {
+            padding: 2rem !important;
+        }
 
-.selected-card {
-    background-color: #ffd500; /* Light red background color */
-    border: 1px solid #ffc00e; /* Red border color */
-}
+        .step {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-/* Input Field Style */
-/* General styling for all inputs */
-input {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    padding: 10px;
-    border: 2px solid #792db8; /* Border color */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 24px; /* Increased font size */
-    font-family: 'Arial', sans-serif;
-}
+        .step.active {
+            display: block;
+        }
 
-/* Styling for text-type inputs */
-input[name='amount'] {
-    text-align: right;
-}
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
 
-/* Hover effect */
-input:hover {
-    border-color: #792db8; /* Border color on hover */
-}
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5ee;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
 
-/* Focus effect */
-input:focus {
-    outline: none;
-    border-color: #792db8; /* Border color when focused */
-    box-shadow: 0 0 10px rgba(185, 60, 231, 0.8); /* Box shadow when focused */
-}
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(106, 61, 232, 0.15);
+            outline: none;
+        }
 
-</style>
-<div class="col-xxl-12 col-xl-12 col-lg-12">
-    <div id="fileUploadSection" class="profile-card card-bx m-b30 p-4">
-        <div class="wizard-container">
-            <form action="{{ route("update-kyc-uploads") }}" method="POST" enctype="multipart/form-data"  id="wizardForm">
-                @csrf
-                <div class="step" id="step1">
-                    <div class="row justify-content-center">
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">First Name</label>
-                            <input
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->fname }}"
-                            name="fname"
-                            value="{{ auth()->user()->fname }}"
-                            {{-- wire:model.defer="state.fname" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Last Name</label>
-                            <input
-                            name="lname"
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->lname }}"
-                            value="{{ auth()->user()->lname }}"
-                            {{-- wire:model.defer="state.lname" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Phone Number</label>
-                            <input
-                            name="phone"
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->phone}}"
-                            value="{{ auth()->user()->phone}}"
-                            {{-- wire:model.defer="state.phone" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">National ID Type</label>
-                            <select
-                                name="id_type"
-                                class="form-control"
-                                >
-                                <option {{ auth()->user()->id_type == null ? 'selected' : ''}} value="">-- Choose --</option>
-                                <option {{ auth()->user()->id_type == 'NRC' ? 'selected' : ''}} value="NRC">NRC</option>
-                                <option {{ auth()->user()->id_type == 'Passport' ? 'selected' : ''}} value="Passport">Passport</option>
-                                <option {{ auth()->user()->id_type == 'Driver Liecense' ? 'selected' : ''}} value="Driver Liecense">Driver Liecense</option>
-                            </select>
-                        </div>
+        select.form-control {
+            appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236a3de8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat;
+            background-position: right 16px center;
+            background-color: var(--white);
+            padding-right: 40px;
+        }
 
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">National ID Number</label>
-                            <input
-                            name="nrc_no"
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->nrc_no}}"
-                            value="{{ auth()->user()->nrc_no}}"
-                            {{-- wire:model.defer="state.nrc_no" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Sex</label>
-                            <select
-                                name="gender"
-                                class="form-control"
-                                name="gender"
-                                {{-- wire:model.defer="state.gender" --}}
-                                >
-                                <option value="{{ auth()->user()->gender}}">{{ auth()->user()->gender}}</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Date of birth</label>
-                            <input
-                            name="dob"
-                            type="text"
-                            class="form-control hasDatepicker"
-                            placeholder="{{ auth()->user()->dob}}"
-                            value="{{ auth()->user()->dob}}"
-                            id="datepicker"
-                            autocomplete="off"
-                            {{-- wire:model.defer="state.dob" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Present Address</label>
-                            <input
-                            name="address"
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->address }}"
-                            value="{{ auth()->user()->address }}"
-                            {{-- wire:model.defer="state.address" --}}
-                            />
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4">
-                            <label class="form-label">Job Title</label>
-                            <input
-                            name="occupation"
-                            type="text"
-                            class="form-control"
-                            placeholder="{{ auth()->user()->occupation }}"
-                            value="{{ auth()->user()->occupation }}"
-                            {{-- wire:model.defer="state.address" --}}
-                            />
-                        </div>
-                    </div>
-                    <button type="button" class="btn text-white float-end next mt-4 rounded-3 bg-color-info" onclick="navigateStep('next')">Next</button>
-                </div>
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            gap: 8px;
+        }
 
-                <div class="step justify-content-center" id="step2">
-                    <div class="col-xl-6">
-                        <div class="form-group">
-                            <div class="input-box">
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Copy of NRC</label>
-                                    <input required class="form-control" name="nrc_file" type="file" id="formFile">
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
 
-                                    @if ($meta->uploads->where('name', 'nrc_file')->isNotEmpty())
-                                        <p class="text-success file-list">You uploaded a National ID Copy on {{ $meta->uploads->where('name', 'nrc_file')->first()->created_at->toFormattedDateString() }}</p>
-                                    @endif
-                                </div>
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 61, 232, 0.3);
+        }
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="form-group">
-                            <div class="input-box">
-                                <div class="mb-3">
-                                    <label for="tpin_file" class="form-label">Tpin</label>
-                                    <input required class="form-control" name="tpin_file" type="file" id="tpin_file">
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
 
-                                    @if ($meta->uploads->where('name', 'tpin_file')->isNotEmpty())
-                                        <p class="text-success file-list">You uploaded a Tpin Copy on  {{ $meta->uploads->where('name', 'tpin_file')->first()->created_at->toFormattedDateString() }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
 
-                    <button class="btn btn-bg text-primary float-start back rounded-3" type="button" onclick="navigateStep('prev')">Previous</button>
-                    <button class="btn text-white float-end submit-button rounded-3  btn-bg" type="submit">Submit</button>
-                </div>
-            </form>
-            <br><br><br><br>
+        .float-end {
+            float: right;
+        }
+
+        .float-start {
+            float: left;
+        }
+
+        .text-success {
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: -10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-xxl-4, .col-xl-4, .col-lg-4, .col-xl-6 {
+            padding: 0 15px;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        .col-xl-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding-top: 1.5rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            width: 70%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e1e5ee;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-step.active .step-icon {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .progress-step.completed .step-icon {
+            background-color: var(--success);
+            color: var(--white);
+        }
+
+        .step-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .progress-step.active .step-title {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            height: 2px;
+            background-color: #e1e5ee;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 20px;
+            height: 2px;
+            background-color: var(--primary);
+            left: 0;
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 1;
+        }
+
+        .file-upload-container {
+            border: 2px dashed #e1e5ee;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .file-upload-container:hover {
+            border-color: var(--primary);
+        }
+
+        .file-upload-container input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: var(--text-light);
+        }
+
+        .upload-hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .button-pulse:hover {
+            animation: pulse 1s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .col-xxl-4, .col-xl-4, .col-lg-4 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-xxl-4, .col-xl-4, .col-lg-4, .col-xl-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .progress-steps {
+                width: 90%;
+            }
+        }
+    </style>
+    <div class="col-xxl-12 col-xl-12 col-lg-12">
+        <div id="fileUploadSection" class="profile-card card-bx m-b30 p-4">
+            @include('profile.parts.kyc-wizard')
         </div>
     </div>
-</div>
 
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-<script>
-    let wcurrentStep = 1;
+    <script>
+        let currentStep = 1;
+        const totalSteps = 2;
 
-    // Show initial step
-    showStep(wcurrentStep);
+        // Show initial step
+        showStep(currentStep);
+        updateProgress();
 
-    function showStep(step) {
-      const steps = document.querySelectorAll('.step');
-      steps.forEach(s => s.style.display = 'none');
-      document.getElementById(`step${step}`).style.display = 'block';
-    }
+        function showStep(step) {
+            // Hide all steps
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(s => {
+                s.classList.remove('active');
+            });
 
-    function navigateStep(direction) {
-      if (direction === 'next' && wcurrentStep < 2) {
-        wcurrentStep++;
-      } else if (direction === 'prev' && wcurrentStep > 1) {
-        wcurrentStep--;
-      }
-      showStep(wcurrentStep);
-    }
-  </script>
+            // Show current step
+            document.getElementById(`step${step}`).classList.add('active');
+
+            // Update progress steps
+            updateProgress();
+        }
+
+        function updateProgress() {
+            // Update step icons
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepEl = document.getElementById(`progressStep${i}`);
+
+                if (i < currentStep) {
+                    stepEl.classList.add('completed');
+                    stepEl.classList.remove('active');
+                    stepEl.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+                } else if (i === currentStep) {
+                    stepEl.classList.add('active');
+                    stepEl.classList.remove('completed');
+                    stepEl.querySelector('.step-icon').innerHTML = i;
+                } else {
+                    stepEl.classList.remove('active', 'completed');
+                    stepEl.querySelector('.step-icon').innerHTML = i;
+                }
+            }
+
+            // Update progress line fill
+            const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressLineFill').style.width = `${progressPercent}%`;
+        }
+
+        function navigateStep(direction) {
+            if (direction === 'next' && currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else if (direction === 'prev' && currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Add visual feedback for file uploads
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const container = this.closest('.file-upload-container');
+
+                if (this.files.length > 0) {
+                    container.style.borderColor = '#38b653';
+                    container.style.backgroundColor = 'rgba(56, 182, 83, 0.05)';
+
+                    const fileName = this.files[0].name;
+                    const uploadText = container.querySelector('.upload-text');
+                    uploadText.innerHTML = `Selected: <strong>${fileName}</strong>`;
+                } else {
+                    container.style.borderColor = '#e1e5ee';
+                    container.style.backgroundColor = 'transparent';
+                }
+            });
+        });
+    </script>

@@ -14228,27 +14228,7 @@ div#preloader {
 @keyframes sk-foldCubeAngle{0%,10%{-webkit-transform:perspective(140px) rotateX(-180deg);transform:perspective(140px) rotateX(-180deg);opacity:0}25%,75%{-webkit-transform:perspective(140px) rotateX(0);transform:perspective(140px) rotateX(0);opacity:1}100%,90%{-webkit-transform:perspective(140px) rotateY(180deg);transform:perspective(140px) rotateY(180deg);opacity:0}}
 
  */
-#preloader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    position: fixed;
-    width: 100%;
-    z-index: 999999;
-    background-color: #851202;
-}
 
-#preloader .loader {
-    margin: auto;
-    width: 2rem;
-    height: 2rem;
-    /* background-image: url("../images/preloader.gif"); */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23ffffff' stroke-width='4' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: cover;
-    animation: loader 6s infinite ease-in-out;
-}
 
 @keyframes loader {
     0% {

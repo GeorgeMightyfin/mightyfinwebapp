@@ -60,7 +60,7 @@
 
                     <!-- Next of Kin Info -->
                     @include('components.parts.nextkin')
-                    
+
                     <!-- References -->
                     @include('components.parts.references')
 
@@ -91,7 +91,7 @@
         --loan-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         --loan-radius: 12px;
     }
-    
+
     .loan-modal-overlay {
         position: fixed;
         top: 0;
@@ -100,9 +100,9 @@
         bottom: 0;
         background-color: rgba(15, 23, 42, 0.7);
         backdrop-filter: blur(4px);
-        z-index: 99998;
+        z-index: 99999;
     }
-    
+
     .loan-modal {
         position: absolute;
         top: 0%;
@@ -116,24 +116,24 @@
         box-shadow: var(--loan-shadow);
         animation: loanModalFadeIn 0.3s ease-out;
     }
-    
+
     @keyframes loanModalFadeIn {
         from { opacity: 0; transform: translate(-50%, -48%); }
         to { opacity: 1; transform: translate(-50%, -50%); }
     }
-    
+
     .loan-modal-content {
         border-radius: var(--loan-radius);
         overflow: hidden;
     }
-    
+
     .loan-modal-header {
         padding: 1.5rem 2rem;
         background: linear-gradient(135deg, var(--loan-primary-dark), var(--loan-primary));
         color: white;
         border-radius: var(--loan-radius) var(--loan-radius) 0 0;
     }
-    
+
     .loan-modal-title {
         display: flex;
         align-items: center;
@@ -142,24 +142,24 @@
         font-weight: 700;
         gap: 0.75rem;
     }
-    
+
     .loan-icon {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .loan-modal-body {
         padding: 0;
         display: flex;
     }
-    
+
     .loan-sidebar {
         padding: 1.5rem;
         border-right: 1px solid var(--loan-border);
         background-color: #f8fafc;
     }
-    
+
     .loan-progress-container {
         margin-bottom: 1.5rem;
         background-color: #e2e8f0;
@@ -168,7 +168,7 @@
         overflow: hidden;
         position: relative;
     }
-    
+
     .loan-progress-bar {
         height: 100%;
         width: 15%; /* Adjust based on progress */
@@ -176,7 +176,7 @@
         border-radius: 3px;
         transition: width 0.5s ease;
     }
-    
+
     .loan-progress-text {
         font-size: 0.875rem;
         color: var(--loan-text);
@@ -184,24 +184,24 @@
         font-weight: 500;
         text-align: center;
     }
-    
+
     .loan-illustration {
         border-radius: var(--loan-radius);
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         margin-bottom: 1.5rem;
         transition: transform 0.3s ease;
     }
-    
+
     .loan-illustration:hover {
         transform: translateY(-5px);
     }
-    
+
     .loan-steps {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     .loan-step {
         display: flex;
         align-items: center;
@@ -211,16 +211,16 @@
         transition: all 0.2s ease;
         cursor: pointer;
     }
-    
+
     .loan-step:hover {
         background-color: #e2e8f0;
     }
-    
+
     .loan-step.active {
         background-color: rgba(59, 130, 246, 0.1);
         border-left: 3px solid var(--loan-primary);
     }
-    
+
     .loan-step-icon {
         width: 2rem;
         height: 2rem;
@@ -235,35 +235,35 @@
         margin-right: 1rem;
         transition: all 0.2s ease;
     }
-    
+
     .loan-step.active .loan-step-icon {
         background-color: var(--loan-primary);
         color: white;
     }
-    
+
     .loan-step-text {
         font-weight: 500;
         font-size:12px;
         color: var(--loan-text);
     }
-    
+
     .loan-step.active .loan-step-text {
         color: var(--loan-primary);
     }
-    
+
     .loan-form-container {
         padding: 1.5rem 2rem;
     }
-    
+
     .loan-form {
         animation: loanFormFadeIn 0.5s ease-out;
     }
-    
+
     @keyframes loanFormFadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    
+
     /* Enhance existing form elements */
     .form-control {
         border-radius: 8px;
@@ -272,55 +272,55 @@
         transition: all 0.2s ease;
         width: 100%;
     }
-    
+
     .form-control:focus {
         border-color: var(--loan-primary);
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         outline: none;
     }
-    
+
     label {
         font-weight: 500;
         color: var(--loan-text);
         margin-bottom: 0.5rem;
         display: block;
     }
-    
+
     .form-group {
         margin-bottom: 1.5rem;
     }
-    
+
     /* Responsive adjustments */
     @media (max-width: 992px) {
         .loan-modal {
             width: 95%;
         }
-        
+
         .loan-sidebar {
             border-right: none;
             border-bottom: 1px solid var(--loan-border);
             padding-bottom: 1rem;
         }
-        
+
         .loan-steps {
             flex-direction: row;
             overflow-x: auto;
             padding-bottom: 0.5rem;
             gap: 0.5rem;
         }
-        
+
         .loan-step {
             min-width: 120px;
             flex-direction: column;
             text-align: center;
             padding: 0.75rem 0.5rem;
         }
-        
+
         .loan-step-icon {
             margin-right: 0;
             margin-bottom: 0.5rem;
         }
-        
+
         .loan-step-text {
             font-size: 0.75rem;
         }

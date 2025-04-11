@@ -1,5 +1,5 @@
 @unless (request()->routeIs('dashboard'))
-    <div  class="header">
+    <div  class="header" style="z-index: 0">
         <div style="margin-top:2svh" class="container">
             <div class="row">
                 <div class="col-xxl-12">

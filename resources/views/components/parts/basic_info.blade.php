@@ -3,7 +3,7 @@
         <h5 class="step-title">Profile Details</h5>
         <span class="step-indicator">Step 1/4</span>
     </div>
-    
+
     <div class="form-grid">
         <!-- Row 1 -->
         <div class="form-cell">
@@ -228,6 +228,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-right:5px;
 }
 
 .form-control, .form-select {
@@ -243,7 +244,8 @@
 }
 
 .form-control.compact, .form-select.compact {
-    height: 40px;
+    height: 50px;
+    padding-left: 10%;
 }
 
 .form-control:focus, .form-select:focus {
@@ -347,7 +349,7 @@
     .form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .step-panel {
         padding: 1.25rem;
     }

@@ -950,7 +950,7 @@
                                         <!-- Your previous code for the duration input -->
 
                                         <!-- Div with dotted yellow border -->
-                                        <div class="border-dotted-yellow">
+                                        {{-- <div class="border-dotted-yellow">
                                             <div class="row">
                                                 <div class="col">
                                                     <p class="text-center text-secondary font-weight-bold">
@@ -970,7 +970,7 @@
                                                 </div>
                                             </div>
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
