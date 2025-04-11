@@ -3515,14 +3515,14 @@ fieldset:disabled .btn {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #5234c4;
+    background-color: #792db8;
     border-color: #4e31b8;
 }
 
 .btn-check:focus+.btn-primary,
 .btn-primary:focus {
     color: #fff;
-    background-color: #5234c4;
+    background-color: #792db8;
     border-color: #4e31b8;
     -webkit-box-shadow: 0 0 0 0rem rgba(121, 90, 234, 0.5);
     box-shadow: 0 0 0 0rem rgba(121, 90, 234, 0.5);

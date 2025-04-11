@@ -1,10 +1,10 @@
 
-    <div style="padding:50%" class="container content-body">
+    <div class="container content-body">
         <div class="container-fluid">
           <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
               <div class="card welcome-profile">
-                <div class="card-body">
+                <div class="card-body p-4">
                     @if($data->profile_photo_path == null)
                         @if($data->fname != null && $data->lname != null)
                             <span class="text-white">{{ $data->fname[0].' '.$data->lname[0] }}</span>
@@ -14,13 +14,11 @@
                     @else
                         <img src="{{ 'public/'.Storage::url($data->profile_photo_path) }}" />
                     @endif
-                  {{-- <img src="https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png" alt="" /> --}}
-                  <h4>{{ $data->fname.' '.$data->lname }}</h4>
-                  <p>
-                    Looks like you are not verified yet. Verify yourself to use the
-                    full potential of Mighty Finance Soultion.
-                  </p>
-
+                    <h4>{{ $data->fname.' '.$data->lname }}</h4>
+                    <p>
+                        Looks like you are not verified yet. Verify yourself to use the
+                        full potential of Mighty Finance Soultion.
+                    </p>
                   <ul>
                     <li>
                       <a href="{{ route('profile.show') }}">
@@ -55,12 +53,12 @@
                       and reliable.
                     </p>
                     <a href="#" class="btn btn-primary">
-                      <img src="{{ asset('mfs/images/android.svg')}}" alt="" />
+                      <img src="{{ asset('public/mfs/images/android.svg')}}" alt="" />
                     </a>
                     <br />
                     <div class="mt-3"></div>
                     <a href="#" class="btn btn-primary">
-                      <img src="{{ asset('mfs/images/apple.svg')}}" alt="" />
+                      <img src="{{ asset('public/mfs/images/apple.svg')}}" alt="" />
                     </a>
                   </div>
                 </div>

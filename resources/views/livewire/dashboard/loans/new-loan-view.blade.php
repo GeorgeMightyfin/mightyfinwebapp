@@ -582,12 +582,6 @@
         max-width: 20%;
     }
 
-    body {
-        background: #F6F3F8 !important;
-    }
-
-
-
     .range {
         display: flex;
         width: 100%x;

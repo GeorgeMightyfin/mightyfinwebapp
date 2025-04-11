@@ -6,7 +6,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-header bg-white border-0 py-3">
                         <h4 class="card-title text-primary d-flex align-items-center">
-                            <i class="bi bi-clipboard-data me-2"></i> LOAN INFORMATION
+                            <i class="bi bi-clipboard-data me-2"></i> MY LOAN INFORMATION
                         </h4>
                     </div>
                     <div class="card-body">
@@ -72,7 +72,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-header bg-white border-0 py-3">
                         <h4 class="card-title text-primary d-flex align-items-center">
-                            <i class="bi bi-person-badge me-2"></i> USER INFORMATION
+                            <i class="bi bi-person-badge me-2"></i> MY USER INFORMATION
                         </h4>
                     </div>
                     <div class="card-body">
@@ -80,10 +80,10 @@
                             <!-- User Profile Photo -->
                             <div class="col-xxl-4 col-xl-4 col-lg-4 mb-4">
                                 <div class="profile-photo-container text-center">
-                                    <div class="avatar-xxl position-relative">
+                                    <div class="avatar-xl position-relative">
                                         @if ($loan->user->profile_photo_path)
                                             <img src="{{ '../public/'.Storage::url($loan->user->profile_photo_path) }}"
-                                                 class="rounded-circle border border-3 border-primary shadow-sm"
+                                                 class="rounded border border-3 border-primary shadow-sm"
                                                  alt="Profile Photo" style="width: 100%; height: auto; max-width: 300px;">
                                         @else
                                             <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
