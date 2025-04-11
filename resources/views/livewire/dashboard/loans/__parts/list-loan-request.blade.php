@@ -44,13 +44,13 @@
                                     Active (Open)
                                 </span>
                                 @elseif($loan->status == 2)
-                                <span class="badge badge-sm text-warning light badge-warning">
+                                <span class="badge badge-sm text-warning light badge-warning ">
                                     <i class="fa fa-circle text-warning me-1"></i>
                                     Under Review
                                 </span>
                                 @else
-                                <span class="text-white badge badge-sm light badge-danger">
-                                    <i class="text-white fa fa-circle me-1"></i>
+                                <span class="text-danger badge badge-sm light badge-danger">
+                                    <i class="text-danger fa fa-circle me-1"></i>
                                     Rejected
                                 </span>
                                 @endif
@@ -69,7 +69,7 @@
                         <a href="{{ route('loan-details',['id' => $loan->id]) }}" class="btn btn-info sharp tp-btn">
                             <i style="color: rgb(241, 233, 233)" class="fa fa-eye"></i>
                         </a>
-                        
+
                         {{-- <a target="_blank" title="View Loan Statement" href="{{ route('loan-statement', ['id'=>$loan->id]) }}" class="shadow btn btn-primary btn-xs sharp">
                             <i class="bi bi-file-earmark-ruled"></i>
                         </a> --}}

@@ -197,6 +197,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('loan-history') }}" data-toggle="tooltip" data-placement="right"
+                            title="Loan History">
+                            <span><i class="text-white bi bi-clock-history"></i></span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('loan-wallet') }}" data-toggle="tooltip" data-placement="right"
                             title="My Wallet">
                             <span><i class="text-white bi bi-wallet2"></i></span>

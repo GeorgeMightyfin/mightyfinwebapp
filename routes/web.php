@@ -140,6 +140,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('apply-proxy-loan', [LoanApplicationController::class, 'new_proxy_loan'])->name('proxy-apply-loan');
     Route::post('update-loan', [LoanApplicationController::class, 'updateLoanDetails'])->name('update-loan-details');
     Route::post('update-loan-statuses', [LoanProductController::class, 'updateLoanStatus'])->name('update-loan-statuses');
+    Route::get('loan-history', LoanHistoryView::class)->name('loan-history');
 
     // ---- Payments
     Route::get('make-payments', PaymentPage::class)->name('payments');

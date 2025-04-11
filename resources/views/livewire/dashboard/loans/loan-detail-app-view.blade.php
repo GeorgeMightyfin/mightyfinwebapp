@@ -319,7 +319,7 @@
                                     </div>
                                 @elseif ($loan->status == 3)
                                     <div class="avatar-sm rounded-circle bg-danger bg-opacity-10 p-2">
-                                        <i class="bi bi-x-circle fs-4 text-danger"></i>
+                                        <i class="bi bi-circle fs-4 text-danger"></i>
                                     </div>
                                 @endif
                             </div>
