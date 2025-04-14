@@ -1,4 +1,5 @@
 <div class="content-body">
+    <script src="https://cdn.tailwindcss.com"></script>
     <div class="container mt-4">
         <!-- Loan Information Card - Enhanced -->
         <div class="row">
@@ -88,8 +89,8 @@
                                                  alt="Default Profile" style="border-radius: 20px; width: 100%; height: auto; max-width: 300px;">
                                         @endif
                                     </div>
-                                    <div class="mt-3">
-                                        <h5 class="mb-0">{{ $loan->user->fname.' '.$loan->user->lname }}</h5>
+                                    <div class="mt-3 w-full text-left px-2">
+                                        <h3 class="mb-0">{{ $loan->user->fname.' '.$loan->user->lname }}</h3>
                                         <small class="text-muted">User ID: {{ $loan->user->id }}</small>
                                     </div>
                                 </div>
@@ -361,9 +362,9 @@
                                 </a>
                             @endif
                             @if ($loan->status == 1)
-                                <p href="#" class="text-muted">
-                                    <i class=" bi bi-cash-stack me-1"></i> Make repayment
-                                </p>
+                            <p href="#" class="text-muted">
+                                <i class=" bi bi-cash-stack me-1"></i> Balance: K{{ number_format(App\Models\Application::open_balance($loan),2,'.',',') }}
+                            </p>
                             @endif
                             @if ($loan->status == 3)
                                 <a href="#" class="btn btn-primary">
