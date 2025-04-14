@@ -1,7 +1,7 @@
 <div class="step-panel step" id="step1">
     <div class="step-header">
-        <h5 class="step-title">Profile Details</h5>
-        <span class="step-indicator">Step 1/4</span>
+        <h5 class="step-title">Your Profile Details</h5>
+        <span class="step-indicator">Step 1/7</span>
     </div>
 
     <div class="form-grid">
@@ -127,8 +127,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </span>
                 <select class="form-control compact" id="yearsOfWork" name="yearsOfWork">
-                    <option value="1" {{ auth()->user()->employeeNo == 1 ? 'selected' : '' }}>1 Year</option>
-                    <option value="2" {{ auth()->user()->employeeNo == 2 ? 'selected' : '' }}>2 Years</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Years</option>
+                    <option value="3">3 Years</option>
+                    <option value="4">4 Years</option>
+                    <option value="5">5 Years</option>
+                    <option value="6">6 Years</option>
+                    <option value="6+">6+ Years</option>
+                    <option value="20+">20+ Years</option>
                     <!-- Add more options as needed for different years of work -->
                 </select>
             </div>
@@ -136,7 +142,7 @@
     </div>
 
     <div class="form-actions">
-        <button style="background: linear-gradient(135deg, #6a3093, #873093)" type="button" class="btn btn-primary" onclick="nextStep(1)">
+        <button style="background: linear-gradient(135deg, #6a3093, #873093)" type="button" class="btn btn-prime rounded-3" onclick="nextStep(1)">
             Continue to Next Step
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>

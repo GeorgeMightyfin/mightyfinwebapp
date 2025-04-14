@@ -1,5 +1,5 @@
 <div id="overlay" class="loan-modal-overlay"></div>
-<div class="loan-modal" style="z-index: 99999; background:#faf9fa;" id="continue-loan-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="loan-modal" style="z-index: 99999; background:#ffffff;" id="continue-loan-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="p-0 loan-modal-content">
         {{-- <div class="loan-modal-header">
             <h4 class="loan-modal-title">
@@ -7,7 +7,7 @@
                 <b>Loan Completion Form</b>
             </h4>
         </div> --}}
-        <div class="loan-modal-body row" style="overflow-y: auto; overflow-x: hidden; height: 80vh">
+        <div class="loan-modal-body row" >
             <div class="loan-sidebar col-xxl-3 col-xl-3 col-lg-3">
                 <div class="loan-progress-container">
                     <div class="loan-progress-bar"></div>
@@ -43,10 +43,17 @@
                         <div class="loan-step-icon">7</div>
                         <div class="loan-step-text">Summary</div>
                     </div>
+                    <a title="Delete this loan request" href="{{ route('remove', App\Models\Application::currentApplication()->id ) }}" class="items-center flex center mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                          </svg>&nbsp;
+                        I don't wish to continue
+                    </a>
                 </div>
             </div>
             <div class="loan-form-container col-xxl-9 col-xl-9 col-lg-9">
-                <form class="py-6 pb-4 loan-form col-xxl-12 col-xl-12 col-lg-12" method="post" action="{{ route('continue-loan') }}" id="wizard" enctype="multipart/form-data">
+                <form style="overflow-y: auto; overflow-x: hidden;height: 80vh" class="loan-form col-xxl-12 col-xl-12 col-lg-12" method="post" action="{{ route('continue-loan') }}" id="wizard" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="MAX_FILE_SIZE" value="64000000" />
                     <input type="hidden" name="application_id" value="{{ App\Models\Application::currentApplication()->id }}">
@@ -99,8 +106,8 @@
         right: 0;
         bottom: 0;
         background-color: rgba(15, 23, 42, 0.7);
-        backdrop-filter: blur(4px);
-        z-index: 99999;
+        backdrop-filter: blur(6px);
+        z-index: 9999 !important;
     }
 
     .loan-modal {

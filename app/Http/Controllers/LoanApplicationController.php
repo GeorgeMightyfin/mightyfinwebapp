@@ -660,6 +660,20 @@ class LoanApplicationController extends Controller
             dd($th);
         }
     }
+
+    public function remove($id)
+    {
+        $application = Application::find($id);
+
+        if (!$application) {
+            return redirect()->back()->with('error', 'Application not found.');
+        }
+
+        $application->delete();
+
+        return redirect()->back()->with('success', 'Application deleted successfully.');
+    }
+
     public function destroy($id)
     {
         //

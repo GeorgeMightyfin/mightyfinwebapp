@@ -3844,14 +3844,14 @@ fieldset:disabled .btn {
 
 .btn-dark:hover {
     color: #fff;
-    background-color: #1a2744;
+    background-color: #6a3093;
     border-color: #182540;
 }
 
 .btn-check:focus+.btn-dark,
 .btn-dark:focus {
     color: #fff;
-    background-color: #1a2744;
+    background-color: #6a3093;
     border-color: #182540;
     -webkit-box-shadow: 0 0 0 0rem rgba(64, 77, 106, 0.5);
     box-shadow: 0 0 0 0rem rgba(64, 77, 106, 0.5);

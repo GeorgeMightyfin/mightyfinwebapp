@@ -195,6 +195,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // ------- Loan Continue Completion
     Route::post('continue-loan', [LoanApplicationController::class, 'continue_loan'])->name('continue-loan');
+    Route::get('remove/{id}', [LoanApplicationController::class, 'remove'])->name('remove');
 
     // -------Ticket
     Route::resource('tickets', TicketController::class);

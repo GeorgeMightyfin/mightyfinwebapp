@@ -126,7 +126,7 @@
         .file-input-label {
             display: block;
             padding: 10px;
-            background-color: #3498db;
+            background-color: #6a3093;
             color: #fff;
             cursor: pointer;
         }
@@ -135,7 +135,7 @@
         #preview-container {
             max-width: 300px;
             margin-top: 20px;
-            border: 2px dashed #3498db;
+            border: 2px dashed #6a3093;
             padding: 10px;
             text-align: center;
         }
@@ -152,6 +152,25 @@
             font-style: italic;
             font-size: 12px;
             margin-bottom: 5px;
+        }
+
+        .btn-prime {
+            background-color: #FFD700 !important; /* Replace with your desired bg color */
+            border-color: #FFD700 !important;
+        }
+
+        .btn-prime:hover {
+            background-color: #ffdf28 !important; /* Replace with your desired hover color */
+            border-color: #FFD700 !important;
+        }
+        .btn-custom {
+            background-color: #6a3093 !important; /* Replace with your desired bg color */
+            border-color: #6a3093 !important;
+        }
+
+        .btn-custom:hover {
+            background-color: #411e5a !important; /* Replace with your desired hover color */
+            border-color: #411e5a !important;
         }
     </style>
 
