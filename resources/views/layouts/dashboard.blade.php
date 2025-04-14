@@ -158,6 +158,7 @@
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="dashboard">
@@ -202,12 +203,12 @@
                             <span><i class="text-white bi bi-clock-history"></i></span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('loan-wallet') }}" data-toggle="tooltip" data-placement="right"
                             title="My Wallet">
                             <span><i class="text-white bi bi-wallet2"></i></span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a class="setting_" href="{{ route('settings') }}" data-toggle="tooltip" data-placement="right"
                             title="Settings">

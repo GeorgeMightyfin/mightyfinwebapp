@@ -1,7 +1,7 @@
 <style>
     /* Base styles */
     :root {
-        --primary: #9b43ee;
+        --primary: #6a3093;
         --primary-light: #5704d315;
         --success: #2ecc71;
         --warning: #f39c12;
@@ -61,11 +61,11 @@
     }
 
     .balance-card {
-        background: linear-gradient(135deg, var(--primary), #3a0ca3);
+        background: linear-gradient(135deg, var(--primary), #5c2472);
         color: white;
         border-radius: 12px;
         padding: 1.5rem;
-        box-shadow: 0 8px 16px rgba(67, 97, 238, 0.3);
+        box-shadow: 0 8px 16px rgba(204, 67, 238, 0.3);
         margin-bottom: 1.5rem;
     }
 
@@ -268,10 +268,11 @@
     <div class="dashboard-header">
         <h1 class="text-2xl font-bold"></h1>
         <button id="repaymentBtn" class="btn-repay">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.5-1.5H2V1.78a1.5 1.5 0 0 1 2.136-1.355L8 2.539l3.864-2.213zM3.5 3V1.78a.5.5 0 0 1 .712-.45L8 3.417l3.788-2.168a.5.5 0 0 1 .712.45V3H3.5zm-2 3h5v1H1.5V6zm0 2h5v1H1.5V8zm0 2h5v1H1.5v-1zm7 0h5v1h-5v-1zm0-2h5v1h-5V8zm0-2h5v1h-5V6z"/>
-            </svg>
-            Make a Repayment
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z"/>
+              </svg>
+            Pay Now
         </button>
     </div>
     @endif
@@ -286,8 +287,8 @@
             </div>
             <div>
                 <p style="font-size: 0.875rem; opacity: 0.8;">Next Payment Due</p>
-                <h3 style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;">April 15, 2025</h3>
-                <p style="font-weight:bold; font-size: 1.875rem; opacity: 0.8; margin-top: 0.5rem; color:#fff">K3,500.00</p>
+                {{-- <h3 style="font-size: 1.25rem; font-weight: bold; margin-top: 0.5rem;color:#fff">April 15, 2025</h3> --}}
+                <p style="font-weight:bold; font-size: 1.875rem; opacity: 0.8; margin-top: 0.5rem; color:#fff">K{{ number_format(App\Models\Application::payback_installment($loan), 2, '.',',') }}</p>
             </div>
         </div>
     </div>
@@ -435,7 +436,7 @@ document.head.insertAdjacentHTML('beforeend', `
         height: 60px;
         border: 4px solid rgba(155, 67, 238, 0.2);
         border-radius: 50%;
-        border-top-color: var(--primary, #9b43ee);
+        border-top-color: var(--primary, #6a3093);
         animation: spinner 1s linear infinite;
     }
 
@@ -443,7 +444,7 @@ document.head.insertAdjacentHTML('beforeend', `
         position: absolute;
         bottom: calc(50% - 50px);
         font-weight: 600;
-        color: var(--primary, #9b43ee);
+        color: var(--primary, #6a3093);
     }
 </style>
 `);

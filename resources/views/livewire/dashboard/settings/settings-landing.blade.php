@@ -46,14 +46,12 @@
 
     <div style="z-index: 0" class="w-full z-0 mx-auto py-3 px-2 sm:px-3">
         <div class="settings-card bg-white rounded-xl overflow-hidden">
-
-
             <!-- Settings Menu -->
             <div class="settings-body">
                 <ul class="settings-menu list-none p-0 m-0">
                     <!-- Profile -->
                     <li class="menu-item border-b border-gray-100">
-                        <a href="{{ route('profile.show', ['view'=>'profile']) }}" class="menu-link d-flex items-center py-4 px-4 text-gray-800 no-underline relative hover:bg-gray-50">
+                        <a href="{{ route('my-profile', ['view' => 'profile']) }}" class="menu-link d-flex items-center py-4 px-4 text-gray-800 no-underline relative hover:bg-gray-50">
                             <div class="menu-icon flex items-center justify-center min-w-12 h-12 bg-amber-50 rounded-lg text-amber-400 shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>

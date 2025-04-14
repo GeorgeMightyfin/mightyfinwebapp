@@ -51,15 +51,17 @@
                         <div class="action-button">
                             @switch($my_loan->status)
                                 @case(1)
-                                    <a href="{{ route('transaction.item', ['view'=>'payments']) }}" class="btn-action active">
+                                    <a href="{{ route('transaction.item', ['view'=>'payments']) }}" class="text-white btn-action active">
                                         <span class="btn-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                                        </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                                <path fill="none" d="M0 0h24v24H0z"/>
+                                                <path fill="white" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                              </svg>                                                                                      </span>
                                         Repay Now
                                     </a>
                                     @break
                                 @case(2)
-                                    <button class="btn-action processing">
+                                    <a href="{{ route('loan-details', $my_loan->id) }}" class="btn-action processing">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
                                         </span>
@@ -69,10 +71,10 @@
                                         @else
                                             <div class="status-badge">KYC Pending</div>
                                         @endif
-                                    </button>
+                                    </a>
                                     @break
                                 @case(3)
-                                    <button class="btn-action declined">
+                                    <a href="{{ route('loan-details', $my_loan->id) }}" class="btn-action declined">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-10v-2h10v2z"/></svg>
                                         </span>
@@ -82,24 +84,24 @@
                                         @else
                                             <div class="status-badge">KYC Incomplete</div>
                                         @endif
-                                    </button>
+                                    </a>
                                     @break
                                 @case(4)
-                                    <button class="btn-action defaulted">
+                                    <a href="{{ route('loan-details', $my_loan->id) }}" class="btn-action defaulted">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                                         </span>
                                         Defaulted
-                                    </button>
+                                    </a>
                                     @break
                                 @default
-                                    <div class="btn-action pending">
+                                    <a href="{{ route('loan-details', $my_loan->id) }}" class="btn-action pending">
                                         <span class="btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
                                         </span>
                                         Pending Approval
-                                    </div>
-                                    @break
+                                    </a>
+                                @break
                             @endswitch
                         </div>
                     </div>

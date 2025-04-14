@@ -58,9 +58,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Chart Section -->
-                        {{-- <div class="mt-4" id="chartx" style="height: 300px;"></div> --}}
                     </div>
                 </div>
             </div>
@@ -80,15 +77,15 @@
                             <!-- User Profile Photo -->
                             <div class="col-xxl-4 col-xl-4 col-lg-4 mb-4">
                                 <div class="profile-photo-container text-center">
-                                    <div class="avatar-xl position-relative">
+                                    <div class="avatar-lg position-relative">
                                         @if ($loan->user->profile_photo_path)
                                             <img src="{{ '../public/'.Storage::url($loan->user->profile_photo_path) }}"
-                                                 class="rounded border border-3 border-primary shadow-sm"
-                                                 alt="Profile Photo" style="width: 100%; height: auto; max-width: 300px;">
+                                                 class=" border border-3 border-primary shadow-sm"
+                                                 alt="Profile Photo" style="border-radius: 20px; width: 100%; height: auto; max-width: 300px;">
                                         @else
                                             <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
-                                                 class="rounded-circle border border-3 border-primary shadow-sm"
-                                                 alt="Default Profile" style="width: 100%; height: auto; max-width: 300px;">
+                                                class=" border border-3 border-primary shadow-sm"
+                                                 alt="Default Profile" style="border-radius: 20px; width: 100%; height: auto; max-width: 300px;">
                                         @endif
                                     </div>
                                     <div class="mt-3">
@@ -310,8 +307,8 @@
                                         </div>
                                     @endif
                                 @elseif ($loan->status == 1)
-                                    <div class="avatar-sm rounded-circle bg-success bg-opacity-10 p-2">
-                                        <i class="bi bi-check-circle fs-4 text-success"></i>
+                                    <div class="avatar-sm rounded-circle bg-success text-white bg-opacity-10 p-2">
+                                        <i class="bi bi-check fs-4 text-white"></i>
                                     </div>
                                 @elseif ($loan->status == 2)
                                     <div class="avatar-sm rounded-circle bg-info bg-opacity-10 p-2">
@@ -364,9 +361,9 @@
                                 </a>
                             @endif
                             @if ($loan->status == 1)
-                                <a href="#" class="btn btn-primary">
-                                    <i class="bi bi-cash-stack me-1"></i> Get Cash
-                                </a>
+                                <p href="#" class="text-muted">
+                                    <i class=" bi bi-cash-stack me-1"></i> Make repayment
+                                </p>
                             @endif
                             @if ($loan->status == 3)
                                 <a href="#" class="btn btn-primary">
@@ -463,7 +460,7 @@
 <style>
     .info-card {
         transition: all 0.3s ease;
-        border-left: 4px solid;
+        /* border-bottom: 4px solid; */
     }
     .info-card:hover {
         transform: translateY(-5px);
