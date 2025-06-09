@@ -170,10 +170,7 @@ trait UserTrait{
     }
 
     public function VerifyOTP(){
-      
-        // dd(auth()->user()->opt_verified == 0);
         try {
-
             if(auth()->user()->opt_verified == 0){
                 // Generate otp code
                 $code = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
@@ -183,23 +180,39 @@ trait UserTrait{
                     'opt_code' => $code
                 ]);
 
-                // Send SMS
-                $data = [
-                    'message'=>$code.' is your OTP verification code',
-                    'phone'=> '26'.auth()->user()->phone,
-                ];
+                // Try to send SMS
+                try {
+                    $data = [
+                        'message'=>$code.' is your OTP verification code',
+                        'phone'=> '26'.auth()->user()->phone,
+                    ];
+                    $this->send_with_server($data);
+                } catch (\Throwable $smsError) {
+                    // Log SMS error but continue
+                    \Log::error('SMS sending failed: ' . $smsError->getMessage());
+                }
 
-                $this->send_with_server($data);
-                Mail::to(auth()->user()->email)->send(new SendOtpMail($code));
+                // Try to send email
+                try {
+                    Mail::to(auth()->user()->email)->send(new SendOtpMail($code));
+                } catch (\Throwable $emailError) {
+                    // Log email error but continue
+                    \Log::error('Email sending failed: ' . $emailError->getMessage());
+                }
 
-                // Then redirect the user to go and verify
+                // Redirect to OTP page regardless of email/SMS success
                 return redirect()->route('otp');
-            }else{
-                return true;
+            } else {
+                return redirect()->route('dashboard');
             }
         } catch (\Throwable $th) {
-            dd('Please check the SMPT settings'.$th->getMessage());
-            // return false;
+            // Log the error
+            \Log::error('OTP verification error: ' . $th->getMessage());
+            // If user is not verified, still redirect to OTP page
+            if(auth()->user()->opt_verified == 0) {
+                return redirect()->route('otp');
+            }
+            return redirect()->route('dashboard');
         }
     }
     public function send_with_server($data) {
