@@ -107,6 +107,7 @@
             height: 12px;
             margin-right: 4px;
         }
+        
 
         .security-assurance {
             display: flex;
@@ -135,10 +136,10 @@
                     <div class="col-xl-5 col-md-6">
                         <div class="my-4 text-center mini-logo">
                             <a href="{{ route('welcome') }}">
-                                <img width="160" src="{{ asset('/public/web/images/01-ft-logo.png') }}"
-                                    alt="" />
+                                <img width="160" src="{{ asset('/public/web/images/01-ft-logo.png') }}"alt="" />
                             </a>
-                            <h4 class="text-white" style="margin-top:2rem" id="slogan-text">Financial Inclusion for All!
+                            <h4 class="text-white" style="margin-top:2rem" id="slogan-text">
+                                Financial Inclusion for All!
                             </h4>
                         </div>
 
