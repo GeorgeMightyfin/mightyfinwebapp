@@ -203,7 +203,7 @@ trait UserTrait{
                 // Redirect to OTP page regardless of email/SMS success
                 return redirect()->route('otp');
             } else {
-                return redirect()->route('dashboard');
+                return true;
             }
         } catch (\Throwable $th) {
             // Log the error
@@ -212,7 +212,7 @@ trait UserTrait{
             if(auth()->user()->opt_verified == 0) {
                 return redirect()->route('otp');
             }
-            return redirect()->route('dashboard');
+            return true;
         }
     }
     public function send_with_server($data) {
