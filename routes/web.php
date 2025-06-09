@@ -112,7 +112,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/search', SearchEngineView::class)->name('search');
     // Administrator
     Route::get('approved-loans', ApprovedLoansView::class)->name('approved-loans');
-    Route::get('new-loan-request', NewLoanView::class)->name('new-loan');
+    Route::get('get-a-loan', NewLoanView::class)->name('new-loan');
     Route::get('client-loan-requests', LoanRequestView::class)->name('view-loan-requests');
     Route::get('active-repayments', LoanRepaymentView::class)->name('repayments');
     Route::get('track-repayments/{id}', LoanTrackingView::class)->name('track-repayments');

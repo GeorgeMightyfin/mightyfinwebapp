@@ -800,11 +800,10 @@
                                         <div class="col">
                                             <label onclick="selectCard(this)" class="card h-70 py-2 custom-radio {{ $item->status == 0 ? 'disabled-card' : '' }}">
                                                 <input type="radio" name="loan_type" value="{{ $item->id }}" class="d-none"
-                                                    checker()/>
+                                                    required/>
                                                 <div class="radio-btn">
                                                     <div class="content flex">
                                                         <div class="mb-2 text-xs text-white" style="width: 5px; height: 5px;">
-                                                            {{-- {!! $item->icon !!} --}}
                                                         </div>
                                                         <h2>{{ ucwords($item->description) }}</h2>
                                                         <p class="skill">{{ $item->description }} {{ $item->status == 1 ? '(Available)' : '(coming soon)' }} </p>
@@ -827,19 +826,19 @@
                                                 <div class="card-body">
                                                     <div class="slider">
                                                         <h4 class="text-white">Loan Amount</h4>
-                                                        <div v class="range" style="margin-bottom: -60px;"
+                                                        <div class="range" style="margin-bottom: -60px;"
                                                             id="pricipal-slide">
                                                             <div class="form-group range__slider">
                                                                 <input value="1"
                                                                     oninput="this.nextElementSibling.value = this.value"
                                                                     onchange="updateOutputValue(this.value)" step="50" type="range"
                                                                     style="width:100%;"
-                                                                    id="slidatious" title="Slide for amount">
+                                                                    id="slidatious" title="Slide for amount" required>
 
                                                                 <input name="amount" id="update_side" step="50" value="10000"
                                                                     onchange="updateRangeValue(this.value)"
                                                                     style="outline: none;border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style: hidden; background-color: #792db8; display: block; font-size: 20px;font-weight: bold;color: #fff;text-align: center;width: 100%; border: 1px #eaff0000 solid;"
-                                                                    class="output form-control" type="number">
+                                                                    class="output form-control" type="number" required>
                                                                 <output></output>
                                                             </div>
                                                         </div>
@@ -867,8 +866,8 @@
                                                                     onclick="decreaseDuration()">-</span>
                                                                 <input type="number" name="duration" id="durationInput"
                                                                     class="text-center form-control bg-purple"
-                                                                    value="1" min="1" max="60">
-                                                                <span class=" btn btn-secondary"
+                                                                    value="1" min="1" max="60" required>
+                                                                <span class="btn btn-secondary"
                                                                     onclick="increaseDuration()">+</span>
                                                             </div>
                                                         </div>
@@ -881,71 +880,69 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="mt-1">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 col-md-12">
-                                            <div class="border-dotted-yellow">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <p class="text-center text-secondary font-weight-bold">
-                                                            Total Repayment
-                                                        </p>
-                                                        <p id="payback_value" class="text-center text-secondary">K51000.00</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <p class="text-center text-secondary font-weight-bold">Monthly
-                                                            Repayment</p>
-                                                        <p id="monthly_repay" class="text-center text-secondary">K51000.00</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <p class="text-center text-secondary font-weight-bold">Next
-                                                            Repayment Date</p>
-                                                        <p id="nxt_repay_date" class="text-center text-secondary">02/05/2024</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                                 <button type="button" class="mt-0 mt-4 text-white btn btn-custom float-start back rounded-3">
                                     Go Back
                                 </button>
-                                <button onclick="showLoader()" type="submit" class="mt-4 finalcontinue btn btn-prime float-end next confirm">
+                                <button type="submit" class="mt-4 finalcontinue btn btn-prime float-end next confirm">
                                     Continue
                                 </button>
                             </div>
                         </div>
-                        {{-- <br>
-                        <div class="is_loading" id="preloader"><i>.</i><i>.</i><i>.</i></div>
-                        <br> --}}
                     </form>
                 </div>
             </section>
         </div>
     </div>
 
+    <div id="preloader2">
+        <i></i>
+        <i></i>
+        <i></i>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
         $('.is_loading').hide();
         $('.finalcontinue').hide();
+        $('#preloader2').hide();
+
+        // Global variables
+        var stepCount = 0;
+        var principal = 0;
+        var rate = null;
+        var duration = 1;
+        var selectedLoanProduct = null;
+
+        // Global function to check form validity
+        function checkFormValidity() {
+            var isValid = selectedLoanProduct && 
+                         principal >= $('#slidatious').attr('min') && 
+                         principal <= $('#slidatious').attr('max') &&
+                         duration >= $('#durationInput').attr('min') && 
+                         duration <= $('#durationInput').attr('max');
+            
+            $('button[type="submit"]').prop('disabled', !isValid);
+        }
 
         $(document).ready(function() {
-            var stepCount = 0;
-            var principal = 0;
-            var rate = 21;
-            var duration = document.getElementById('slider_input');
-            var principalVal = document.getElementById('amountInput');
-            var principalText = document.getElementById('principalText');
-            var loanProdValidText = document.getElementById('loanProdValidText');
-
-            var selectedLoanProduct = null;
-            duration = 1;
+            // Disable submit button initially
+            $('button[type="submit"]').prop('disabled', true);
 
             $(".form-business").hide();
             $("#successMessage").hide();
 
+            // Form submission handler
+            $('form').on('submit', function(e) {
+                if (!validateAndSubmit()) {
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            });
+
             $('input[name="loan_type"]').change(function() {
                 selectedLoanProduct = $('input[name="loan_type"]:checked').val();
+                checkFormValidity();
             });
 
             $(".next").on({
@@ -958,6 +955,7 @@
                     });
                 }
             });
+
             // back button
             $(".back").on({
                 click: function() {
@@ -967,14 +965,7 @@
                     });
                 }
             });
-            //finish button
-            $(".submit-button").on({
-                click: function() {
-                    $("#wizardRow").fadeOut(300);
-                    $(this).parents(".row").children("#successForm").fadeOut(300);
-                    $(this).parents(".row").children("#successMessage").fadeIn(3000);
-                }
-            });
+
             //Active card on click function
             $(".card").on({
                 click: function() {
@@ -982,63 +973,14 @@
                     $(this).parent(".col").siblings().children(".card").removeClass("active-card");
                 }
             });
+
             //back to wizard
             $(".back-to-wizard").on({
                 click: function() {
                     location.reload(true);
                 }
             });
-            const amountInput = document.getElementById('amountInput');
-            amountInput.addEventListener('input', function() {
-                // Get the current value of the input
-                var inputValue = amountInput.value;
-
-                // Remove non-numeric characters (letters, symbols, commas)
-                var numericValue = inputValue.replace(/[^0-9.]/g, '');
-
-                // Convert the numeric value to a float
-                principal = parseInt(numericValue);
-
-                var my_returns = (parseInt(principal) * 0.21) * parseInt(2) + parseInt(principal);
-                // Log the cleaned and converted value to the console
-                console.log('Borrowing: ', principal);
-                $('#payback_value').text('Payback amount of: K' + my_returns.toFixed(2));
-                $('#principal_value').text('Borrowing: K' + principal);
-                // Update a display element with the current value
-                $('#slider_value').text('Payback in 2 Months');
-            });
-
-
-            // Use input event to track changes in the range input value
-            $('#slider_input').on('input', function() {
-
-                // Get the current value of the range input
-                var sliderValue = $(this).val();
-                var my_returns = (parseInt(principal) * 0.21) * parseInt(sliderValue) + parseInt(principal);
-
-                $('#payback_value').text('Payback amount of: K' + my_returns.toFixed(2));
-                $('#principal_value').text('Borrowing: K' + principal);
-                // Update a display element with the current value
-                $('#slider_value').text('Payback in ' + sliderValue + ' Months');
-            });
         });
-
-        const slider_input = document.getElementById('slider_input'),
-            slider_thumb = document.getElementById('slider_thumb'),
-            slider_line = document.getElementById('slider_line');
-
-        function showSliderValue() {
-            slider_thumb.innerHTML = slider_input.value;
-            const bulletPosition = (slider_input.value / slider_input.max),
-                space = slider_input.offsetWidth - slider_thumb.offsetWidth;
-
-            slider_thumb.style.left = (bulletPosition * space) + 'px';
-            slider_line.style.width = slider_input.value + '%';
-        }
-
-        showSliderValue();
-        window.addEventListener("resize", showSliderValue);
-        slider_input.addEventListener('input', showSliderValue, false);
 
         function selectCard(selectedLabel) {
             $('.finalcontinue').show();
@@ -1050,8 +992,6 @@
             fetch(`api/get-loan-product-details/${selectedLoanProductID}`)
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(data); // Display the details in the console
-                    // Update the UI with the retrieved details
                     updateUI(data);
                 })
                 .catch(error => {
@@ -1077,110 +1017,133 @@
             $('#durationInput').attr('min', data.min_loan_duration);
 
             principal = parseFloat($('#slidatious').val());
-            rate = parseFloat(data.def_loan_interest); // e.g. 21 for 21%
+            rate = parseFloat(data.def_loan_interest);
             duration = parseInt($('#durationInput').val());
+
+            calculateLoanDetails();
+            checkFormValidity();
+        }
+
+        function calculateLoanDetails() {
+            if (!rate || !principal || !duration) return;
 
             const monthlyInterestRate = rate / 12 / 100; // Convert annual % to monthly decimal
             const n = duration;
 
-            // EMI calculation
+            // EMI calculation using the formula: EMI = P * r * (1 + r)^n / ((1 + r)^n - 1)
             const numerator = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, n);
             const denominator = Math.pow(1 + monthlyInterestRate, n) - 1;
             const emi = numerator / denominator;
 
             const totalRepayment = emi * n;
 
+            // Update UI with calculated values
             $('#payback_value').text('K' + totalRepayment.toFixed(2));
             $('#monthly_repay').text('K' + emi.toFixed(2));
 
+            // Calculate next repayment date
             const currentDate = new Date();
             const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
-            $('#nxt_repay_date').text(futureDate.toDateString());
-
-            if (data.services_fees !== undefined) {
-                data.services_fees.forEach(element => {
-                    $('#service_charge').text(element.name + ' ' + element.value);
-                });
-            }
+            $('#nxt_repay_date').text(futureDate.toLocaleDateString());
         }
 
-
         function decreaseDuration() {
-            if(rate !== null){
-                var currentValue = $('#durationInput').val();
-                var numericValue = parseInt(currentValue);
-                if (numericValue > 1) {
-                    var newValue = numericValue - 1;
-                    $('#durationInput').val(newValue);
-                    var my_returns = (parseInt(principal) * rate) *
-                    parseInt(newValue) + parseInt(principal);
-                    $('#payback_value').text(my_returns.toFixed(2));
-                    $('#monthly_repay').text(my_returns.toFixed(2) / newValue);
-                }
-            }else{
-                alert('Please choose a loan type');
+            if (!rate) {
+                alert('Please choose a loan type first');
+                return;
+            }
+
+            var currentValue = parseInt($('#durationInput').val());
+            var minValue = parseInt($('#durationInput').attr('min'));
+            
+            if (currentValue > minValue) {
+                var newValue = currentValue - 1;
+                $('#durationInput').val(newValue);
+                duration = newValue;
+                calculateLoanDetails();
+                checkFormValidity();
             }
         }
 
         function increaseDuration() {
-            if(rate !== null){
-                var currentValue = $('#durationInput').val();
-                var numericValue = parseInt(currentValue);
-                var newValue = numericValue + 1;
+            if (!rate) {
+                alert('Please choose a loan type first');
+                return;
+            }
+
+            var currentValue = parseInt($('#durationInput').val());
+            var maxValue = parseInt($('#durationInput').attr('max'));
+            
+            if (currentValue < maxValue) {
+                var newValue = currentValue + 1;
                 $('#durationInput').val(newValue);
-                var my_returns = (parseInt(principal) * rate) *
-                    parseInt(newValue) + parseInt(principal);
-                $('#payback_value').text(my_returns.toFixed(2));
-                $('#monthly_repay').text(my_returns.toFixed(2) / newValue);
-            }else{
-                alert('Please choose a loan type');
+                duration = newValue;
+                calculateLoanDetails();
+                checkFormValidity();
             }
         }
 
-        function showLoader(){
-            $('.is_loading').show();
-        }
-
-        // Event listener for range input changes
         function updateOutputValue(value) {
-            var duration = $('#durationInput').val();
-            var my_returns = (parseInt(value) * rate) * parseInt(duration) + parseInt(value);
-            $('#payback_value').text(my_returns.toFixed(2));
-            $('#monthly_repay').text(my_returns.toFixed(2) / duration);
-            checker(); // Call your checker function
+            principal = parseFloat(value);
+            calculateLoanDetails();
+            checkFormValidity();
         }
 
-        // Event listener for number input changes
         function updateRangeValue(value) {
-            var duration = $('#durationInput').val();
-            var my_returns = (parseInt(value) * rate) * parseInt(duration) + parseInt(value);
-            $('#payback_value').text(my_returns.toFixed(2));
-            $('#monthly_repay').text(my_returns.toFixed(2) / duration);
-            checker(); // Call your checker function
+            principal = parseFloat(value);
+            calculateLoanDetails();
+            checkFormValidity();
         }
-        // Get all elements with the specified class
-        var svgContainers = document.querySelectorAll('.svg-container');
-        // Loop through each container
-        svgContainers.forEach(function(svgContainer) {
-            // Find the first child which should be the SVG element
-            var svgElement = svgContainer.firstElementChild;
-            // Set the desired width and height
-            var newWidth = 40; // Replace with your desired width
-            var newHeight = 40; // Replace with your desired height
 
-            // Check if the SVG element exists
-            if (svgElement) {
-                // Traverse the SVG's child elements to set width and height attributes
-                Array.from(svgElement.children).forEach(function(child) {
-                    child.setAttribute('width', newWidth);
-                    child.setAttribute('height', newHeight);
-                });
+        function showLoader() {
+            $('#preloader2').show();
+            // Disable the submit button to prevent double submission
+            $('button[type="submit"]').prop('disabled', true);
+        }
 
-                // Set the width and height attributes of the SVG itself
-                svgElement.setAttribute('width', newWidth);
-                svgElement.setAttribute('height', newHeight);
-            }
+        // Add event listeners for input changes
+        $('#slidatious').on('input', function() {
+            updateOutputValue(this.value);
         });
+
+        $('#update_side').on('input', function() {
+            updateRangeValue(this.value);
+        });
+
+        $('#durationInput').on('input', function() {
+            var newValue = parseInt(this.value);
+            var minValue = parseInt($(this).attr('min'));
+            var maxValue = parseInt($(this).attr('max'));
+            
+            if (newValue >= minValue && newValue <= maxValue) {
+                duration = newValue;
+                calculateLoanDetails();
+            } else {
+                // Reset to previous valid value
+                $(this).val(duration);
+            }
+            checkFormValidity();
+        });
+
+        function validateAndSubmit() {
+            if (!selectedLoanProduct) {
+                alert('Please select a loan type first');
+                return false;
+            }
+            
+            if (!principal || principal < $('#slidatious').attr('min') || principal > $('#slidatious').attr('max')) {
+                alert('Please enter a valid loan amount');
+                return false;
+            }
+
+            if (!duration || duration < $('#durationInput').attr('min') || duration > $('#durationInput').attr('max')) {
+                alert('Please enter a valid duration');
+                return false;
+            }
+
+            showLoader();
+            return true;
+        }
     </script>
     <script src="{{ asset('web/js/app.calculator.js')}}">
 

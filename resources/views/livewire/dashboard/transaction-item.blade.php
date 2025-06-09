@@ -1,13 +1,10 @@
 <div>
     <div>
         @php
-        if (isset($_GET['view'])) {
-            // Retrieve the value of the 'view' parameter
-            $param = $_GET['view'];
-
-            // Use the $view variable as needed
-            $view = htmlspecialchars($param);
-        }
+            if (isset($_GET['view'])) {
+                $param = $_GET['view'];
+                $view = htmlspecialchars($param);
+            }
         @endphp
         <div class="mt-5 content-body">
 
