@@ -519,9 +519,6 @@ class LoanApplicationController extends Controller
                 'msg' => 'You have new a '.$form['type'].' loan application request from '.$user->fname.' '.$user->lname.' has been updated, please visit the site to view more details'
             ];
 
-            // Email going to the Administrator
-            // $process = $this->send_loan_email($mail);
-
             if($request->wantsJson()){
                 return response()->json([
                     "status" => 200,
@@ -577,17 +574,6 @@ class LoanApplicationController extends Controller
                 ];
                 $this->createNOK($nok);
             }
-            // $guarants = [
-            //     'gfname'=> $data['guarantorName'],
-            //     'gnrc_no'=> $data['guarantorNRC'],
-            //     'gdob'=> $data['guarantorDOB'],
-            //     'gphone'=> $data['guarantorContactNumber'],
-            //     'gphone2'=> $data['alternativeNumber'],
-            //     'gphonesp3'=> $data['spouseContactNumber'],
-            //     'gaddress'=> $data['guarantorAddress'],
-            //     'g_relation'=> $data['relationshipToBorrower'],
-            //     'application_id' => $data['application_id']
-            // ];
             if (isset($data['hrFirstName'])) {
                 $refs = [
                     'hrFname'=> $data['hrFirstName'],

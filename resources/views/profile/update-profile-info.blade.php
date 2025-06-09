@@ -1,9 +1,9 @@
-<div style="width: 100%" class="w-full">
+<div style="width: 80em" class="w-full">
 
 
     <div>
         <!-- Profile Photo -->
-        <div class="row">
+        <div class="row" style="width:80em">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
                 <div class="">
                     <form action="{{ route('update-prof-pic') }}" method="POST" class="row g-3" enctype="multipart/form-data">

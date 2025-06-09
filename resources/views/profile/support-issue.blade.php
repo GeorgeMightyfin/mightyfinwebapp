@@ -4,7 +4,7 @@
     </div>
 @endif
 
-<div class="row">
+<div style="width:80em" class="row">
 <div class="col-xxl-6 col-xl-6 col-lg-6">
     <div class="card welcome-profile">
     <div class="card-body">
