@@ -216,8 +216,15 @@
                                             </div>
                                             <div class="col-12">
                                                 <label class="mb-1 text-dark"><strong>Password</strong></label>
-                                                <input name="password" required autocomplete="new-password"
-                                                    type="password" class="form-control">
+                                                <div class="input-group">
+                                                    <input name="password" required autocomplete="new-password"
+                                                        type="password" class="form-control" id="password">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                            <i class="fa fa-eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="px-3 mt-4 text-left">
                                                 <button
@@ -287,6 +294,27 @@
     <script src="{{ asset('public/theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('public/theme/js/custom.min.js') }}"></script>
     <script src="{{ asset('public/theme/js/deznav-init.js') }}"></script>
+
+    <!-- Add Font Awesome for the eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script>
+        // Password toggle functionality
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
 
 </body>
 

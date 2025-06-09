@@ -94,7 +94,8 @@
                     </a>
                     <h4 class="mt-5 text-2xl font-semibold text-white">Reset Your Password</h4>
                 </div>
-                <div class="transition-all duration-300 transform bg-white shadow-xl bg-opacity-95 rounded-3xl hover:-translate-y-1 hover:shadow-2xl animate__animated animate__fadeIn" style="border-radius:1.3rem">
+                <div class="pb-4 transition-all duration-300 transform bg-white shadow-xl bg-opacity-95 rounded-3xl hover:-translate-y-1 hover:shadow-2xl animate__animated animate__fadeIn" style="border-radius:1.3rem">
+                    <br>
                     <x-jet-validation-errors class="w-full text-sm text-center text-red-500" />
                     <div class="p-8">
                         <p class="mb-6 text-center text-gray-600">Enter your email address and we'll send you a link to reset your password.</p>
