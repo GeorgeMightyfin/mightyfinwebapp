@@ -4,8 +4,8 @@
     <div class="w-full">
       <!-- Loop through loan requests -->
       @forelse($loan_requests as $loan)
-        <div class="bg-white rounded-lg  mb-2 shadow-md p-4 transition-all hover:shadow-lg animate-slide-fade">
-          <div class="flex flex-col md:flex-row space-y-3 md:space-y-0">
+        <div class="p-4 mb-2 transition-all bg-white rounded-lg shadow-md hover:shadow-lg animate-slide-fade">
+          <div class="flex flex-col space-y-3 md:flex-row md:space-y-0">
             <!-- Left section with icon and loan details -->
             <div class="flex items-start space-x-3 md:w-3/5">
               <div class="text-gray-700">
@@ -15,31 +15,35 @@
                 </svg>
               </div>
               <div class="flex flex-col">
-                <div class="flex items-center flex-wrap gap-2">
+                <div class="flex flex-wrap items-center gap-2">
                   <span class="w-2 h-2 bg-green-500 rounded-full"></span>
                   <span class="font-bold text-gray-800">K{{ number_format($loan->amount, 2, '.', ',') }}</span>
-
+                  
                   <!-- Status badge -->
-                  @if($loan->status == 0)
-                  <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                  @if($loan->status == 0 && $loan->closed == 0)
+                  <span class="px-2 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-full">
                     Pending Approval
                   </span>
-                  @elseif($loan->status == 1)
-                  <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                  @elseif($loan->status == 1 && $loan->closed == 0)
+                  <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
                     Active (Open)
                   </span>
-                  @elseif($loan->status == 2)
-                  <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                  @elseif($loan->status == 2 && $loan->closed == 0)
+                  <span class="px-2 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">
                     Under Review
                   </span>
+                  @elseif($loan->status == 1 && $loan->closed == 1)
+                  <span class="px-2 py-1 text-xs font-medium text-purple-800 bg-pink-100 rounded-full">
+                    Closed & Repaid
+                  </span>
                   @else
-                  <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                  <span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">
                     Rejected
                   </span>
                   @endif
                 </div>
-                <p class="text-sm text-gray-600 mt-1">{{ $loan->loan_product->name }} Loan</p>
-                <p class="text-xs text-gray-500 mt-1">Applied on {{ $loan->created_at->toFormattedDateString() }}</p>
+                <p class="mt-1 text-sm text-gray-600">{{ $loan->loan_product->name }} Loan</p>
+                <p class="mt-1 text-xs text-gray-500">Applied on {{ $loan->created_at->toFormattedDateString() }}</p>
               </div>
             </div>
 
@@ -51,8 +55,8 @@
             <!-- Right section with action button -->
             <div class="justify-end md:w-1/5">
               <a class="btn bg-primary" href="{{ route('loan-details',['id' => $loan->id]) }}"
-                 class="p-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                 class="p-2 text-white transition-colors bg-blue-600 rounded-md hover:bg-blue-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                   <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                 </svg>
@@ -61,7 +65,7 @@
           </div>
         </div>
       @empty
-        <div class="col-span-full text-center py-10">
+        <div class="py-10 text-center col-span-full">
           <p class="text-gray-500">No loan requests found</p>
         </div>
       @endforelse

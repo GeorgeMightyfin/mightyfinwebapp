@@ -50,7 +50,6 @@ class LoanRequestView extends Component
         }
     }
     
-
     public function exportLoans(){
         switch ($this->status) {
             case 0:

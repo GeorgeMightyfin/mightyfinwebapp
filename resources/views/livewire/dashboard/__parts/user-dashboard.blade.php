@@ -197,12 +197,7 @@
                                             <p class="mb-4">
                                                 Complete your verification to unlock all features and maximize your MFS experience!
                                             </p>
-
-                                            <div class="mb-3 progress" style="height: 10px; color:#fff">
-                                                <div class="progress-bar bg-warning text-white" role="progressbar" style="width: 25%; color:#fff" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mb-4 small">Profile completion: <strong>25%</strong></p>
-
+                                            
                                             <ul class="list-unstyled">
                                                 <li class="mb-3">
                                                     <a class="p-3 bg-white rounded-4 d-flex align-items-center justify-content-between bg-opacity-10 tour-kyc-1 verification-link"
@@ -230,7 +225,7 @@
                                 </div>
                             @endif
 
-                            <div class="mb-5 col-12">
+                            {{-- <div class="mb-5 col-12">
                                 <div class="gap-3 d-flex">
                                     <a href="{{ route('payment.gate', ['view' => 'deposit']) }}"
                                        class="gap-2 py-3 btn btn-primary flex-grow-1 d-flex align-items-center justify-content-center position-relative btn-pulse"
@@ -256,7 +251,7 @@
                                         <span>Fund Account</span>
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
 
 
                         <div class="col-12">

@@ -31,7 +31,6 @@
                                     Get a Loan
                                 </a>
                             </div>
-
                             <div class="mt-3 text-center col-12">
                                 <p class="text-muted">Need help or have questions? <a href="{{ route('contact') }}">Contact us</a>.</p>
                             </div>
