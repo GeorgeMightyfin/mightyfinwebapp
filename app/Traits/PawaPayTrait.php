@@ -38,15 +38,9 @@ trait PawaPayTrait
                 // return response()->json(['message' => 'Payment submitted successfully', 'data' => $response->json()]);
                 return true;
             }
-
-            // If unsuccessful, throw an exception with detailed info
             throw new Exception("API request failed with status {$response->status()} and message: " . $response->body());
         } catch (Exception $e) {
             dd($e);
-            Log::error('Payment submission failed', [
-                'exception' => $e
-            ]);
-            // Catch any exception and return the detailed error message
             return response()->json(['error' => 'Failed to submit payment', 'details' => $e->getMessage()], 500);
         }
     }
